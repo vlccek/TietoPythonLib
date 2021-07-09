@@ -9,16 +9,6 @@ infoSW01 = switch.get_info() # returns <<switchInfo>>
 print(infoSW01)
 ```
 
-## Usage of auto connect
-```py
-switch01 = Switch(name="Switch01", iphost="1.1.1.1", autoconnect=True)
-switch01.password = input('Enter password from ' + switch.get_name())
-# Automatically connect if possible
-
-infoSW01 = switch.get_info() # returns <<switchInfo>>
-print(infoSW01)
-```
-
 ## Run an (unknown) command on switch
 ```py
 switch01 = Switch(name="Pepa", iphost="1.1.1.0")  
@@ -28,44 +18,60 @@ switch01.run_command(command="switch-get-config", params=[]) # possible output o
 ## VLANS
 ```py
 switch01 = Switch(name="Vlaďa", iphost="1.1.1.1")
-switch01.password = input(" password of {switch.getName()}")
-switch.sshconnect()
+switch01.password = input('Enter password from ' + switch.get_name())
+switch.ssh_connect()
 
 vlan10 = {
-    "name":"Vidláci",
-    "number" : 10,
-    "ports" : ["eth0"]
+    "id": 10,
+    "description": "pepa",
+    "type": "private",
+    "scope": "local",
+    "ports": [457, 621],
+    "untagged_ports": [457],
+    "active_ports": [621],
+    "vxlan": None,
+    "vxlanmodule": ""
 }
 
 vlans = Vlans()
 
 
 #more vlans like:
-vlans_dict = [
+vlans_list = [
 {
-    "name":"Vidláci",
-    "number" : 10,
-    "ports" : ["eth0"]
+    "id": 10,
+    "description": "pepa",
+    "type": "private",
+    "scope": "local",
+    "ports": [457, 621],
+    "untagged_ports": [457],
+    "active_ports": [621],
+    "vxlan": None,
+    "vxlanmodule": ""
 },
 {
-    "name":"vidlačky",
-    "number" : 11,
-    "ports" : ["eth11"]
-}
+    "id": 11,
+    "description": "vidlak",
+    "type": "public",
+    "ports": [457, 621],
+    "untagged_ports": [457],
+    "active_ports": [621],
+},
 ]
 for i in vlans_dict:
-    vlans.add(i)
+    vlans.add_by_dict(i)
 
-vlans.add(vlan10)
+vlans.add_by_dict(vlan10)
 # or
-vlans.add(name="Luďek", number=110, ports=["eth10"])
+vlans.add_by_params(id=42, description="Gerwant", type="public", scope="cluster", ports=[7, 21, 42, 99], untagged_ports=[7, 99], active_ports=[21, 42]) # the only mandatory parameter is <<id>>
 
-switch01.vlansappend(vlans)
-# just append if exist let it bee
+switch01.vlans_append(vlans)
+# just append if exist let it be
 
-switch01.vlansreplace(vlans)
-# force delete all exits vlans and replace them by vlans in var vlans
-switch.showVlans()
-# show table of vlans
+switch01.vlans_replace(vlans)
+# force delete all exists vlans and replace them by vlans in var vlans
+switch.get_vlans()
+# obj. type Vlans()
+
 switch(vlan)
 ```
