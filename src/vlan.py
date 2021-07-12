@@ -21,9 +21,11 @@ class Vlans:
         self.__vlans__ = []
 
     def __id_checker__(self, id: int) -> int:
+        if id < 0:
+            raise Exception("ID cannot be negative")
         for i in self.__vlans__:
-            if not (i.get("id") != id and id > 0):
-                raise Exception("ID invalid or already in list")
+            if not (i.get("id") != id):
+                raise Exception("ID is already in list")
         return id
 
     def __text_checker__(self, text: Any) -> str:
@@ -50,34 +52,50 @@ class Vlans:
                                         or vlan_type != "public":
             return "private"
         return "public"
+    
+    def __replicators_check__(self, replicators: Optional[Any]) -> Optional[str]:
+        if type(replicators) is not str:
+            return None
+        return replicators
+    
+    def __bool_check__(self, boolean: Any):
+        if type(boolean) is not bool:
+            return False
+        return boolean
 
-    def check_vlan_dict(self, vlan_dict: Dict) -> Dict:
+    def add_by_dict(self, vlan_dict: Dict) -> None:
         new_vlan = {
             "id": self.__id_checker__(vlan_dict.get("id", 0)),
-            "description": self.__text_checker__(vlan_dict.get("description", "")),
             "type": self.__type_checker__(vlan_dict.get("type")),
+            "auto-vxlan": self.__bool_check__(vlan_dict.get("auto-vxlan")),
+            "replicators": self.__replicators_check__(vlan_dict.get("replicators")),
             "scope": self.__text_checker__(vlan_dict.get("scope", "local")),
+            "description": self.__text_checker__(vlan_dict.get("description", "")),
+            "active": self.__bool_check__(vlan_dict.get("active")),
+            "stats": self.__bool_check__(vlan_dict.get("stats")),
             "ports": self.__port_checker__(vlan_dict.get("ports", [])),
             "untagged_ports": self.__port_checker__(vlan_dict.get("untagged_ports", [])),
             "active_ports": self.__port_checker__(vlan_dict.get("active_ports", [])),
             "vxlan": self.__vxlan_checker__(vlan_dict.get("vxlan")),
             "vxlanmodule": self.__text_checker__(vlan_dict.get("vxlanmodule", ""))
         }
-        return new_vlan
-
-    def add_by_dict(self, vlan_dict: Dict) -> None:
-        new_vlan = self.check_vlan_dict(vlan_dict)
         self.__vlans__.append(new_vlan)
 
-    def add_by_params(self, id: int, description: str = "", type: str = "private",
-                      scope: str = "local", ports: List[int] = [],
-                      untagged_ports: List[int] = [], active_ports: List[int] = [],
-                      vxlan: Optional[int] = None, vxlanmodule: str = "") -> None:
+    def add_by_params(self, id: int, type: str = "private", auto_vxlan: bool = False, 
+                      replicators: Optional[str] = None, scope: str = "local", 
+                      description: str = "", active: bool = False, stats: bool = False,  
+                      ports: List[int] = [], untagged_ports: List[int] = [], 
+                      active_ports: List[int] = [], vxlan: Optional[int] = None, 
+                      vxlanmodule: str = "") -> None:
         new_vlan = {
             "id": self.__id_checker__(id),
-            "description": self.__text_checker__(description),
             "type": self.__type_checker__(type),
+            "auto-vxlan": self.__bool_check__(auto_vxlan),
+            "replicators": self.__replicators_check__(replicators),
             "scope": self.__text_checker__(scope),
+            "description": self.__text_checker__(description),
+            "active": self.__bool_check__(active),
+            "stats": self.__bool_check__(stats),
             "ports": self.__port_checker__(ports),
             "untagged_ports": self.__port_checker__(untagged_ports),
             "active_ports": self.__port_checker__(active_ports),
