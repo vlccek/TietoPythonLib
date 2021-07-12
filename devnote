@@ -1,3 +1,4 @@
 -autoconnect na switch - priorita nízká, pravděpodobně zbytecnost
 -porty - jednotlive nebo v intervalech? seradit?
 -mozne hodnoty scopu?
+-vxlan + vxlanmodule - povinne atributy?

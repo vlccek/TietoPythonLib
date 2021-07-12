@@ -23,9 +23,13 @@ switch.ssh_connect()
 
 vlan10 = {
     "id": 10,
-    "description": "pepa",
     "type": "private",
+    "auto-vxlan": False,
+    "replicators": None,
     "scope": "local",
+    "description": "pepa",
+    "active": True,
+    "stats": True,
     "ports": [457, 621],
     "untagged_ports": [457],
     "active_ports": [621],
@@ -40,9 +44,13 @@ vlans = Vlans()
 vlans_list = [
 {
     "id": 10,
-    "description": "pepa",
     "type": "private",
+    "auto-vxlan": False,
+    "replicators": None,
     "scope": "local",
+    "description": "pepa",
+    "active": True,
+    "stats": True,
     "ports": [457, 621],
     "untagged_ports": [457],
     "active_ports": [621],
@@ -51,19 +59,23 @@ vlans_list = [
 },
 {
     "id": 11,
-    "description": "vidlak",
     "type": "public",
-    "ports": [457, 621],
-    "untagged_ports": [457],
-    "active_ports": [621],
-},
+    "scope": "cluster",
+    "description": "vidlak",
+    "active": True,
+    "stats": True,
+    "ports": [460, 635],
+    "untagged_ports": [635],
+    "active_ports": [460]
+}
 ]
 for i in vlans_dict:
     vlans.add_by_dict(i)
 
 vlans.add_by_dict(vlan10)
 # or
-vlans.add_by_params(id=42, description="Gerwant", type="public", scope="cluster", ports=[7, 21, 42, 99], untagged_ports=[7, 99], active_ports=[21, 42]) # the only mandatory parameter is <<id>>
+vlans.add_by_params(id=42, description="Gerwant", type="public", scope="cluster", ports=[7, 21, 42, 99], untagged_ports=[7, 99], active_ports=[21, 42]) 
+# the only mandatory parameter is <<id>>
 
 switch01.vlans_append(vlans)
 # just append if exist let it be
