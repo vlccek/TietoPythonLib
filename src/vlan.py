@@ -25,7 +25,11 @@ class Vlans:
         """
         self.__vlans__ = []
 
-    def __id_checker__(self, id: Any) -> int:
+    def __id_checker(self, id: Any) -> int:
+        """Check if id is already in use and if it's of correct type 
+        
+        :param id: Is being checked for correctness
+        """
         if type(id) is not int:
             raise Exception("ID must be int")
         if id < 0:
