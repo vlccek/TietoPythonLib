@@ -4,7 +4,6 @@ import re
 from ipaddress import IPv4Network, IPv6Network
 
 
-
 teststr = """
 switch-name:               119-NRU02-spine-01
 mgmt-ip:                   21.119.28.11/19
@@ -34,26 +33,45 @@ mgmt-lacp-mode:            off
 ntp:                       on
 """
 
+
 class Switch:
     def __init__(self, vlans: Vlans = Vlans()) -> None:
         self.vlans = vlans
-    
+
     def parse_switch_setup_show(self, info_to_parse: str):
         pattern = "(.[^\:]*)\:\ *(.*)"
         parsed_info = re.findall(pattern, info_to_parse)
         new_dictionary = dict()
-        ip4field = ["mgmt-ip", "in-band-ip","gateway-ip","dns-ip", "dns-secondary-ip", "ntp-server", "ntp-secondary-server"]
-        ip6field = ["mgmt-ip6", "in-band-ip6"]
+        ip4field = [
+            "mgmt-ip", # managment ip
+            "in-band-ip", # nemám tušení mby vnitřní ip ale aby byl na sw NAT to se mi nepozdává
+            "gateway-ip", # gw
+            "dns-ip", # DNS
+            "dns-secondary-ip", # DNS2
+            "ntp-server", 
+            "ntp-secondary-server",
+        ]
+        ip6field = [
+            "mgmt-ip6", # managment ip
+            "in-band-ip6"
+            ]
         for i in parsed_info:
             new_dictionary[i[0]] = i[1]
-            if(i[0] in ip4field): 
-                new_dictionary[i[0]] = i[1] # convert string to ipv4 object
-            if(i[0] in ip6field):
-                new_dictionary[i[0]] = i[1] # convert string to ipv6 object
-        return new_dictionary   
- 
- # https://docs.python.org/3/library/ipaddress.html#ipaddress.ip_interface
+            if i[0] in ip4field:
+                new_dictionary[i[0]] = i[1]  # convert string to ipv4 object
+            if i[0] in ip6field:
+                new_dictionary[i[0]] = i[1]  # convert string to ipv6 object
+        return new_dictionary
 
+        @property
+        def vlan(self):
+            """Vlan getter"""
+            return self.__vlans__
+        
+        @vlan.setter
+        def vlan(self, vlans: Vlans = Vlans()):
+            self.vlan = vlans
+        
 
-n  = Switch()
+n = Switch()
 print(n.parse_switch_setup_show(info_to_parse=teststr))

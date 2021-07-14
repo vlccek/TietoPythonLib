@@ -103,7 +103,7 @@ class Vlans:
             "vxlanmodule": self.__text_checker__(vlan_dict.get("vxlanmodule", "")),
         }
         self.__vlans__.append(new_vlan)
-        self.__vlans__ = sorted(self.__vlans__, key = lambda k: k['id'])
+        self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
 
     def add_by_params(
         self,
@@ -137,7 +137,7 @@ class Vlans:
             "vxlanmodule": self.__text_checker__(vxlanmodule),
         }
         self.__vlans__.append(new_vlan)
-        self.__vlans__ = sorted(self.__vlans__, key = lambda k: k['id'])
+        self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
 
     def __repr__(self) -> str:
         if self.__vlans__ == []:
@@ -156,7 +156,7 @@ class Vlans:
                     self.__vlans__[delete_idx],
                 )
                 self.__vlans__.pop()
-                self.__vlans__ = sorted(self.__vlans__, key = lambda k: k['id'])
+                self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
                 deleted = True
                 break
         if not deleted:
