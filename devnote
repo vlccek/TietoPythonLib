@@ -1,5 +1,35 @@
+věci na které jsme moc liní:
 -autoconnect na switch - priorita nízká, pravděpodobně zbytecnost
--porty - jednotlive nebo v intervalech? seradit?
 -mozne hodnoty scopu?
--vxlan + vxlanmodule - povinne atributy?
 -switch.py - parser - problem s ipv4/v6 objekty - zatim stringy
+
+#################################################x
+
+věci co těžko říct
+-vxlan + vxlanmodule - povinne atributy?
+    tohle bych asi kašlal
+
+#################################
+
+Featury co mě napadly dneska "ráno"
+- přidat debug možnost něco jako:
+    class sw( debug=True):
+    ....
+    sw.connect(...)
+
+    console napíše:
+    10.04.1998 12:54 - Připojuji se na sw {ip}
+    10.04.1998 12:55 - připojení uspěšné 
+    .... načítám configuraci
+- přidat možnost auto získávání informací: class sw(autoGetInfo=True) při připojení získá všechny informace vlany ip sračky... 
+- přidat nějákou verifikaci jestli všechno proběhlo ok (nebo jestli se má něco dělat vůbec .)
+    jak to myslím:
+    v obj. Switch() budu držet: 
+    - ip
+    - dns
+    - gw
+    - ...
+    chci změnit gw pro příklad:
+    sw.gwChange(1.1.1.1) ->
+    __status__ = {gw : False , dns : True, ip : True}
+    __infosw__ = {gw : 1.1.1.1, dns: True, ip: True}
