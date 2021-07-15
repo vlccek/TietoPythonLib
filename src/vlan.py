@@ -3,21 +3,6 @@ from typing import List, Dict, Any, Optional
 
 
 class Vlans:
-    __vlan_example__ = {
-        "id": 1,
-        "type": "private",
-        "auto-vxlan": False,
-        "replicators": None,
-        "scope": "local",
-        "description": "",
-        "active": False,
-        "stats": False,
-        "ports": [],
-        "untagged_ports": [],
-        "active_ports": [],
-        "vxlan": None,
-        "vxlanmodule": "",
-    }
 
     def __init__(self):
         """
@@ -39,12 +24,20 @@ class Vlans:
                 raise Exception("ID is already in list")
         return id
 
-    def __text_checker__(self, text: Any) -> str:
+    def __text_checker(self, text: Any) -> str:
+        """ Check if variable text is Str if not return empty string else return variable text
+
+        :param text: variable that you want to check
+        """
         if type(text) is str:
             return text
         return ""
 
-    def __port_checker__(self, ports: Any) -> List[int]:
+    def __port_checker(self, ports: Any) -> List[int]:
+        """check if port (ports of swtich) is in correct format and if not return empty list
+        
+        :param ports: Controlled variable
+        """
         if type(ports) is not list:
             return []
         real_ports = []
@@ -53,7 +46,10 @@ class Vlans:
                 real_ports.append(port)
         return real_ports
 
-    def __special_port_checker__(self, special_ports: Any, ports: Any) -> List[int]:
+    def __special_port_checker(self, special_ports: Any, ports: Any) -> List[int]:
+        """nemám tušení co to dělá ale Petr to bdudeu vědět
+        
+        :params"""
         if type(ports) is not list or type(special_ports) is not list:
             return []
         real_ports = []
@@ -87,24 +83,47 @@ class Vlans:
         return boolean
 
     def add_by_dict(self, vlan_dict: Dict) -> None:
+        """add vlan by dict 
+        !warnings!: every unknow key will be ignor
+                    if any key is missing it will be replaced by an empty class of the required data type
+                    if any key will be in wrong format it will replace by an empty class of the required data type
+        Correct_format=
+        {
+        "id": 1,
+        "type": "private",
+        "auto-vxlan": False,
+        "replicators": None,
+        "scope": "local",
+        "description": "",
+        "active": False,
+        "stats": False,
+        "ports": [],
+        "untagged_ports": [],
+        "active_ports": [],
+        "vxlan": None,
+        "vxlanmodule": "",
+    }
+
+        
+        :params vlan_dict: atributes of vlan in dict"""
         new_vlan = {
             "id": self.__id_checker__(vlan_dict.get("id", 0)),
             "type": self.__type_checker__(vlan_dict.get("type")),
             "auto-vxlan": self.__bool_check__(vlan_dict.get("auto-vxlan")),
             "replicators": self.__replicators_check__(vlan_dict.get("replicators")),
-            "scope": self.__text_checker__(vlan_dict.get("scope", "local")),
-            "description": self.__text_checker__(vlan_dict.get("description", "")),
+            "scope": self.__text_checker(vlan_dict.get("scope", "local")),
+            "description": self.__text_checker(vlan_dict.get("description", "")),
             "active": self.__bool_check__(vlan_dict.get("active")),
             "stats": self.__bool_check__(vlan_dict.get("stats")),
-            "ports": self.__port_checker__(vlan_dict.get("ports", [])),
-            "untagged_ports": self.__special_port_checker__(
+            "ports": self.__port_checker(vlan_dict.get("ports", [])),
+            "untagged_ports": self.__special_port_checker(
                 vlan_dict.get("untagged_ports", []), vlan_dict.get("ports", [])
             ),
-            "active_ports": self.__special_port_checker__(
+            "active_ports": self.__special_port_checker(
                 vlan_dict.get("active_ports", []), vlan_dict.get("ports", [])
             ),
             "vxlan": self.__vxlan_checker__(vlan_dict.get("vxlan")),
-            "vxlanmodule": self.__text_checker__(vlan_dict.get("vxlanmodule", "")),
+            "vxlanmodule": self.__text_checker(vlan_dict.get("vxlanmodule", "")),
         }
         self.__vlans__.append(new_vlan)
         self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
@@ -125,20 +144,36 @@ class Vlans:
         vxlan: Optional[int] = None,
         vxlanmodule: str = "",
     ) -> None:
+        """Add vlan by parametrs 
+
+        :param id: id of new creted vlan
+        :param type: type of vlan, defaults to "private"
+        :param auto_vxlan:  defaults to False
+        :param replicators:  defaults to None
+        :param scope:  defaults to "local"
+        :param description:  defaults to ""
+        :param active:  defaults to False
+        :param stats:  defaults to False
+        :param ports: defaults to []
+        :param untagged_ports:  defaults to []
+        :param active_ports:  defaults to []
+        :param vxlan: defaults to None
+        :param vxlanmodule: defaults to ""
+        """
         new_vlan = {
             "id": self.__id_checker__(id),
             "type": self.__type_checker__(type),
             "auto-vxlan": self.__bool_check__(auto_vxlan),
             "replicators": self.__replicators_check__(replicators),
-            "scope": self.__text_checker__(scope),
-            "description": self.__text_checker__(description),
+            "scope": self.__text_checker(scope),
+            "description": self.__text_checker(description),
             "active": self.__bool_check__(active),
             "stats": self.__bool_check__(stats),
-            "ports": self.__port_checker__(ports),
-            "untagged_ports": self.__special_port_checker__(untagged_ports, ports),
-            "active_ports": self.__special_port_checker__(active_ports, ports),
+            "ports": self.__port_checker(ports),
+            "untagged_ports": self.__special_port_checker(untagged_ports, ports),
+            "active_ports": self.__special_port_checker(active_ports, ports),
             "vxlan": self.__vxlan_checker__(vxlan),
-            "vxlanmodule": self.__text_checker__(vxlanmodule),
+            "vxlanmodule": self.__text_checker(vxlanmodule),
         }
         self.__vlans__.append(new_vlan)
         self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
@@ -151,6 +186,11 @@ class Vlans:
         return tabulate.tabulate(rows, header)
 
     def delete(self, id: int) -> None:
+        """delere vlan by id
+
+        :param id: id of vlan that should be delete
+        :raises Exception: Not existing vlan
+        """
         deleted = False
         for i in range(0, len(self.__vlans__)):
             if self.__vlans__[i]["id"] == id:
@@ -165,3 +205,21 @@ class Vlans:
                 break
         if not deleted:
             raise Exception("Vlan with such ID isn't in this object")
+
+"""template variable
+"""
+example_vlan = {
+    "id": 1,
+    "type": "private",
+    "auto-vxlan": False,
+    "replicators": None,
+    "scope": "local",
+    "description": "",
+    "active": False,
+    "stats": False,
+    "ports": [],
+    "untagged_ports": [],
+    "active_ports": [],
+    "vxlan": None,
+    "vxlanmodule": "",
+}
