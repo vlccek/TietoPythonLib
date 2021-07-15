@@ -1,3 +1,6 @@
 napalm-pluribus
 paramiko
 tabulate
+sphinx
+insegel
+karma-sphinx-theme

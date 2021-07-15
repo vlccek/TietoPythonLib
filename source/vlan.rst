@@ -1,5 +1,6 @@
-vlan module
-===========
+***********
+Vlan module 
+***********
 
 .. automodule:: vlan
    :members:
