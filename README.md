@@ -1,6 +1,6 @@
 # TietoPythonLib
 
-Basic python library for configuration switch from company pluribus
+Basic python library for switch configuration from company pluribus
 
 
 
