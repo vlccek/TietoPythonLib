@@ -11,12 +11,11 @@ TietoPythonLib
 
 .. toctree::
    :maxdepth: 2
-   :glob:
 
-   *
+   vlans
    
 
-
+Hovno cuc
 
 
 
