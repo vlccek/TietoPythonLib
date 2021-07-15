@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="switch_doc.html" />
-    <link rel="prev" title="switch module" href="switch.html" /> 
+    <link rel="next" title="Vlan module examples" href="vlan_doc.html" />
+    <link rel="prev" title="TietoPythonLib" href="index.html" /> 
 
 </head>
 
@@ -69,8 +69,6 @@
     
       <li><a href="index.html">Docs</a></li>
         
-          <li><a href="modules.html">src</a></li>
-        
       <li>Vlan module</li>
     
     
@@ -107,17 +105,12 @@
                             
                             
                                 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="switch.html">switch module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Vlan module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="switch.html">switch module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vlan module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vlan_doc.html">Vlan module examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vlan_doc.html#vlans">Vlans</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="switch.html">switch module</a></li>
 </ul>
 
                             
@@ -134,6 +127,17 @@
 <dt class="sig sig-object py" id="vlan.Vlans">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">vlan.</span></span><span class="sig-name descname"><span class="pre">Vlans</span></span><a class="headerlink" href="#vlan.Vlans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vlan.Vlans.__bool_check">
+<span class="sig-name descname"><span class="pre">__bool_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boolean</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vlan.Vlans.__bool_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if &lt;&lt;boolean&gt;&gt; is of bool type. If not, default (False) is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>boolean</strong> – Controlled variable</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="vlan.Vlans.__id_checker">
 <span class="sig-name descname"><span class="pre">__id_checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#vlan.Vlans.__id_checker" title="Permalink to this definition">¶</a></dt>
@@ -188,9 +192,34 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="vlan.Vlans.__type_checker">
+<span class="sig-name descname"><span class="pre">__type_checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlan_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vlan.Vlans.__type_checker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if &lt;&lt;vlan_type&gt;&gt; is of correct type and correct format. If not, default value (“private”) is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>vlan_type</strong> – Controlled variable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vlan.Vlans.__vxlan_checker">
+<span class="sig-name descname"><span class="pre">__vxlan_checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vxlan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vlan.Vlans.__vxlan_checker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if vxlan is in correct format/type and if it is non-negative number. If not, it returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vxlan</strong> – Controlled variable. Should be int and non-negative number, or None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="vlan.Vlans.add_by_dict">
 <span class="sig-name descname"><span class="pre">add_by_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlan_dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#vlan.Vlans.add_by_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>add vlan by dict
+<dd><p>Adds vlan by dict
 !warnings!: the only mandatory key is &lt;&lt;id&gt;&gt; (when &lt;&lt;id&gt;&gt; key is missing or is invalid, exception is raised)</p>
 <blockquote>
 <div><p>every unknown key will be ignored
@@ -202,7 +231,7 @@ if any key will be in wrong format it will replace by an empty class of the requ
 “id”: 1,
 “type”: “private”,
 “auto-vxlan”: False,
-“replicators”: None,
+“replicators”: “”,
 “scope”: “local”,
 “description”: “”,
 “active”: False,
@@ -215,22 +244,22 @@ if any key will be in wrong format it will replace by an empty class of the requ
 }</p>
 <dl class="field-list simple">
 <dt class="field-odd">Params vlan_dict</dt>
-<dd class="field-odd"><p>atributes of vlan in dict</p>
+<dd class="field-odd"><p>Attributes of vlan in dict</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vlan.Vlans.add_by_params">
-<span class="sig-name descname"><span class="pre">add_by_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'private'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_vxlan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replicators</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'local'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">untagged_ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxlan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxlanmodule</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#vlan.Vlans.add_by_params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add vlan by parametrs</p>
+<span class="sig-name descname"><span class="pre">add_by_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'private'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_vxlan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replicators</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'local'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">untagged_ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_ports</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxlan</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxlanmodule</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#vlan.Vlans.add_by_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds vlan by parametrs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – id of new creted vlan</p></li>
+<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – id of new creted vlan, mandatory parameter</p></li>
 <li><p><strong>type</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – type of vlan, defaults to “private”</p></li>
 <li><p><strong>auto_vxlan</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – defaults to False</p></li>
-<li><p><strong>replicators</strong> – defaults to None</p></li>
+<li><p><strong>replicators</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
 <li><p><strong>scope</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “local”</p></li>
 <li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
 <li><p><strong>active</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – defaults to False</p></li>
@@ -248,10 +277,10 @@ if any key will be in wrong format it will replace by an empty class of the requ
 <dl class="py method">
 <dt class="sig sig-object py" id="vlan.Vlans.delete">
 <span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#vlan.Vlans.delete" title="Permalink to this definition">¶</a></dt>
-<dd><p>delere vlan by id</p>
+<dd><p>Deletes vlan by &lt;&lt;id&gt;&gt;</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – id of vlan that should be delete</p>
+<dd class="field-odd"><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – id of vlan that should be deleted</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>Exception</strong> – Not existing vlan</p>

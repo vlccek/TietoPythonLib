@@ -2,10 +2,16 @@ from typing import List, Dict, Any, Optional
 from vlan import Vlans
 import re
 from ipaddress import IPv4Network, IPv6Network
-from tests.stringforparse import vlan_show, switch_setup_show
+
+# from tests.stringforparse import vlan_show, switch_setup_show
 
 
-def parse_switch_setup_show(info_to_parse: str):
+def parse_switch_setup_show(info_to_parse: str) -> dict:
+    """parse output of command switch setup show
+
+    :param info_to_parse: string format info
+    :return: parsed information
+    """
     pattern = "(.[^\:]*)\:\ *(.*)"
     parsed_info = re.findall(pattern, info_to_parse)
     new_dictionary = dict()
@@ -28,7 +34,11 @@ def parse_switch_setup_show(info_to_parse: str):
     return new_dictionary
 
 
-def parse_vlan_show(info_to_parse: str):
+def parse_vlan_show(info_to_parse: str) -> Vlans:
+    """Parse vlan show
+
+    :param info_to_parse: string to parse
+    """
     pattern = "(?P<Sw_name>[a-zA-Z0-9_.-]*)\s+(?P<vlan_id>\d+)\s+(?P<type>\w+)\s+(?P<auto_vxlan>yes|no)\s+(?P<replicators>\w+)\s+(?P<scope>\w+)\s+(?P<description>[a-zA-Z0-9_.-]*)\s+(?P<active>yes|no)\s+(?P<stats>yes|no)\s+(?P<ports>[0-9,-]*|none)\s+(?P<untagged_ports>[0-9,-]*|none)\s+(?P<active_ports>none|[0-9,-]*)"
     # https://regexr.com/61s1p
     new_vlan_obj = Vlans()
@@ -54,107 +64,146 @@ def parse_vlan_show(info_to_parse: str):
 
 class Switch:
     def __init__(self, management_ip: str, management_ipv6: str = "") -> None:
-        self.__vlans__ = Vlans()
-        self.__management_ipv4__ = management_ip
-        self.__inband_ipv4__ = ""
-        self.__gateway_ipv4__ = ""
-        self.__dns_ipv4__ = ""
-        self.__dns_secondary_ipv4__ = ""
-        self.__ntp_server_ipv4__ = ""
-        self.__ntp_secondary_ipv4__ = ""
-        self.__management_ipv6__ = ""
-        self.__inband_ipv6__ = ""
+        self.__vlans = Vlans()
+        self.__management_ipv4 = management_ip
+        self.__inband_ipv4 = ""
+        self.__gateway_ipv4 = ""
+        self.__dns_ipv4 = ""
+        self.__dns_secondary_ipv4 = ""
+        self.__ntp_server_ipv4 = ""
+        self.__ntp_secondary_ipv4 = ""
+        self.__management_ipv6 = ""
+        self.__inband_ipv6 = ""
 
     @property
     def vlans(self):
         """Vlan getter"""
-        return self.__vlans__
+        return self.__vlans
 
     @property
     def management_ipv4(self):
         """Management IPv4 getter"""
-        return self.__management_ipv4__
+        return self.__management_ipv4
 
     @property
     def inband_ipv4(self):
         """Inband IPv4 getter"""
-        return self.__inband_ipv4__
+        return self.__inband_ipv4
 
     @property
     def gateway_ipv4(self):
         """Gateway IPv4 getter"""
-        return self.__gateway_ipv4__
+        return self.__gateway_ipv4
 
     @property
     def dns_ipv4(self):
         """DNS IPv4 getter"""
-        return self.__dns_ipv4__
+        return self.__dns_ipv4
 
     @property
     def dns_secondary_ipv4(self):
         """DNS Secondary IPv4 getter"""
-        return self.__dns_secondary_ipv4__
+        return self.__dns_secondary_ipv4
 
     @property
     def ntp_server(self):
-        """NTP IPv4 getter"""
-        return self.__ntp_server_ipv4__
+        """NTP Server IPv4 getter"""
+        return self.__ntp_server_ipv4
 
     @property
     def ntp_secondary_server(self):
-        """NTP IPv4 getter"""
-        return self.__ntp_secondary_ipv4__
+        """NTP Secondary server IPv4 getter
+        
+        """
+        return self.__ntp_secondary_ipv4
 
     @property
     def management_ipv6(self):
-        """Management IPv6 getter"""
-        return self.___management_ipv6__
+        """Management IPv6 getter
+        
+        """
+        return self.___management_ipv6
 
     @property
     def inband_ipv6(self):
-        """Inband IPv6 getter"""
-        return self.__inband_ipv6__
+        """Inband IPv6 getter
+        
+        """
+        return self.__inband_ipv6
 
     @vlans.setter
     def vlans(self, vlans: Vlans = Vlans()):
-        self.__vlans__ = vlans
+        """Vlan setter
+
+        :param vlans: Vlans object. Empty Vlans object by default.
+        """
+        self.__vlans = vlans
 
     """
     @management_ipv4.setter
     def management_ipv4(self, ip:str):
-        self.__management_ipv4__ = ip
+        self.__management_ipv4 = ip
     """
 
     @inband_ipv4.setter
     def inband_ipv4(self, ip: str):
-        self.__inband_ipv4__ = ip
+        """Inband IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__inband_ipv4 = ip
 
     @gateway_ipv4.setter
     def gateway_ipv4(self, ip: str):
-        self.__gateway_ipv4__ = ip
+        """Gateway IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__gateway_ipv4 = ip
 
     @dns_ipv4.setter
     def dns_ipv4(self, ip: str):
-        self.__dns_ipv4__ = ip
+        """DNS IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__dns_ipv4 = ip
 
     @dns_secondary_ipv4.setter
     def dns_secondary_ipv4(self, ip: str):
-        self.__dns_secondary_ipv4__ = ip
+        """DNS Secondary IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__dns_secondary_ipv4 = ip
 
     @ntp_server.setter
     def ntp_server(self, ip: str):
-        self.__ntp_server_ipv4__ = ip
+        """NTP Server IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__ntp_server_ipv4 = ip
 
     @ntp_secondary_server.setter
     def ntp_secondary_server(self, ip: str):
-        self.__ntp_secondary_ipv4__ = ip
+        """NTP Secondary server IPv4 setter
+        
+        :param ip: IPv4 address in str type
+        """
+        self.__ntp_secondary_ipv4 = ip
 
+    """
     @management_ipv6.setter
     def management_ipv6(self, ip6: str):
-        self.__management_ipv6__ = ip6
+        Management IPv6 setter
+        self.__management_ipv6= ip6
+    """
 
-    """
     @inband_ipv6.setter
-    def inband_ipv6(self, ip6:str):
-        self.__inband_ipv6__ = ip6
-    """
+    def inband_ipv6(self, ip6: str):
+        """Inband IPv6 setter
+        
+        :param ip: IPv6 address in str type
+        """
+        self.__inband_ipv6 = ip6

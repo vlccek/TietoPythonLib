@@ -120,8 +120,105 @@
                     <div class="document">
                         
                             
-  <div class="section" id="switch-module">
-<h1>switch module<a class="headerlink" href="#switch-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-switch">
+<span id="switch-module"></span><h1>switch module<a class="headerlink" href="#module-switch" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="switch.Switch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">Switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">management_ip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management_ipv6</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.dns_ipv4">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dns_ipv4</span></span><a class="headerlink" href="#switch.Switch.dns_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>DNS IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.dns_secondary_ipv4">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dns_secondary_ipv4</span></span><a class="headerlink" href="#switch.Switch.dns_secondary_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>DNS Secondary IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.gateway_ipv4">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">gateway_ipv4</span></span><a class="headerlink" href="#switch.Switch.gateway_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gateway IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.inband_ipv4">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">inband_ipv4</span></span><a class="headerlink" href="#switch.Switch.inband_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inband IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.inband_ipv6">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">inband_ipv6</span></span><a class="headerlink" href="#switch.Switch.inband_ipv6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inband IPv6 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.management_ipv4">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">management_ipv4</span></span><a class="headerlink" href="#switch.Switch.management_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Management IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.management_ipv6">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">management_ipv6</span></span><a class="headerlink" href="#switch.Switch.management_ipv6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Management IPv6 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.ntp_secondary_server">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ntp_secondary_server</span></span><a class="headerlink" href="#switch.Switch.ntp_secondary_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>NTP Secondary server IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.ntp_server">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ntp_server</span></span><a class="headerlink" href="#switch.Switch.ntp_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>NTP Server IPv4 getter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="switch.Switch.vlans">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vlans</span></span><a class="headerlink" href="#switch.Switch.vlans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vlan getter</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="switch.parse_switch_setup_show">
+<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_switch_setup_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#switch.parse_switch_setup_show" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse output of command switch setup show</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>info_to_parse</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – string format info</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>parsed information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="switch.parse_vlan_show">
+<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_vlan_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><span class="pre">vlan.Vlans</span></a></span></span><a class="headerlink" href="#switch.parse_vlan_show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse vlan show</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vlans</span></code></a></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>info_to_parse</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – string to parse</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

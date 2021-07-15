@@ -4,9 +4,8 @@ from typing import List, Dict, Any, Optional
 
 class Vlans:
     def __init__(self):
-        """Stored vlans, example of vlan_dict
-        """
-        self.__vlans__ = []
+        """Stored vlans, example of vlan_dict"""
+        self.__vlans = []
 
     def __id_checker(self, id: Any) -> int:
         """Check if id is already in use and if it's of correct type. If not, Exception is raised.
@@ -17,7 +16,7 @@ class Vlans:
             raise Exception("ID must be int")
         if id < 0:
             raise Exception("ID cannot be negative")
-        for i in self.__vlans__:
+        for i in self.__vlans:
             if not (i.get("id") != id):
                 raise Exception("ID is already in list")
         return id
@@ -58,16 +57,20 @@ class Vlans:
                 real_ports.append(port)
         return real_ports
 
-    def __vxlan_checker__(self, vxlan: Optional[Any]) -> Optional[int]:
+    def __vxlan_checker(self, vxlan: Optional[Any]) -> Optional[int]:
         """Checks if vxlan is in correct format/type and if it is non-negative number. If not, it returns None.
 
-        :param vxlan: Controlled variable. 
+        :param vxlan: Controlled variable. Should be int and non-negative number, or None.
         """
         if vxlan is None or type(vxlan) is not int or vxlan < 0:
             return None
         return vxlan
 
-    def __type_checker__(self, vlan_type: Any) -> str:
+    def __type_checker(self, vlan_type: Any) -> str:
+        """Checks if <<vlan_type>> is of correct type and correct format. If not, default value ("private") is returned.
+
+        :param vlan_type: Controlled variable.
+        """
         if (
             type(vlan_type) is not str
             or vlan_type == "private"
@@ -76,18 +79,17 @@ class Vlans:
             return "private"
         return "public"
 
-    def __replicators_check__(self, replicators: Optional[Any]) -> Optional[str]:
-        if type(replicators) is not str:
-            return None
-        return replicators
+    def __bool_check(self, boolean: Any):
+        """Checks if <<boolean>> is of bool type. If not, default (False) is returned.
 
-    def __bool_check__(self, boolean: Any):
+        :param boolean: Controlled variable
+        """
         if type(boolean) is not bool:
             return False
         return boolean
 
     def add_by_dict(self, vlan_dict: Dict) -> None:
-        """add vlan by dict
+        """Adds vlan by dict
         !warnings!: the only mandatory key is <<id>> (when <<id>> key is missing or is invalid, exception is raised)
                     every unknown key will be ignored
                     if any key is missing it will be replaced by an empty class of the required data type
@@ -97,7 +99,7 @@ class Vlans:
         "id": 1,
         "type": "private",
         "auto-vxlan": False,
-        "replicators": None,
+        "replicators": "",
         "scope": "local",
         "description": "",
         "active": False,
@@ -110,16 +112,16 @@ class Vlans:
         }
 
 
-        :params vlan_dict: atributes of vlan in dict"""
+        :params vlan_dict: Attributes of vlan in dict"""
         new_vlan = {
             "id": self.__id_checker(vlan_dict.get("id", 0)),
-            "type": self.__type_checker__(vlan_dict.get("type")),
-            "auto-vxlan": self.__bool_check__(vlan_dict.get("auto-vxlan")),
-            "replicators": self.__replicators_check__(vlan_dict.get("replicators")),
+            "type": self.__type_checker(vlan_dict.get("type")),
+            "auto-vxlan": self.__bool_check(vlan_dict.get("auto-vxlan")),
+            "replicators": self.__text_checker(vlan_dict.get("replicators")),
             "scope": self.__text_checker(vlan_dict.get("scope", "local")),
             "description": self.__text_checker(vlan_dict.get("description", "")),
-            "active": self.__bool_check__(vlan_dict.get("active")),
-            "stats": self.__bool_check__(vlan_dict.get("stats")),
+            "active": self.__bool_check(vlan_dict.get("active")),
+            "stats": self.__bool_check(vlan_dict.get("stats")),
             "ports": self.__port_checker(vlan_dict.get("ports", [])),
             "untagged_ports": self.__special_port_checker(
                 vlan_dict.get("untagged_ports", []), vlan_dict.get("ports", [])
@@ -127,18 +129,18 @@ class Vlans:
             "active_ports": self.__special_port_checker(
                 vlan_dict.get("active_ports", []), vlan_dict.get("ports", [])
             ),
-            "vxlan": self.__vxlan_checker__(vlan_dict.get("vxlan")),
+            "vxlan": self.__vxlan_checker(vlan_dict.get("vxlan")),
             "vxlanmodule": self.__text_checker(vlan_dict.get("vxlanmodule", "")),
         }
-        self.__vlans__.append(new_vlan)
-        self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
+        self.__vlans.append(new_vlan)
+        self.__vlans = sorted(self.__vlans, key=lambda k: k["id"])
 
     def add_by_params(
         self,
         id: int,
         type: str = "private",
         auto_vxlan: bool = False,
-        replicators: Optional[str] = None,
+        replicators: str = "",
         scope: str = "local",
         description: str = "",
         active: bool = False,
@@ -147,14 +149,14 @@ class Vlans:
         untagged_ports: List[int] = [],
         active_ports: List[int] = [],
         vxlan: Optional[int] = None,
-        vxlanmodule: str = ""
+        vxlanmodule: str = "",
     ) -> None:
-        """Add vlan by parametrs
+        """Adds vlan by parametrs
 
-        :param id: id of new creted vlan
+        :param id: id of new creted vlan, mandatory parameter
         :param type: type of vlan, defaults to "private"
         :param auto_vxlan:  defaults to False
-        :param replicators:  defaults to None
+        :param replicators:  defaults to ""
         :param scope:  defaults to "local"
         :param description:  defaults to ""
         :param active:  defaults to False
@@ -167,45 +169,46 @@ class Vlans:
         """
         new_vlan = {
             "id": self.__id_checker(id),
-            "type": self.__type_checker__(type),
-            "auto-vxlan": self.__bool_check__(auto_vxlan),
-            "replicators": self.__replicators_check__(replicators),
+            "type": self.__type_checker(type),
+            "auto-vxlan": self.__bool_check(auto_vxlan),
+            "replicators": self.__text_checker(replicators),
             "scope": self.__text_checker(scope),
             "description": self.__text_checker(description),
-            "active": self.__bool_check__(active),
-            "stats": self.__bool_check__(stats),
+            "active": self.__bool_check(active),
+            "stats": self.__bool_check(stats),
             "ports": self.__port_checker(ports),
             "untagged_ports": self.__special_port_checker(untagged_ports, ports),
             "active_ports": self.__special_port_checker(active_ports, ports),
-            "vxlan": self.__vxlan_checker__(vxlan),
+            "vxlan": self.__vxlan_checker(vxlan),
             "vxlanmodule": self.__text_checker(vxlanmodule),
         }
-        self.__vlans__.append(new_vlan)
-        self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
+        self.__vlans.append(new_vlan)
+        self.__vlans = sorted(self.__vlans, key=lambda k: k["id"])
 
     def __repr__(self) -> str:
-        if self.__vlans__ == []:
+        """Special method for formatting output of class <<Vlans>>"""
+        if self.__vlans == []:
             return ""
-        header = self.__vlans__[0].keys()
-        rows = [x.values() for x in self.__vlans__]
+        header = self.__vlans[0].keys()
+        rows = [x.values() for x in self.__vlans]
         return tabulate.tabulate(rows, header)
 
     def delete(self, id: int) -> None:
-        """delere vlan by id
+        """Deletes vlan by <<id>>
 
-        :param id: id of vlan that should be delete
+        :param id: id of vlan that should be deleted
         :raises Exception: Not existing vlan
         """
         deleted = False
-        for i in range(0, len(self.__vlans__)):
-            if self.__vlans__[i]["id"] == id:
+        for i in range(0, len(self.__vlans)):
+            if self.__vlans[i]["id"] == id:
                 delete_idx = i
-                self.__vlans__[delete_idx], self.__vlans__[len(self.__vlans__) - 1] = (
-                    self.__vlans__[len(self.__vlans__) - 1],
-                    self.__vlans__[delete_idx],
+                self.__vlans[delete_idx], self.__vlans[len(self.__vlans) - 1] = (
+                    self.__vlans[len(self.__vlans) - 1],
+                    self.__vlans[delete_idx],
                 )
-                self.__vlans__.pop()
-                self.__vlans__ = sorted(self.__vlans__, key=lambda k: k["id"])
+                self.__vlans.pop()
+                self.__vlans = sorted(self.__vlans, key=lambda k: k["id"])
                 deleted = True
                 break
         if not deleted:
@@ -218,7 +221,7 @@ example_vlan = {
     "id": 1,
     "type": "private",
     "auto-vxlan": False,
-    "replicators": None,
+    "replicators": "",
     "scope": "local",
     "description": "",
     "active": False,
