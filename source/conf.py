@@ -33,7 +33,6 @@ release = '0.0.1 alpha'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx_autodoc_annotation',
-    'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
 ]

@@ -6,4 +6,3 @@ src
 
    switch
    vlan
-   vlan_test
