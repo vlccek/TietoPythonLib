@@ -3,16 +3,14 @@ from typing import List, Dict, Any, Optional
 
 
 class Vlans:
-
     def __init__(self):
-        """
-        Stored vlans, example of vlan_dict
+        """Stored vlans, example of vlan_dict
         """
         self.__vlans__ = []
 
     def __id_checker(self, id: Any) -> int:
-        """Check if id is already in use and if it's of correct type 
-        
+        """Check if id is already in use and if it's of correct type. If not, Exception is raised.
+
         :param id: Is being checked for correctness
         """
         if type(id) is not int:
@@ -25,7 +23,7 @@ class Vlans:
         return id
 
     def __text_checker(self, text: Any) -> str:
-        """ Check if variable text is Str if not return empty string else return variable text
+        """Check if variable text is Str. If not, return empty string else return variable text
 
         :param text: variable that you want to check
         """
@@ -34,8 +32,8 @@ class Vlans:
         return ""
 
     def __port_checker(self, ports: Any) -> List[int]:
-        """check if port (ports of swtich) is in correct format and if not return empty list
-        
+        """Checks if port (ports of swtich) is in correct format and if not, then return empty list.
+
         :param ports: Controlled variable
         """
         if type(ports) is not list:
@@ -47,9 +45,11 @@ class Vlans:
         return real_ports
 
     def __special_port_checker(self, special_ports: Any, ports: Any) -> List[int]:
-        """nemám tušení co to dělá ale Petr to bdudeu vědět
-        
-        :params"""
+        """Same as __port_checker extended with check if ports in <<special_ports>> list are also in <<ports>> list. If not, that port isn't in result list.
+
+        :param special_ports: Controlled variable. Should be list of ports, which should be tagged somehow.
+        :param ports: Controlled variable. Should be list of all ports of vlan.
+        """
         if type(ports) is not list or type(special_ports) is not list:
             return []
         real_ports = []
@@ -59,6 +59,10 @@ class Vlans:
         return real_ports
 
     def __vxlan_checker__(self, vxlan: Optional[Any]) -> Optional[int]:
+        """Checks if vxlan is in correct format/type and if it is non-negative number. If not, it returns None.
+
+        :param vxlan: Controlled variable. 
+        """
         if vxlan is None or type(vxlan) is not int or vxlan < 0:
             return None
         return vxlan
@@ -83,8 +87,9 @@ class Vlans:
         return boolean
 
     def add_by_dict(self, vlan_dict: Dict) -> None:
-        """add vlan by dict 
-        !warnings!: every unknow key will be ignor
+        """add vlan by dict
+        !warnings!: the only mandatory key is <<id>> (when <<id>> key is missing or is invalid, exception is raised)
+                    every unknown key will be ignored
                     if any key is missing it will be replaced by an empty class of the required data type
                     if any key will be in wrong format it will replace by an empty class of the required data type
         Correct_format=
@@ -102,12 +107,12 @@ class Vlans:
         "active_ports": [],
         "vxlan": None,
         "vxlanmodule": "",
-    }
+        }
 
-        
+
         :params vlan_dict: atributes of vlan in dict"""
         new_vlan = {
-            "id": self.__id_checker__(vlan_dict.get("id", 0)),
+            "id": self.__id_checker(vlan_dict.get("id", 0)),
             "type": self.__type_checker__(vlan_dict.get("type")),
             "auto-vxlan": self.__bool_check__(vlan_dict.get("auto-vxlan")),
             "replicators": self.__replicators_check__(vlan_dict.get("replicators")),
@@ -142,9 +147,9 @@ class Vlans:
         untagged_ports: List[int] = [],
         active_ports: List[int] = [],
         vxlan: Optional[int] = None,
-        vxlanmodule: str = "",
+        vxlanmodule: str = ""
     ) -> None:
-        """Add vlan by parametrs 
+        """Add vlan by parametrs
 
         :param id: id of new creted vlan
         :param type: type of vlan, defaults to "private"
@@ -161,7 +166,7 @@ class Vlans:
         :param vxlanmodule: defaults to ""
         """
         new_vlan = {
-            "id": self.__id_checker__(id),
+            "id": self.__id_checker(id),
             "type": self.__type_checker__(type),
             "auto-vxlan": self.__bool_check__(auto_vxlan),
             "replicators": self.__replicators_check__(replicators),
@@ -205,6 +210,7 @@ class Vlans:
                 break
         if not deleted:
             raise Exception("Vlan with such ID isn't in this object")
+
 
 """template variable
 """
