@@ -21,4 +21,4 @@ jobs:
     - uses: actions/checkout@v1
     - uses: ammaraskar/sphinx-action@master
       with:
-        build-command: "sphinx-build -b html . _build"
+        build-command: "make html"
