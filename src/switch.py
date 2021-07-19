@@ -56,9 +56,9 @@ def parse_vlan_show(info_to_parse: str) -> Vlans:
             "description": i[6],
             "active": i[7],
             "stats": i[8],
-            "ports": i[9],
-            "untagged_ports": i[10],
-            "active_ports": i[11],
+            "ports": parse_ports(i[9]),
+            "untagged_ports": parse_ports(i[10]),
+            "active_ports": parse_ports(i[11]),
         }
         new_vlan_obj.add_by_dict(new_vlan)
 
@@ -101,7 +101,9 @@ TODO
 
 class Switch:
     def __init__(self, username: str, password: str, management_ip: str = "", management_ipv6: str = "", port: int = 22, timeout: int = 60, keepalive: int = 60) -> None:
+
         self.__vlans = Vlans()
+        self.__switch_name = ""
         self.__management_ipv4 = management_ip
         self.__inband_ipv4 = ""
         self.__gateway_ipv4 = ""
@@ -111,12 +113,22 @@ class Switch:
         self.__ntp_secondary_ipv4 = ""
         self.__management_ipv6 = management_ipv6
         self.__inband_ipv6 = ""
+        self.__software = ""
+        self.__domain_name = ""
+        self.__time_zone = ""
+        self.__hostid = None  # int
+        self.__location_id = None  # int
+        self.__motd = ""
+        self.__banner = ""
+        self.__mgmt_lag = ""
+        self.__mgmt_lacp_mode = ""
+        self.__ntp = ""
+
         self.__port = port
         self.__timeout = timeout
         self.__keepalive = keepalive
         self.__username = username
         self.__password = password
-        self.__software = ""
 
         self.__changed = False
         self.__connected = False
@@ -164,6 +176,42 @@ class Switch:
         if not self.__changed:
             return
         # TODO
+        pass
+
+    def from_dict_to_attributes(self, parsed: Dict):
+        # self.__management_ipv4 = parsed.get("mgmt-ip", "")
+        self.__inband_ipv4 = parsed.get("in-band-ip", "")
+        self.__gateway_ipv4 = parsed.get("gateway-ip", "")
+        self.__dns_ipv4 = parsed.get("dns-ip", "")
+        self.__dns_secstdondary_ipv4 = parsed.get("dns-secondary-ip", "")
+        self.__ntp_server_ipv4 = parsed.get("ntp-server", "")
+        self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", ""]
+        # self.__management_ipv6 = parsed.get("mgmt-ip6", "")
+
+        self.__switch_name = parsed.get("", "")
+        self.__inband_ipv4 = parsed.get("", "")
+        self.__gateway_ipv4 = parsed.get("", "")
+        self.__dns_ipv4 = parsed.get("", "")
+        self.__dns_secondary_ipv4 = parsed.get("", "")
+        self.__ntp_server_ipv4 = parsed.get("", "")
+        self.__ntp_secondary_ipv4 = parsed.get("", "")
+        self.__inband_ipv6 = parsed.get("in-band-ip6", "")
+        self.__software = parsed.get("", "")
+        self.__domain_name = parsed.get("", "")
+        self.__time_zone = parsed.get("", "")
+        self.__hostid = parsed.get("", None)  # int
+        self.__location_id = parsed.get("", None)  # int
+        self.__motd = parsed.get("", "")
+        self.__banner = parsed.get("", "")
+        self.__mgmt_lag = parsed.get("", "")
+        self.__mgmt_lacp_mode = parsed.get("", "")
+        self.__ntp = parsed.get("", "")
+
+    def load_info(self):
+
+        pass
+
+    def download_info(self):
         pass
 
     @property
