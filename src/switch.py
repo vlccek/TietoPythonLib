@@ -372,6 +372,10 @@ class Switch:
         """
         self.__username = user_name
 
+    @property
+    def password(self):
+        return self.__password
+
     @password.setter
     def password(self, password: str) -> None:
         """Password setter
