@@ -2,8 +2,14 @@ from typing import List, Dict, Any, Optional
 from vlan import Vlans
 import re
 from ipaddress import IPv4Network, IPv6Network
+import paramiko
+
+from socket import error as socket_error
+from socket import gaierror as socket_gaierror
 
 # from tests.stringforparse import vlan_show, switch_setup_show
+
+
 
 
 def parse_switch_setup_show(info_to_parse: str) -> dict:
@@ -62,8 +68,17 @@ def parse_vlan_show(info_to_parse: str) -> Vlans:
     return new_vlan_obj
 
 
+"""TODO
+- user name a password
+- přidat connected
+- metoda na převod z range na array
+
+"""
+
+
+
 class Switch:
-    def __init__(self, management_ip: str, management_ipv6: str = "") -> None:
+    def __init__(self, username:str , password:str, management_ip: str = "", management_ipv6: str = "", port:int=22, timeout:int=60, keepalive:int=60) -> None:
         self.__vlans = Vlans()
         self.__management_ipv4 = management_ip
         self.__inband_ipv4 = ""
@@ -72,8 +87,65 @@ class Switch:
         self.__dns_secondary_ipv4 = ""
         self.__ntp_server_ipv4 = ""
         self.__ntp_secondary_ipv4 = ""
-        self.__management_ipv6 = ""
+        self.__management_ipv6 = management_ipv6
         self.__inband_ipv6 = ""
+        self.__port = port
+        self.__timeout = timeout
+        self.__keepalive = keepalive
+        self.__username = username
+        self.__password = password
+        
+        self.__changed = False
+        self.__connected = False
+        self.__connection = None
+
+        if management_ip == "" and management_ipv6 == "":
+            raise Exception("ip not provided")
+        elif management_ipv6 == "":
+            self.hostname = management_ip
+        else:
+            self.hostname = management_ipv6
+        
+        self.open()
+        
+
+    def open(self):
+        """Opens a SSH connection"""
+        self.__connection = paramiko.SSHClient()
+        self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        try:
+            self.__connection.connect(hostname=self.__management_ipv4,
+                                     username=self.__username,
+                                     password=self.__password,
+                                     timeout=self.__timeout,
+                                     port=self.__port)
+            self.__connection.get_transport().set_keepalive(self.__keepalive)
+            self.__connected = True
+        except paramiko.ssh_exception.AuthenticationException:
+            raise Exception("Unable to open connection with {hostname}: invalid credentials!".format(hostname=self._hostname))
+        except socket_error as sockerr:
+            raise Exception("Cannot open connection: {skterr}. Wrong port?".format(skterr=sockerr.message))
+        except socket_gaierror as sockgai:
+            raise Exception("Cannot open connection: {gaierr}. \
+                Wrong hostname?".format(gaierr=sockgai.message))
+        return self.__connection
+
+    def run_command(self, commands: List[str]):
+        # TODO
+        pass
+    
+    def commit(self):
+        """Send changes made in Switch object to switch"""
+        # tady jsou ty dva řádky xd
+        if not self.__changed:
+            return
+        # TODO
+        pass
+    
+    @property
+    def connection(self):
+        """Connection getter"""
+        return self.__connection
 
     @property
     def vlans(self):
