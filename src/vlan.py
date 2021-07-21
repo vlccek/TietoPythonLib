@@ -213,7 +213,9 @@ class Vlans:
                 break
         if not deleted:
             raise Exception("Vlan with such ID isn't in this object")
-
+    @property
+    def vlan_array(self):
+        return self.__vlans
 
 """template variable
 """
