@@ -1,5 +1,6 @@
 from typing import List, Dict, Any, Optional
 from vlan import Vlans
+from switch_info import Switch_info
 import re
 import paramiko
 
@@ -123,6 +124,7 @@ class Switch:
         self.__mgmt_lag = ""
         self.__mgmt_lacp_mode = ""
         self.__ntp = ""
+        self.__info = Switch_info()
 
         self.__port = port
         self.__timeout = timeout
@@ -185,7 +187,7 @@ class Switch:
         self.__dns_ipv4 = parsed.get("dns-ip", "")
         self.__dns_secstdondary_ipv4 = parsed.get("dns-secondary-ip", "")
         self.__ntp_server_ipv4 = parsed.get("ntp-server", "")
-        self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", ""]
+        self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", "")
         # self.__management_ipv6 = parsed.get("mgmt-ip6", "")
 
         self.__switch_name = parsed.get("", "")
