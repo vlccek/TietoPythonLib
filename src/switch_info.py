@@ -4,15 +4,17 @@ from vlan import Vlans
 
 
 class Switch_info:
-    def __init__(self) -> None:
+    def __init__(self, management_ip: str = "", management_ipv6: str = "") -> None:
         self.__vlans = Vlans()
         self.__switch_name = ""
+        self.__management_ipv4 = management_ip
         self.__inband_ipv4 = ""
         self.__gateway_ipv4 = ""
         self.__dns_ipv4 = ""
         self.__dns_secondary_ipv4 = ""
         self.__ntp_server_ipv4 = ""
         self.__ntp_secondary_ipv4 = ""
+        self.__management_ipv6 = management_ipv6
         self.__inband_ipv6 = ""
         self.__software = ""
         self.__domain_name = ""
@@ -35,36 +37,31 @@ class Switch_info:
         self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", "")
         # self.__management_ipv6 = parsed.get("mgmt-ip6", "")
 
-        self.__switch_name = parsed.get("", "")
-        self.__inband_ipv4 = parsed.get("", "")
-        self.__gateway_ipv4 = parsed.get("", "")
-        self.__dns_ipv4 = parsed.get("", "")
-        self.__dns_secondary_ipv4 = parsed.get("", "")
-        self.__ntp_server_ipv4 = parsed.get("", "")
-        self.__ntp_secondary_ipv4 = parsed.get("", "")
+        self.__switch_name = parsed.get("switch-name", "")
+        self.__inband_ipv4 = parsed.get("in-band-ip", "")
+        self.__gateway_ipv4 = parsed.get("gateway-ip", "")
+        self.__dns_ipv4 = parsed.get("in-band-ip6-assignment", "")
+        self.__dns_secondary_ipv4 = parsed.get("dns-secondary-ip", "")
+        self.__ntp_server_ipv4 = parsed.get("ntp-server", "")
+        self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", "")
         self.__inband_ipv6 = parsed.get("in-band-ip6", "")
-        self.__software = parsed.get("", "")
-        self.__domain_name = parsed.get("", "")
-        self.__time_zone = parsed.get("", "")
-        self.__hostid = parsed.get("", None)  # int
-        self.__location_id = parsed.get("", None)  # int
-        self.__motd = parsed.get("", "")
-        self.__banner = parsed.get("", "")
-        self.__mgmt_lag = parsed.get("", "")
-        self.__mgmt_lacp_mode = parsed.get("", "")
-        self.__ntp = parsed.get("", "")
+        self.__software = parsed.get("", "") # Neni hotovo nevím co to je pomoc pomoc pomoc :'(
+        self.__domain_name = parsed.get("domain-name", "")
+        self.__time_zone = parsed.get("timezone", "")
+        self.__hostid = parsed.get("hostid", None)  # int
+        self.__location_id = parsed.get("location-id", None)  # int
+        self.__motd = parsed.get("motd", "")
+        self.__banner = parsed.get("banner", "")
+        self.__mgmt_lag = parsed.get("mgmt-lag", "")
+        self.__mgmt_lacp_mode = parsed.get("mgmt-lacp-mode", "")
+        self.__ntp = parsed.get("ntp", "")
     
     def load_info(self):
         pass
 
     def download_info(self):
         pass
-
-    @property
-    def connection(self):
-        """Connection getter"""
-        return self.__connection
-
+    
     @property
     def vlans(self):
         """Vlan getter"""
@@ -114,6 +111,60 @@ class Switch_info:
         """Software version getter
         """
         return self.__software
+    
+    @property
+    def domain_name(self):
+        """Domain name getter
+        """
+        return self.__domain_name
+    
+    @property
+    def time_zone(self):
+        """Time zone getter
+        """
+        return self.__time_zone
+    
+    @property
+    def hostid(self):
+        """HostID getter
+        """
+        return self.__hostid
+    
+    @property
+    def location_id(self):
+        """LocationID getter
+        """
+        return self.__location_id
+    
+    @property
+    def motd(self):
+        """Motd getter
+        """
+        return self.__motd
+    
+    @property
+    def banner(self):
+        """Banner getter
+        """
+        return self.__banner
+    
+    @property
+    def mgmt_lag(self):
+        """Management lag getter
+        """
+        return self.__mgmt_lag
+
+    @property
+    def mgmt_lacp_mode(self):
+        """Management lacp mode getter
+        """
+        return self.__mgmt_lacp_mode
+    
+    @property
+    def ntp(self):
+        """Ntp getter
+        """
+        return self.__ntp
     
     @vlans.setter
     def vlans(self, vlans: Vlans = Vlans()):
@@ -178,11 +229,89 @@ class Switch_info:
         :param ip: IPv6 address in str type
         """
         self.__inband_ipv6 = ip6
+    
+    # @software.setter
+    # def software(self, version: str) -> None:
+    #     """Software version setter
 
-    @software.setter
-    def software(self, version: str) -> None:
-        """Software version setter
+    #     :param version: Version """"""of software on switch in str type
+    #     """
+    #     self.__software = version
+    
+    
+    @domain_name.setter
+    def domain_name(self, name: str) -> None:
+        """Domain name setter
 
-        :param version: Version of software on switch in str type
+        :param name: Desired domain name
         """
-        self.__software = version
+        self.__domain_name = name
+    
+    @time_zone.setter
+    def time_zone(self, zone: str) -> None:
+        """Time zone setter
+        
+        :param zone: Desired time zone
+        """
+        self.__time_zone = zone
+    
+    @hostid.setter
+    def hostid(self, id: int):
+        """HostID setter
+
+        :param id: Desired HostID
+        """
+        self.__hostid = id
+    
+    @location_id.setter
+    def location_id(self, id: int):
+        """LocationID setter
+
+        :param id: Desired LocationID
+        """
+        self.__location_id = id
+    
+    @motd.setter
+    def motd(self, motd: str):
+        """Motd setter
+
+        :param motd: Desired motd
+        """
+        self.__motd = motd
+    
+    @banner.setter
+    def banner(self, banner: str):
+        """Banner setter
+
+        :param banner: Desired banner
+        """
+        self.__banner = banner
+    
+    @mgmt_lag.setter
+    def mgmt_lag(self, lag: str):
+        """Management lag setter
+
+        :param lag: Desired management lag
+        """
+        self.__mgmt_lag = lag
+
+    @mgmt_lacp_mode.setter
+    def mgmt_lacp_mode(self, lacp_mode: str):
+        """Management lacp mode setter
+
+        :param lacp_mode: Desired management lacp mode
+        """
+        self.__mgmt_lacp_mode = lacp_mode
+    
+    @ntp.setter
+    def ntp(self, ntp: str):
+        """Ntp setter
+
+        :param ntp: Ntp state
+        """
+        self.__ntp = ntp
+
+def comapare_switch_info(original:Switch_info, new: Switch_info ):
+    """compare 2 switch info a return new object with only 
+    
+    """

@@ -3,6 +3,8 @@ from vlan import Vlans
 from switch_info import Switch_info
 import re
 import paramiko
+from loguru import logger
+import sys
 
 from socket import error as socket_error
 from socket import gaierror as socket_gaierror
@@ -102,8 +104,9 @@ TODO
 
 class Switch:
     def __init__(self, username: str, password: str, management_ip: str = "", management_ipv6: str = "", port: int = 22, timeout: int = 60, keepalive: int = 60) -> None:
-
+        """
         self.__vlans = Vlans()
+        
         self.__switch_name = ""
         self.__management_ipv4 = management_ip
         self.__inband_ipv4 = ""
@@ -111,7 +114,7 @@ class Switch:
         self.__dns_ipv4 = ""
         self.__dns_secondary_ipv4 = ""
         self.__ntp_server_ipv4 = ""
-        self.__ntp_secondary_ipv4 = ""
+        self.__ntp_secondary""""""_ipv4 = ""
         self.__management_ipv6 = management_ipv6
         self.__inband_ipv6 = ""
         self.__software = ""
@@ -124,7 +127,9 @@ class Switch:
         self.__mgmt_lag = ""
         self.__mgmt_lacp_mode = ""
         self.__ntp = ""
+        """
         self.__info = Switch_info()
+        self.__logger = logger.add(sys.stdout, format="{time} {level} {message}", filter="my_module", level="INFO")
 
         self.__port = port
         self.__timeout = timeout
@@ -143,10 +148,13 @@ class Switch:
         else:
             self.hostname = management_ipv6
 
+        logger.debug("That's it, beautiful and simple logging!")
         self.open()
 
     def open(self):
         """Opens a SSH connection"""
+        return
+        """
         self.__connection = paramiko.SSHClient()
         self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         try:
@@ -167,6 +175,7 @@ class Switch:
             raise Exception("Cannot open connection: {gaierr}. \
                 Wrong hostname?".format(gaierr=sockgai.message))
         return self.__connection
+    """
 
     def run_command(self, commands: List[str]):
         # TODO
@@ -174,13 +183,12 @@ class Switch:
 
     def commit(self):
         """Send changes made in Switch object to switch"""
-        # tady jsou ty dva řádky xd
         if not self.__changed:
             return
         # TODO
         pass
 
-    def from_dict_to_attributes(self, parsed: Dict):
+"""     def from_dict_to_attributes(self, parsed: Dict):
         # self.__management_ipv4 = parsed.get("mgmt-ip", "")
         self.__inband_ipv4 = parsed.get("in-band-ip", "")
         self.__gateway_ipv4 = parsed.get("gateway-ip", "")
@@ -214,68 +222,68 @@ class Switch:
         pass
 
     def download_info(self):
-        pass
+        pass """
 
     @property
     def connection(self):
         """Connection getter"""
         return self.__connection
 
-    @property
-    def vlans(self):
-        """Vlan getter"""
-        return self.__vlans
+    # @property
+    # def vlans(self):
+    #     """Vlan getter"""
+    #     return self.__vlans
 
-    @property
-    def management_ipv4(self):
-        """Management IPv4 getter"""
-        return self.__management_ipv4
+    # @property
+    # def management_ipv4(self):
+    #     """Management IPv4 getter"""
+    #     return self.__management_ipv4
 
-    @property
-    def inband_ipv4(self):
-        """Inband IPv4 getter"""
-        return self.__inband_ipv4
+    # @property
+    # def inband_ipv4(self):
+    #     """Inband IPv4 getter"""
+    #     return self.__inband_ipv4
 
-    @property
-    def gateway_ipv4(self):
-        """Gateway IPv4 getter"""
-        return self.__gateway_ipv4
+    # @property
+    # def gateway_ipv4(self):
+    #     """Gateway IPv4 getter"""
+    #     return self.__gateway_ipv4
 
-    @property
-    def dns_ipv4(self):
-        """DNS IPv4 getter"""
-        return self.__dns_ipv4
+    # @property
+    # def dns_ipv4(self):
+    #     """DNS IPv4 getter"""
+    #     return self.__dns_ipv4
 
-    @property
-    def dns_secondary_ipv4(self):
-        """DNS Secondary IPv4 getter"""
-        return self.__dns_secondary_ipv4
+    # @property
+    # def dns_secondary_ipv4(self):
+    #     """DNS Secondary IPv4 getter"""
+    #     return self.__dns_secondary_ipv4
 
-    @property
-    def ntp_server(self):
-        """NTP Server IPv4 getter"""
-        return self.__ntp_server_ipv4
+    # @property
+    # def ntp_server(self):
+    #     """NTP Server IPv4 getter"""
+    #     return self.__ntp_server_ipv4
 
-    @property
-    def ntp_secondary_server(self):
-        """NTP Secondary server IPv4 getter
+    # @property
+    # def ntp_secondary_server(self):
+    #     """NTP Secondary server IPv4 getter
 
-        """
-        return self.__ntp_secondary_ipv4
+    #     """
+    #     return self.__ntp_secondary_ipv4
 
-    @property
-    def management_ipv6(self):
-        """Management IPv6 getter
+    # @property
+    # def management_ipv6(self):
+    #     """Management IPv6 getter
 
-        """
-        return self.___management_ipv6
+    #     """
+    #     return self.__management_ipv6
 
-    @property
-    def inband_ipv6(self):
-        """Inband IPv6 getter
+    # @property
+    # def inband_ipv6(self):
+    #     """Inband IPv6 getter
 
-        """
-        return self.__inband_ipv6
+    #     """
+    #     return self.__inband_ipv6
 
     @property
     def port(self):
@@ -301,11 +309,11 @@ class Switch:
         """
         return self.__username
 
-    @property
-    def software(self):
-        """Software version getter
-        """
-        return self.__software
+    # @property
+    # def software(self):
+    #     """Software version getter
+    #     """
+    #     return self.__software
 
     @property
     def connected(self):
@@ -313,13 +321,13 @@ class Switch:
         """
         return self.__connected
 
-    @vlans.setter
-    def vlans(self, vlans: Vlans = Vlans()):
-        """Vlan setter
+    # @vlans.setter
+    # def vlans(self, vlans: Vlans = Vlans()):
+    #     """Vlan setter
 
-        : param vlans: Vlans object. Empty Vlans object by default.
-        """
-        self.__vlans = vlans
+    #     : param vlans: Vlans object. Empty Vlans object by default.
+    #     """
+    #     self.__vlans = vlans
 
     """
     @management_ipv4.setter
@@ -327,53 +335,53 @@ class Switch:
         self.__management_ipv4 = ip
     """
 
-    @inband_ipv4.setter
-    def inband_ipv4(self, ip: str) -> None:
-        """Inband IPv4 setter
+    # @inband_ipv4.setter
+    # def inband_ipv4(self, ip: str) -> None:
+    #     """Inband IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__inband_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__inband_ipv4 = ip
 
-    @gateway_ipv4.setter
-    def gateway_ipv4(self, ip: str) -> None:
-        """Gateway IPv4 setter
+    # @gateway_ipv4.setter
+    # def gateway_ipv4(self, ip: str) -> None:
+    #     """Gateway IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__gateway_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__gateway_ipv4 = ip
 
-    @dns_ipv4.setter
-    def dns_ipv4(self, ip: str) -> None:
-        """DNS IPv4 setter
+    # @dns_ipv4.setter
+    # def dns_ipv4(self, ip: str) -> None:
+    #     """DNS IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__dns_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__dns_ipv4 = ip
 
-    @dns_secondary_ipv4.setter
-    def dns_secondary_ipv4(self, ip: str) -> None:
-        """DNS Secondary IPv4 setter
+    # @dns_secondary_ipv4.setter
+    # def dns_secondary_ipv4(self, ip: str) -> None:
+    #     """DNS Secondary IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__dns_secondary_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__dns_secondary_ipv4 = ip
 
-    @ntp_server.setter
-    def ntp_server(self, ip: str) -> None:
-        """NTP Server IPv4 setter
+    # @ntp_server.setter
+    # def ntp_server(self, ip: str) -> None:
+    #     """NTP Server IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__ntp_server_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__ntp_server_ipv4 = ip
 
-    @ntp_secondary_server.setter
-    def ntp_secondary_server(self, ip: str) -> None:
-        """NTP Secondary server IPv4 setter
+    # @ntp_secondary_server.setter
+    # def ntp_secondary_server(self, ip: str) -> None:
+    #     """NTP Secondary server IPv4 setter
 
-        :param ip: IPv4 address in str type
-        """
-        self.__ntp_secondary_ipv4 = ip
+    #     :param ip: IPv4 address in str type
+    #     """
+    #     self.__ntp_secondary_ipv4 = ip
 
     """
     @management_ipv6.setter
@@ -382,13 +390,13 @@ class Switch:
         self.__management_ipv6= ip6
     """
 
-    @inband_ipv6.setter
-    def inband_ipv6(self, ip6: str) -> None:
-        """Inband IPv6 setter
+    # @inband_ipv6.setter
+    # def inband_ipv6(self, ip6: str) -> None:
+    #     """Inband IPv6 setter
 
-        :param ip: IPv6 address in str type
-        """
-        self.__inband_ipv6 = ip6
+    #     :param ip: IPv6 address in str type
+    #     """
+    #     self.__inband_ipv6 = ip6
 
     @port.setter
     def port(self, port_number: int) -> None:
@@ -434,10 +442,10 @@ class Switch:
         """
         self.__password = password
 
-    @software.setter
-    def software(self, version: str) -> None:
-        """Software version setter
+    # @software.setter
+    # def software(self, version: str) -> None:
+    #     """Software version setter
 
-        :param version: Version of software on switch in str type
-        """
-        self.__software = version
+    #     :param version: Version of software on switch in str type
+    #     """
+    #     self.__software = version
