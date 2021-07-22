@@ -1,5 +1,6 @@
 import tabulate
 from typing import List, Dict, Any, Optional
+from loguru import logger
 
 
 class Vlans:
@@ -213,9 +214,35 @@ class Vlans:
                 break
         if not deleted:
             raise Exception("Vlan with such ID isn't in this object")
+
     @property
     def vlan_array(self):
         return self.__vlans
+
+
+def diff_vlans(new: Vlans, old: Vlans) -> dict:
+    """generrate diff between self and second
+
+    :param second: new vlans
+    """
+    logger.trace("Running diff vlans function")
+    original_vlans = new.vlan_array
+    new_vlans = old.vlan_array
+
+    if (original_vlans == new_vlans):
+        return {}
+
+    diff = {}
+
+    for original in original_vlans:
+        for new in new_vlans:
+            if original['id'] == new['id']:
+                diff[original["id"]] = dict_diff(original, new)
+
+    logger.success("Comparing complete. More info in info log.")
+    logger.trace("Dict with changes \n {}".format(diff))
+    return diff
+
 
 """template variable
 """
