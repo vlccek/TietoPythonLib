@@ -1,7 +1,7 @@
-from logging import log
 from typing import List, Dict, Any, Optional
 from vlan import Vlans
 from loguru import logger
+from help_function import dict_diff
 
 
 class Switch_info:
@@ -29,7 +29,7 @@ class Switch_info:
         self.__mgmt_lacp_mode = ""
         self.__ntp = ""
         logger.success("Switch_info object created successfully")
-    
+
     def from_dict_to_attributes(self, parsed: Dict):
         logger.trace("Converting dictionary to attributes")
         # self.__management_ipv4 = parsed.get("mgmt-ip", "")
@@ -49,7 +49,8 @@ class Switch_info:
         self.__ntp_server_ipv4 = parsed.get("ntp-server", "")
         self.__ntp_secondary_ipv4 = parsed.get("ntp-secondary-server", "")
         self.__inband_ipv6 = parsed.get("in-band-ip6", "")
-        self.__software = parsed.get("", "") # Neni hotovo nevím co to je pomoc pomoc pomoc :'(
+        self.__software = parsed.get(
+            "", "")  # Neni hotovo nevím co to je pomoc pomoc pomoc :'(
         self.__domain_name = parsed.get("domain-name", "")
         self.__time_zone = parsed.get("timezone", "")
         self.__hostid = parsed.get("hostid", None)  # int
@@ -60,19 +61,19 @@ class Switch_info:
         self.__mgmt_lacp_mode = parsed.get("mgmt-lacp-mode", "")
         self.__ntp = parsed.get("ntp", "")
         logger.success("Dictionary converted to attributes successfully")
-    
+
     def load_info(self):
         pass
 
     def download_info(self):
         pass
-    
+
     @property
     def vlans(self):
         """Vlan getter"""
         logger.trace("Getting vlans")
         return self.__vlans
-    
+
     @property
     def inband_ipv4(self):
         """Inband IPv4 getter"""
@@ -109,7 +110,7 @@ class Switch_info:
         """
         logger.trace("Getting NTP secondary server IP")
         return self.__ntp_secondary_ipv4
-    
+
     @property
     def inband_ipv6(self):
         """Inband IPv6 getter
@@ -123,49 +124,49 @@ class Switch_info:
         """
         logger.trace("Getting software version")
         return self.__software
-    
+
     @property
     def domain_name(self):
         """Domain name getter
         """
         logger.trace("Getting domain name")
         return self.__domain_name
-    
+
     @property
     def time_zone(self):
         """Time zone getter
         """
         logger.trace("Getting time zone")
         return self.__time_zone
-    
+
     @property
     def hostid(self):
         """HostID getter
         """
         logger.trace("Getting HostID")
         return self.__hostid
-    
+
     @property
     def location_id(self):
         """LocationID getter
         """
         logger.trace("Getting LocationID")
         return self.__location_id
-    
+
     @property
     def motd(self):
         """Motd getter
         """
         logger.trace("Getting motd")
         return self.__motd
-    
+
     @property
     def banner(self):
         """Banner getter
         """
         logger.trace("Getting banner")
         return self.__banner
-    
+
     @property
     def mgmt_lag(self):
         """Management lag getter
@@ -179,14 +180,14 @@ class Switch_info:
         """
         logger.trace("Getting Management lacp mode")
         return self.__mgmt_lacp_mode
-    
+
     @property
     def ntp(self):
         """Ntp getter
         """
         logger.trace("Getting ntp state")
         return self.__ntp
-    
+
     @vlans.setter
     def vlans(self, vlans: Vlans = Vlans()):
         """Vlan setter
@@ -196,7 +197,7 @@ class Switch_info:
         logger.info(f"Changing vlans")
         self.__vlans = vlans
         logger.success("Vlans changed successfully")
-    
+
     @inband_ipv4.setter
     def inband_ipv4(self, ip: str) -> None:
         """Inband IPv4 setter
@@ -250,7 +251,7 @@ class Switch_info:
         """
         self.__ntp_secondary_ipv4 = ip
         logger.success("NTP secondary server IP changed successfully")
-    
+
     @inband_ipv6.setter
     def inband_ipv6(self, ip6: str) -> None:
         """Inband IPv6 setter
@@ -259,7 +260,7 @@ class Switch_info:
         """
         self.__inband_ipv6 = ip6
         logger.success("Inband IPv6 changed successfully")
-    
+
     # @software.setter
     # def software(self, version: str) -> None:
     #     """Software version setter
@@ -267,8 +268,7 @@ class Switch_info:
     #     :param version: Version """"""of software on switch in str type
     #     """
     #     self.__software = version
-    
-    
+
     @domain_name.setter
     def domain_name(self, name: str) -> None:
         """Domain name setter
@@ -276,15 +276,15 @@ class Switch_info:
         :param name: Desired domain name
         """
         self.__domain_name = name
-    
+
     @time_zone.setter
     def time_zone(self, zone: str) -> None:
         """Time zone setter
-        
+
         :param zone: Desired time zone
         """
         self.__time_zone = zone
-    
+
     @hostid.setter
     def hostid(self, id: int):
         """HostID setter
@@ -292,7 +292,7 @@ class Switch_info:
         :param id: Desired HostID
         """
         self.__hostid = id
-    
+
     @location_id.setter
     def location_id(self, id: int):
         """LocationID setter
@@ -300,7 +300,7 @@ class Switch_info:
         :param id: Desired LocationID
         """
         self.__location_id = id
-    
+
     @motd.setter
     def motd(self, motd: str):
         """Motd setter
@@ -308,7 +308,7 @@ class Switch_info:
         :param motd: Desired motd
         """
         self.__motd = motd
-    
+
     @banner.setter
     def banner(self, banner: str):
         """Banner setter
@@ -316,7 +316,7 @@ class Switch_info:
         :param banner: Desired banner
         """
         self.__banner = banner
-    
+
     @mgmt_lag.setter
     def mgmt_lag(self, lag: str):
         """Management lag setter
@@ -332,7 +332,7 @@ class Switch_info:
         :param lacp_mode: Desired management lacp mode
         """
         self.__mgmt_lacp_mode = lacp_mode
-    
+
     @ntp.setter
     def ntp(self, ntp: str):
         """Ntp setter
@@ -341,44 +341,6 @@ class Switch_info:
         """
         self.__ntp = ntp
 
-    def comapare_switch_info(self, second):
-        """compare 2 switch info a return dict  
-        
-        """
-        self.diff_vlans(second)
-        return
-    
-    def diff_vlans(self,second):
-        original_vlans = self.__vlans.vlan_array
-        new_vlans = second.vlans.vlan_array
-
-        if ( original_vlans == new_vlans):
-
-            return {}
-        diff = {10:[]}
-
-        for original in original_vlans:
-            for new in new_vlans:
-                if original['id'] == new['id']:
-                    diff[original['id']] = []
-                    diff[new['id']] = []
-                    print(new['id'])
-                    for k in list(original.keys()):
-                        if not( original.get(k) == new.get(k)):
-                            diff[new['id']].append(k)
-                            # todo
-        
-        
-        return diff
-
-sw = Switch_info()
-sw.vlans.add_by_params(10)
-sw.vlans.add_by_params(11)
-sw.vlans.add_by_params(100, ports=[10,20])
-
-sw2 = Switch_info()
-sw2.vlans.add_by_params(11)
-sw2.vlans.add_by_params(12)
-sw2.vlans.add_by_params(100)
-
-print(sw.diff_vlans(sw2))
+    def print_instance_attributes(self):
+        for attribute, value in self.__dict__.items():
+            print(attribute, '=', value)

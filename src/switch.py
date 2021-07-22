@@ -12,12 +12,10 @@ from socket import gaierror as socket_gaierror
 # from tests.stringforparse import vlan_show, switch_setup_show
 
 
-
-
-
 class Switch:
-    def __init__(self, username: str, password: str, host:str, port: int = 22, timeout: int = 60, keepalive: int = 60) -> None:
-        logger.add(sys.stdout,colorize=True, format="{time} {level} {message}", level=0)
+    def __init__(self, username: str, password: str, host: str, port: int = 22, timeout: int = 60, keepalive: int = 60) -> None:
+        logger.add(sys.stdout, colorize=True,
+                   format="{time} {level} {message}", level=0)
         logger.remove(0)
         logger.debug("Logger up")
 
@@ -25,9 +23,9 @@ class Switch:
 
         self.__vlans = Vlans()
         self.__info = Switch_info()
+        self.__old_info = Switch_info()
         logger.debug("Succes add Vlans nad switch info private variables")
-        
-        
+
         self.__port = port
         self.__timeout = timeout
         self.__keepalive = keepalive
@@ -40,26 +38,35 @@ class Switch:
         self.__connection = None
         self.__host = host
 
-        logger.success("Object Crete succesfull opening connection with switch.")
+        logger.success(
+            "Object Crete succesfull opening connection with switch.")
         self.open()
+        # tady budu načítat informace o sw
+        # self.__info = Loadinfo()
+        self.__old_info = self.__info
 
     @logger.catch
     def open(self):
-        """Opens a SSH connection"""         
+        """Opens a SSH connection"""
         self.__connection = paramiko.SSHClient()
         self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.__connection.connect(hostname=self.__host,
-                                    username=self.__username,
-                                    password=self.__password,
-                                    timeout=self.__timeout,
-                                    port=self.__port)
+                                  username=self.__username,
+                                  password=self.__password,
+                                  timeout=self.__timeout,
+                                  port=self.__port)
         self.__connection.get_transport().set_keepalive(self.__keepalive)
         self.__connected = True
         logger.success("Connection SUCCESS")
         return self.__connection
 
-        
-    
+    def comapare_swinfo_swinfo_old(self, old: Switch_info, new: Switch_info):
+        """compare 2 switch info a return dict
+
+        """
+        self.__old_info.__weakref__
+        self.diff_vlans(second)
+        return
 
     def run_command(self, commands: List[str]):
         # TODO
@@ -100,14 +107,12 @@ class Switch:
         logger.trace("Getting username")
         return self.__username
 
-
     @property
     def connected(self):
         """Connected getter
         """
         logger.trace("Getting connecetion")
         return self.__connected
-
 
     @port.setter
     def port(self, port_number: int) -> None:
@@ -118,7 +123,6 @@ class Switch:
         logger.info(f"Changing port from {self.__port} to {port_number}")
         self.__port = port_number
         logger.success("Port changed")
-        
 
     # @timeout.setter
     # def timeout(self, timeout_seconds: int) -> None:
@@ -154,3 +158,10 @@ class Switch:
     #     :param password: Password in str type in plaintext
     #     """
     #     self.__password = password
+
+    def comapare_2_switch_info(self, new: Switch_info, old: Switch_info):
+        """compare 2 switch info a return dict
+
+        """
+
+        return
