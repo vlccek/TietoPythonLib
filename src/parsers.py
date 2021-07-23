@@ -1,5 +1,7 @@
 from loguru import logger
+
 from vlan import Vlans
+
 
 def parse_switch_setup_show(info_to_parse: str) -> dict:
     """parse output of command switch setup show
@@ -69,7 +71,7 @@ def parse_interval(interval_to_parse: str):
 
     tmp = []
 
-    for i in range(int(resolut.group(1)), int(resolut.group(2))+1):
+    for i in range(int(resolut.group(1)), int(resolut.group(2)) + 1):
         tmp.append(i)
     logger.success("Parsed successfully")
     return tmp

@@ -1,6 +1,7 @@
-import vlan
-import unittest
 import random
+import unittest
+
+import vlan
 
 """TODO
 chybí dopasat testy s nepovedenými vlany (slovníky
@@ -85,10 +86,7 @@ class Test_vlans_add(unittest.TestCase):
 
         self.assertEqual(vlan_exp.__vlans__, [vlan_example])
 
-    def test_vlan_add_by_params(self):  
-
-
-
+    def test_vlan_add_by_params(self):
         vlan_test1 = vlan.Vlans()
         vlan_test1.__vlans__ = [vlan1_res, vlan2_res]
         vlans1 = vlan.Vlans()
