@@ -31,7 +31,7 @@ class Switch_info:
         self.__ntp = ""
         logger.success("Switch_info object created successfully")
 
-    def parse_switch_setup_show(info_to_parse: str) -> dict:
+    def parse_switch_setup_show(self, info_to_parse: str) -> dict:
         """parse output of command switch setup show
 
         :param info_to_parse: string format info

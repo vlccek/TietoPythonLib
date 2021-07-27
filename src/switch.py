@@ -75,11 +75,23 @@ class Switch:
         return stdin, stdout, stderr
 
     def get_switch_setup(self):
-        stdin, stdout, stderr = self.run_command("switch-info-show")
-        comandoutput = stdout.readlines()
+        stdin, stdout, stderr = self.run_command("switch-setup-show")
+        comandoutput = ""
+
+        for line in stdout:
+            comandoutput += line
 
         parseddict = self.__info.parse_switch_setup_show(comandoutput)
         self.__info.from_dict_to_attributes(parseddict)
+
+    def get_vlan_show(self):
+        stdin, stdout, stderr = self.run_command("switch-setup-show")
+        comandoutput = ""
+
+        for line in stdout:
+            comandoutput += line
+
+        self.info.vlans.parse_vlan_show(comandoutput)
 
     def commit(self):
         """Send changes made in Switch object to switch"""
