@@ -220,7 +220,11 @@ class Vlans:
     def vlan_array(self):
         return self.__vlans
 
+<<<<<<< HEAD
     def parse_vlan_show(self, info_to_parse: str):
+=======
+    def parse_vlan_show(self, info_to_parse: str) -> Vlans:
+>>>>>>> 0222f66ad8216c8d2cc197ce480778ef211c48de
         """Parse vlan show
 
         :param info_to_parse: string to parse
@@ -245,7 +249,7 @@ class Vlans:
                 "untagged_ports": self.parse_ports(i[10]),
                 "active_ports": self.parse_ports(i[11]),
             }
-            self.add_by_dict(new_vlan)
+            new_vlan_obj.add_by_dict(new_vlan)
         logger.success("Parsed successfully")
         return new_vlan_obj
 
