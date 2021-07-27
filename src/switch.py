@@ -70,9 +70,16 @@ class Switch:
         logger.success("Connection SUCCESS")
         return self.__connection
 
-    def run_command(self, commands: List[str]):
-        # TODO
-        pass
+    def run_command(self, command: str):
+        stdin, stdout, stderr = self.__connection.exec_command(command)
+        return stdin, stdout, stderr
+
+    def get_switch_setup(self):
+        stdin, stdout, stderr = self.run_command("switch-info-show")
+        comandoutput = stdout.readlines()
+
+        parseddict = self.__info.parse_switch_setup_show(comandoutput)
+        self.__info.from_dict_to_attributes(parseddict)
 
     def commit(self):
         """Send changes made in Switch object to switch"""

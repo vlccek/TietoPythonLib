@@ -31,6 +31,21 @@ class Switch_info:
         self.__ntp = ""
         logger.success("Switch_info object created successfully")
 
+    def parse_switch_setup_show(info_to_parse: str) -> dict:
+        """parse output of command switch setup show
+
+        :param info_to_parse: string format info
+        :return: parsed information
+        """
+        pattern = "(.[^\:]*)\:\ *(.*)"
+        logger.trace("Parsing switch-setup-show")
+        parsed_info = re.findall(pattern, info_to_parse)
+        new_dictionary = dict()
+        for i in parsed_info:
+            new_dictionary[i[0]] = i[1]
+        logger.success("Parsed successfully")
+        return new_dictionary
+
     def from_dict_to_attributes(self, parsed: Dict):
         logger.trace("Converting dictionary to attributes")
         # self.__management_ipv4 = parsed.get("mgmt-ip", "")

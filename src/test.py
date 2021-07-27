@@ -6,6 +6,7 @@ pepa = Switch(
 )  # auto dowload infmation about switch
 pepa.info.vlans.add_by_params(id=10, ports=[10, 20, 30], active_ports=[10, 30])
 pepa.info.dns_ipv4 = "192.168.19.1"
+pepa.run_command("bridge-domain-create novakovi")
 # ...
 
 pepa.commit()  # Upload changes to connected switch

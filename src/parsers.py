@@ -3,36 +3,6 @@ from loguru import logger
 from vlan import Vlans
 
 
-def parse_switch_setup_show(info_to_parse: str) -> dict:
-    """parse output of command switch setup show
-
-    :param info_to_parse: string format info
-    :return: parsed information
-    """
-    pattern = "(.[^\:]*)\:\ *(.*)"
-    logger.trace("Parsing switch-setup-show")
-    parsed_info = re.findall(pattern, info_to_parse)
-    new_dictionary = dict()
-    ip4field = [
-        "mgmt-ip",  # managment ip
-        "in-band-ip",  # nemám tušení mby vnitřní ip ale aby byl na sw NAT to se mi nepozdává
-        "gateway-ip",  # gw
-        "dns-ip",  # DNS
-        "dns-secondary-ip",  # DNS2
-        "ntp-server",
-        "ntp-secondary-server",
-    ]
-    ip6field = ["mgmt-ip6", "in-band-ip6"]  # managment ip
-    for i in parsed_info:
-        new_dictionary[i[0]] = i[1]
-        if i[0] in ip4field:
-            new_dictionary[i[0]] = i[1]
-        if i[0] in ip6field:
-            new_dictionary[i[0]] = i[1]
-    logger.success("Parsed successfully")
-    return new_dictionary
-
-
 def parse_vlan_show(info_to_parse: str) -> Vlans:
     """Parse vlan show
 
@@ -65,7 +35,7 @@ def parse_vlan_show(info_to_parse: str) -> Vlans:
 
 def parse_interval(interval_to_parse: str):
     logger.trace("Parsing number interval")
-    resolut = re.match('^(\d+)\-(\d+)$', interval_to_parse)
+    resolut = re.match("^(\d+)\-(\d+)$", interval_to_parse)
     if not resolut:
         return []
 
@@ -79,10 +49,10 @@ def parse_interval(interval_to_parse: str):
 
 def parse_ports(ports_to_parse: str):
     logger.trace("Parsing ports")
-    splited = ports_to_parse.split(',')
+    splited = ports_to_parse.split(",")
     output = []
     for i in splited:
-        if not '-' in i:
+        if not "-" in i:
             output.append(int(i))
         else:
             output += parse_interval(i)
