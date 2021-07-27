@@ -245,7 +245,7 @@ class Vlans:
                 "untagged_ports": self.parse_ports(i[10]),
                 "active_ports": self.parse_ports(i[11]),
             }
-            self.add_by_dict(new_vlan)
+            new_vlan_obj.add_by_dict(new_vlan)
         logger.success("Parsed successfully")
         return new_vlan_obj
 
