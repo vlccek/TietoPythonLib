@@ -3,6 +3,8 @@ from typing import List, Dict, Any, Optional
 import tabulate
 from loguru import logger
 
+import re
+
 
 class Vlans:
     def __init__(self):

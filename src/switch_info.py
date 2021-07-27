@@ -4,6 +4,8 @@ from loguru import logger
 
 from vlan import Vlans
 
+import re
+
 
 class Switch_info:
     def __init__(self, management_ip: str = "", management_ipv6: str = "") -> None:
