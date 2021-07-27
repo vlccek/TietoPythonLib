@@ -8,6 +8,7 @@ from switch_info import Switch_info
 from vlan import Vlans
 
 import copy
+import tabulate
 
 
 # from tests.stringforparse import vlan_show, switch_setup_show
@@ -26,12 +27,10 @@ class Switch:
         logger.add(
             sys.stdout, colorize=True, format="{time} {level} {message}", level=0
         )
-        logger.remove(0)
         logger.debug("Logger up")
 
         logger.info("Pepa")
 
-        self.__vlans = Vlans()
         self.__info = Switch_info()
         self.__old_info = Switch_info()
         logger.debug("Succes add Vlans nad switch info private variables")
@@ -80,6 +79,14 @@ class Switch:
         if not self.__changed:
             return
         # TODO
+        pass
+
+    def __repr__(self) -> str:
+        output = f"""Switch name: {self.info.__switch_name}
+Connection information:
+host (connected by): {self.__host}
+port: {self.__port}
+timeout: {self.__timeout}"""
         pass
 
     @property

@@ -129,4 +129,3 @@ dmypy.json
 .pyre/
 .vscode/settings.json
 .vscode/launch.json
-src/test.py
