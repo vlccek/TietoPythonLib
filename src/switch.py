@@ -11,9 +11,6 @@ import copy
 import tabulate
 
 
-# from tests.stringforparse import vlan_show, switch_setup_show
-
-
 class Switch:
     def __init__(
         self,
@@ -50,7 +47,8 @@ class Switch:
         logger.success("Object Crete succesfull opening connection with switch.")
         self.open()
         # tady budu načítat informace o sw
-        # self.__info = Loadinfo()
+        self.load_switch_setup()
+        self.load_vlan_show()
         self.__old_info = copy.deepcopy(self.__info)
 
     @logger.catch
@@ -74,7 +72,8 @@ class Switch:
         stdin, stdout, stderr = self.__connection.exec_command(command)
         return stdin, stdout, stderr
 
-    def get_switch_setup(self):
+    def load_switch_setup(self):
+        logger.trace("Starting loading switch setup")
         stdin, stdout, stderr = self.run_command("switch-setup-show")
         comandoutput = ""
 
@@ -83,8 +82,10 @@ class Switch:
 
         parseddict = self.__info.parse_switch_setup_show(comandoutput)
         self.__info.from_dict_to_attributes(parseddict)
+        logger.success("Loading switch setup SUCCESS")
 
-    def get_vlan_show(self):
+    def load_vlan_show(self):
+        logger.trace("Starting colecting vlan info")
         stdin, stdout, stderr = self.run_command("switch-setup-show")
         comandoutput = ""
 
@@ -92,6 +93,7 @@ class Switch:
             comandoutput += line
 
         self.info.vlans.parse_vlan_show(comandoutput)
+        logger.success("Loadinf switch vlans SUCCESS")
 
     def commit(self):
         """Send changes made in Switch object to switch"""
