@@ -1,10 +1,9 @@
+import re
 from typing import Dict
 
 from loguru import logger
 
 from vlan import Vlans
-
-import re
 
 
 class Switch_info:

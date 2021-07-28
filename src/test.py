@@ -1,5 +1,6 @@
-from switch import Switch
 import paramiko
+
+from switch import Switch
 
 pepa = Switch(
     username="admin", password="root", domain="sw-pepa.cz"

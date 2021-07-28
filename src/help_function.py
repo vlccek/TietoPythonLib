@@ -24,12 +24,7 @@ def dict_diff(old_dict: dict, new_dict: dict):
     :rtype: [type]
     """
     logger.trace("Running dict diff function")
-    diff = {
-        "new": list(),
-        "remove": list(),
-        "same": list(),
-        "change": list()
-    }
+    diff = {"new": list(), "remove": list(), "same": list(), "change": list()}
 
     for dict_a_value in old_dict.keys():
         if dict_a_value in new_dict.keys():

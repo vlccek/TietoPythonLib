@@ -1,9 +1,8 @@
-from typing import List, Dict, Any, Optional
+import re
+from typing import Any, Dict, List, Optional
 
 import tabulate
 from loguru import logger
-
-import re
 
 
 class Vlans:
