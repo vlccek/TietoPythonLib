@@ -125,8 +125,14 @@
 <span id="switch-module"></span><h1>switch module<a class="headerlink" href="#module-switch" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="switch.Switch">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">Switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management_ip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management_ipv6</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepalive</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">Switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepalive</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="switch.Switch.comapare_2_switch_info">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">comapare_2_switch_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">switch_info.Switch_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">switch_info.Switch_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.comapare_2_switch_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>compare 2 switch info a return dict</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="switch.Switch.commit">
 <span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.commit" title="Permalink to this definition">¶</a></dt>
@@ -140,40 +146,9 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.connection">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">connection</span></span><a class="headerlink" href="#switch.Switch.connection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Connection getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.dns_ipv4">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dns_ipv4</span></span><a class="headerlink" href="#switch.Switch.dns_ipv4" title="Permalink to this definition">¶</a></dt>
-<dd><p>DNS IPv4 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.dns_secondary_ipv4">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">dns_secondary_ipv4</span></span><a class="headerlink" href="#switch.Switch.dns_secondary_ipv4" title="Permalink to this definition">¶</a></dt>
-<dd><p>DNS Secondary IPv4 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.gateway_ipv4">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">gateway_ipv4</span></span><a class="headerlink" href="#switch.Switch.gateway_ipv4" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gateway IPv4 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.inband_ipv4">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">inband_ipv4</span></span><a class="headerlink" href="#switch.Switch.inband_ipv4" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inband IPv4 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.inband_ipv6">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">inband_ipv6</span></span><a class="headerlink" href="#switch.Switch.inband_ipv6" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inband IPv6 getter</p>
-</dd></dl>
+<dt class="sig sig-object py" id="switch.Switch.info">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">info</span></span><a class="headerlink" href="#switch.Switch.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="switch.Switch.keepalive">
@@ -181,40 +156,26 @@
 <dd><p>Keepalive getter</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.management_ipv4">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">management_ipv4</span></span><a class="headerlink" href="#switch.Switch.management_ipv4" title="Permalink to this definition">¶</a></dt>
-<dd><p>Management IPv4 getter</p>
-</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="switch.Switch.load_switch_setup">
+<span class="sig-name descname"><span class="pre">load_switch_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.load_switch_setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="switch.Switch.load_vlan_show">
+<span class="sig-name descname"><span class="pre">load_vlan_show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.load_vlan_show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.management_ipv6">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">management_ipv6</span></span><a class="headerlink" href="#switch.Switch.management_ipv6" title="Permalink to this definition">¶</a></dt>
-<dd><p>Management IPv6 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.ntp_secondary_server">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ntp_secondary_server</span></span><a class="headerlink" href="#switch.Switch.ntp_secondary_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>NTP Secondary server IPv4 getter</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.ntp_server">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ntp_server</span></span><a class="headerlink" href="#switch.Switch.ntp_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>NTP Server IPv4 getter</p>
-</dd></dl>
+<dt class="sig sig-object py" id="switch.Switch.old_info">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">old_info</span></span><a class="headerlink" href="#switch.Switch.old_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="switch.Switch.open">
 <span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Opens a SSH connection</p>
 </dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.password">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#switch.Switch.password" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="switch.Switch.port">
@@ -224,14 +185,22 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="switch.Switch.run_command">
-<span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commands</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.run_command" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.software">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">software</span></span><a class="headerlink" href="#switch.Switch.software" title="Permalink to this definition">¶</a></dt>
-<dd><p>Software version getter</p>
+<span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.run_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run string in var command as command on connected switch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – command to be run</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return n-tice (stdin, stdout, stderr)</p>
+</dd>
+</dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="switch.Switch.send_atributtes_command">
+<span class="sig-name descname"><span class="pre">send_atributtes_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">switch_info.Switch_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">switch_info.Switch_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.Switch.send_atributtes_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="switch.Switch.timeout">
@@ -245,51 +214,18 @@
 <dd><p>Username getter</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="switch.Switch.vlans">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vlans</span></span><a class="headerlink" href="#switch.Switch.vlans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vlan getter</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="switch.parse_interval">
-<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.parse_interval" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="switch.parse_ports">
-<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_ports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ports_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#switch.parse_ports" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="switch.parse_switch_setup_show">
-<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_switch_setup_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#switch.parse_switch_setup_show" title="Permalink to this definition">¶</a></dt>
-<dd><p>parse output of command switch setup show</p>
+<dt class="sig sig-object py" id="switch.diff_vlans">
+<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">diff_vlans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><span class="pre">vlan.Vlans</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><span class="pre">vlan.Vlans</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#switch.diff_vlans" title="Permalink to this definition">¶</a></dt>
+<dd><p>generrate diff between self and second</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 <dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>info_to_parse</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – string format info</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>parsed information</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="switch.parse_vlan_show">
-<span class="sig-prename descclassname"><span class="pre">switch.</span></span><span class="sig-name descname"><span class="pre">parse_vlan_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><span class="pre">vlan.Vlans</span></a></span></span><a class="headerlink" href="#switch.parse_vlan_show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse vlan show</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="vlan.html#vlan.Vlans" title="vlan.Vlans"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vlans</span></code></a></p>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>info_to_parse</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – string to parse</p>
+<dd class="field-even"><p><strong>second</strong> – new vlans</p>
 </dd>
 </dl>
 </dd></dl>
