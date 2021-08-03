@@ -106,12 +106,12 @@ class Switch:
         self.info.vlans.parse_vlan_show(comandoutput)
         logger.success("Loadinf switch vlans SUCCESS")
 
-    def commit(self, switches: str):
+    def commit(self, switches: list = []):
         """Send changes made in Switch object to switch"""
         perfixes_for_running_command = {
             "all": "",
             "named_sw": f"switch {switches} ",
-            "local": "switch-local ",
+            # "local": "switch-local ",
         }
 
         comm_for_run = []
@@ -128,13 +128,14 @@ class Switch:
         comm_for_run.append(f"banner {self.info.banner}")
 
         # todo vlan
-        for i in comm_for_run:
-            self.run_command()
+        if switches == "":
+            for i in comm_for_run:
+                self.run_command(perfixes_for_running_command["all"] + i)
+        else:
+            for i in comm_for_run:
+                self.run_command(perfixes_for_running_command["named_sw"] + i)
 
-        comm_for_run.append(f"")
-
-        pass
-
+    """
     def send_atributtes_command(self, new: Switch_info, old: Switch_info):
         if not new.dns_ipv4 == old.dns_ipv4:
             stdin, stdout, stderr = self.run_command("switch-setup-show")
@@ -165,6 +166,7 @@ class Switch:
             diff.append("mgmt_lacp_mode")
         if not new.ntp == old.ntp:
             diff.append("ntp")
+    """
 
     def __repr__(self) -> str:
         output = f"""Switch name: {self.info.__switch_name}
