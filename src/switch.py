@@ -106,7 +106,7 @@ class Switch:
         self.info.vlans.parse_vlan_show(comandoutput)
         logger.success("Loadinf switch vlans SUCCESS")
 
-    def commit(self, switches: list = []):
+    def commit(self, switches: str = ""):
         """Send changes made in Switch object to switch"""
         perfixes_for_running_command = {
             "all": "",
