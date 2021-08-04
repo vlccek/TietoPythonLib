@@ -30,7 +30,7 @@ class Fabric:
 
         self.__hostname = hostname
         self.open_connection(username,password)
-        self.__fabric_devices = self.get_fabric_devices()
+        self.__fabric_devices = self.get_parsed_fabric_node_show()
 
         
 
@@ -60,7 +60,7 @@ class Fabric:
     ##########################################################################################################################################
     # Fabric parsing and getting #   
     
-    def get_parse_fabric_show(self)->list:
+    def get_parsed_fabric_node_show(self)->list:
         """Download and parse all nodes that are in same fabric.  
         """
         stdin, stdout, stderr = self.send_command("fabric-node-show")
