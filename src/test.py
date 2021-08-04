@@ -5,6 +5,7 @@ from fabric import Fabric
 
 pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
 print(pepa.fabric_nodes)
+
 """
 pepa = Switch(
     username="admin", password="root", domain="sw-pepa.cz"

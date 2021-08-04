@@ -66,6 +66,7 @@ class Fabric:
 
         for line in stdout:
             tmp =self.parse_line(line)
+            logger.trace("{}".format(tmp))
             if not tmp == "":
                 fabric_node.append(tmp)
         
