@@ -29,10 +29,10 @@ class Fabric:
         self.__fabric_devices = None
 
         self.__hostname = hostname
-        self.open_connection(username,password)
+        self.open_connection(username,password,port,timeout,keepalive)
         self.__fabric_devices = self.get_parsed_fabric_node_show()
 
-        
+    
 
     def open_connection(
         self,
