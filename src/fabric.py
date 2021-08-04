@@ -4,6 +4,7 @@ from loguru import logger
 from switch_info import Switch_info
 from vlan import Vlans
 
+import re
 
 class Fabric:
     def __init__(
@@ -25,9 +26,13 @@ class Fabric:
         :param keepalive: keepalive, defaults to 60
         """
         self.__connection = None
+        self.__fabric_devices = None
 
         self.__hostname = hostname
         self.open_connection()
+        self.__fabric_devices = self.get_fabric_devices()
+
+        
 
     def open_connection(
         self,
@@ -51,3 +56,39 @@ class Fabric:
         self.__connected = True
         logger.success("Connection SUCCESS")
         return self.__connection
+    
+    ##########################################################################################################################################
+    # Fabric parsing and getting #   
+    
+    def get_parse_fabric_show(self)->list:
+        """Download and parse all nodes that are in same fabric.  
+        """
+        stdin, stdout, stderr = self.send_command("fabric-node-show")
+        fabric_node = []
+
+        for line in stdout:
+            fabric_node.append(self.parse_line(line))
+        
+        return fabric_node
+        
+
+    def parse_line(self, line_to_parse:str) -> str:
+        """Parse line of code from "fabric node show" output
+
+        :param line_to_parse: line to parse
+        """
+        pattern = "([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +"
+
+        parsed_re = re.match(pattern, line_to_parse)
+        return parsed_re.group(0)
+
+    ##########################################################################################################################################
+    
+    def send_command(self, command:str):
+        stdin, stdout, stderr = self.__connection.exec_command(command)
+        logger.info(f"Command was send. stdout {stdout.read()} ")
+        logger.trace(f"Command was send. stdout {stdout.read()} ")
+        logger.error(f"Command was send. stderr {stderr.read()}")
+        return stdin, stdout, stderr
+    
+    
