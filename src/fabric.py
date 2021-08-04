@@ -57,8 +57,6 @@ class Fabric:
         logger.success("Connection SUCCESS")
         return self.__connection
     
-    ##########################################################################################################################################
-    # Fabric parsing and getting #   
     
     def get_parsed_fabric_node_show(self)->list:
         """Download and parse all nodes that are in same fabric.  
@@ -82,13 +80,21 @@ class Fabric:
         parsed_re = re.match(pattern, line_to_parse)
         return parsed_re.group(0)
 
-    ##########################################################################################################################################
-    
     def send_command(self, command:str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command was send. stdout {stdout.read()} ")
         logger.trace(f"Command was send. stdout {stdout.read()} ")
-        logger.error(f"Command was send. stderr {stderr.read()}")
+        if not stdout == "":
+            logger.error(f"Command was send. stderr {stderr.read()}")
         return stdin, stdout, stderr
+
+
+    @property
+    def fabric_nodes(self):
+        """Nodes thaht are associated with this fabric"""
+        return self.__fabric_devices
     
     
+    
+    # Todo: nezapomenou uvést do dokumentace jak se jmenuje ten getter
+
