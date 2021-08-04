@@ -29,6 +29,8 @@ class Switch:
         logger.info("Pepa")
 
         self.__info = Switch_info()
+        self.__otherConnected = []
+        pepa.info.dns_ipv4 = ""
         self.__old_info = Switch_info()
         logger.debug("Succes add Vlans nad switch info private variables")
 
@@ -46,12 +48,10 @@ class Switch:
 
         logger.success("Object Crete succesfull opening connection with switch.")
         self.open()
-
         # tady budu načítat informace o sw
-        """self.load_switch_setup()
+        self.load_switch_setup()
         self.load_vlan_show()
         self.__old_info = copy.deepcopy(self.__info)
-        """
 
     @logger.catch
     def open(self):
@@ -71,19 +71,10 @@ class Switch:
         return self.__connection
 
     def run_command(self, command: str):
-        """Run string in var command as command on connected switch
-
-        :param command: command to be run
-        :return: return n-tice (stdin, stdout, stderr)
-        """
-        logger.info(f"Runnig command {command}")
         stdin, stdout, stderr = self.__connection.exec_command(command)
-        logger.info(f"stderr from command: {stderr}")
-        logger.trace(f"stout from command: {stdout}")
         return stdin, stdout, stderr
 
     def load_switch_setup(self):
-        """Run command that requests information abouth switch. Thati string are parsed"""
         logger.trace("Starting loading switch setup")
         stdin, stdout, stderr = self.run_command("switch-setup-show")
         comandoutput = ""
@@ -106,67 +97,11 @@ class Switch:
         self.info.vlans.parse_vlan_show(comandoutput)
         logger.success("Loadinf switch vlans SUCCESS")
 
-    def commit(self, switches: str = ""):
+    def commit(self):
         """Send changes made in Switch object to switch"""
-        perfixes_for_running_command = {
-            "all": "",
-            "named_sw": f"switch {switches} ",
-            # "local": "switch-local ",
-        }
-
-        comm_for_run = []
-
-        comm_for_run.append(f"in-band-ip {self.info.inband_ipv4}")
-        comm_for_run.append(f"in-band-ip {self.info.inband_ipv6}")
-        comm_for_run.append(f"gateway {self.info.gateway_ipv4}")
-        comm_for_run.append(f"dns-ip {self.info.dns_ipv4}")
-        comm_for_run.append(f"dns-secondary {self.info.dns_secondary_ipv4}")
-        comm_for_run.append(f"ntp-server {self.info.ntp_server}")
-        comm_for_run.append(f"ntp-server {self.info.ntp_secondary_server}")
-        comm_for_run.append(f"timezone {self.info.time_zone}")
-        comm_for_run.append(f"motd {self.info.motd}")
-        comm_for_run.append(f"banner {self.info.banner}")
-
-        # todo vlan
-        if switches == "":
-            for i in comm_for_run:
-                self.run_command(perfixes_for_running_command["all"] + i)
-        else:
-            for i in comm_for_run:
-                self.run_command(perfixes_for_running_command["named_sw"] + i)
-
-    """
-    def send_atributtes_command(self, new: Switch_info, old: Switch_info):
-        if not new.dns_ipv4 == old.dns_ipv4:
-            stdin, stdout, stderr = self.run_command("switch-setup-show")
-            diff.append("dns_ipv4")
-        if not new.dns_secondary_ipv4 == old.dns_secondary_ipv4:
-            diff.append("dns_secondary_ipv4")
-        if not new.ntp_server == old.ntp_server:
-            diff.append("ntp_server")
-        if not new.ntp_secondary_server == old.ntp_secondary_server:
-            diff.append("ntp_secondary_server")
-        if not new.software == old.software:
-            diff.append("software")
-        if not new.domain_name == old.domain_name:
-            diff.append("domain_name")
-        if not new.time_zone == old.time_zone:
-            diff.append("time_zone")
-        if not new.hostid == old.hostid:
-            diff.append("hostid")
-        if not new.location_id == old.location_id:
-            diff.append("location_id")
-        if not new.motd == old.motd:
-            diff.append("motd")
-        if not new.banner == old.banner:
-            diff.append("banner")
-        if not new.mgmt_lag == old.mgmt_lag:
-            diff.append("mgmt_lag")
-        if not new.mgmt_lacp_mode == old.mgmt_lacp_mode:
-            diff.append("mgmt_lacp_mode")
-        if not new.ntp == old.ntp:
-            diff.append("ntp")
-    """
+        #self.__info.
+        # TODO
+        pass
 
     def __repr__(self) -> str:
         output = f"""Switch name: {self.info.__switch_name}

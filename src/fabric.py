@@ -29,7 +29,7 @@ class Fabric:
         self.__fabric_devices = None
 
         self.__hostname = hostname
-        self.open_connection()
+        self.open_connection(username,password)
         self.__fabric_devices = self.get_fabric_devices()
 
         
