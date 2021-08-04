@@ -5,7 +5,7 @@ from fabric import Fabric
 
 pepa = Fabric("mgame.cz", "server", "mgameserver2019")
 print(pepa.fabric_nodes)
-
+del pepa
 """
 pepa = Switch(
     username="admin", password="root", domain="sw-pepa.cz"
