@@ -99,9 +99,9 @@ class Fabric:
     @property
     def fabric_nodes(self):
         """Nodes thaht are associated with this fabric"""
-        return self.__fabric_devices
-    
-    
-    
+        return self.__fabric_devices    
     # Todo: nezapomenou uvést do dokumentace jak se jmenuje ten getter
 
+    def __del__(self):
+        self.__connection.close()
+        print("die")
