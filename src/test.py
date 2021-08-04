@@ -1,7 +1,10 @@
 import paramiko
 
 from switch import Switch
+from fabric import Fabric
 
+pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
+"""
 pepa = Switch(
     username="admin", password="root", domain="sw-pepa.cz"
 )  # auto dowload infmation about switch
@@ -33,3 +36,4 @@ client = paramiko.SSHClient()
 client.load_system_host_keys()
 client.connect("ssh.example.com")
 stdin, stdout, stderr = client.exec_command("ls -l")
+"""
