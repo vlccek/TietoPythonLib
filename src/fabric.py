@@ -65,12 +65,14 @@ class Fabric:
         fabric_node = []
 
         for line in stdout:
-            fabric_node.append(self.parse_line(line))
+            tmp =self.parse_line(line)
+            if not tmp == "":
+                fabric_node.append(tmp)
         
         return fabric_node
         
 
-    def parse_line(self, line_to_parse:str) -> str:
+    def parse_line( line_to_parse:str) -> str:
         """Parse line of code from "fabric node show" output
 
         :param line_to_parse: line to parse
@@ -78,13 +80,17 @@ class Fabric:
         pattern = "([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +([a-zA-Z0-9\-\/\_\.]+)\ +"
 
         parsed_re = re.match(pattern, line_to_parse)
-        return parsed_re.group(0)
+        if parsed_re != None:
+            return parsed_re.group(1)
+        else:
+            return ""
+
 
     def send_command(self, command:str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command was send. stdout {stdout.read()} ")
         logger.trace(f"Command was send. stdout {stdout.read()} ")
-        if not stdout == "":
+        if not stderr == "":
             logger.error(f"Command was send. stderr {stderr.read()}")
         return stdin, stdout, stderr
 
