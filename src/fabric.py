@@ -46,11 +46,11 @@ class Fabric:
         self.__connection = paramiko.SSHClient()
         self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.__connection.connect(
-            hostname=self.__host,
-            username=self.__username,
-            password=self.__password,
-            timeout=self.__timeout,
-            port=self.__port,
+            hostname=self.__hostname,
+            username=username,
+            password=password,
+            timeout=timeout,
+            port=port,
         )
         self.__connection.get_transport().set_keepalive(self.__keepalive)
         self.__connected = True
