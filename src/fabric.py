@@ -1,36 +1,17 @@
 import paramiko
 from loguru import logger
-import functools
+from typing import Any
+
+import re
+from switch_in_fabric import Switch_in_Fabric
+from logger_decorator import logger_wraps
+
 
 #from switch_info import Switch_info
 #from vlan import Vlans
 
-import re
-
-
-def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
-
-    def wrapper(func):
-        name = func.__name__
-
-        @functools.wraps(func)
-        def wrapped(*args, **kwargs):
-            logger_ = logger.opt(depth=1)
-            if entry:
-                logger_.log(
-                    level, "Entering '{}' (args={}, kwargs={})", name, args, kwargs)
-            result = func(*args, **kwargs)
-            if exit:
-                logger_.log(level, "Exiting '{}' (result={})", name, result)
-            return result
-
-        return wrapped
-
-    return wrapper
-
 
 class Fabric:
-    @logger_wraps()
     def __init__(
         self,
         hostname: str,
@@ -49,6 +30,7 @@ class Fabric:
         :param timeout: timeout, defaults to 60
         :param keepalive: keepalive, defaults to 60
         """
+        logger.succes("Object was creted success.")
 
         self.__connection = None
         self.__fabric_devices = None
@@ -114,13 +96,21 @@ class Fabric:
     @logger_wraps()
     def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
-        # logger.info(f"Command was send. stdout {stdout.read()} ")
-        # logger.trace(f"Command was send. stdout {stdout.read()} ")
         if not stderr == "":
             logger.error(f"Command was send. stderr {stderr.read()}")
-
-        # logger.info(f"Command was send. stdout {stdout.read()} ")
         return stdin, stdout, stderr
+
+    @logger_wraps()
+    def info(self) -> str:
+        """Retruns info from comamnd fabric-info """
+        stdin, stdout, stderr = self.send_command("fabric-info")
+        return stdout.read()
+
+    @logger_wraps()
+    def node_show(self):
+        """output from command fabric-node-show"""
+        stdin, stdout, stderr = self.send_command("fabric-node-show")
+        return stdout.read()
 
     @property
     def fabric_nodes(self):
