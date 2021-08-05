@@ -1,4 +1,5 @@
 import functools
+from loguru import logger
 
 
 def logger_wraps(*, entry=True, exit=True, level="DEBUG"):

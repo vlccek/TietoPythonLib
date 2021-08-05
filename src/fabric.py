@@ -3,7 +3,7 @@ from loguru import logger
 from typing import Any
 
 import re
-from switch_in_fabric import Switch_in_Fabric
+# from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
 
 
@@ -30,7 +30,7 @@ class Fabric:
         :param timeout: timeout, defaults to 60
         :param keepalive: keepalive, defaults to 60
         """
-        logger.succes("Object was creted success.")
+        logger.success("Object was creted success.")
 
         self.__connection = None
         self.__fabric_devices = None
@@ -77,6 +77,7 @@ class Fabric:
         else:
             return ""
 
+    @property
     @logger_wraps()
     def get_parsed_fabric_node_show(self) -> list:
         """Download and parse all nodes that are in same fabric.  
@@ -84,8 +85,11 @@ class Fabric:
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         fabric_node = []
         # print("stdout" + stdout.read())
-
+        cnt = 0
         for line in stdout:
+            if not cnt > 2:
+                break
+            cnt += 1
             tmp = self.parse_line(line)
             logger.trace("{}".format(tmp))
             if not tmp == "":
@@ -93,6 +97,7 @@ class Fabric:
 
         return fabric_node
 
+    @property
     @logger_wraps()
     def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
