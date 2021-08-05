@@ -63,6 +63,7 @@ class Fabric:
         """
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         fabric_node = []
+        print(stdout.read())
 
         for line in stdout:
             tmp =self.parse_line(line)
