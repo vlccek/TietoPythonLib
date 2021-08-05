@@ -1,5 +1,5 @@
 import paramiko
-from loguru import logger
+from loguru import logger, logger_wraps
 
 #from switch_info import Switch_info
 #from vlan import Vlans
@@ -8,6 +8,7 @@ import re
 
 
 class Fabric:
+    @logger_wraps()
     def __init__(
         self,
         hostname: str,
@@ -26,6 +27,7 @@ class Fabric:
         :param timeout: timeout, defaults to 60
         :param keepalive: keepalive, defaults to 60
         """
+
         self.__connection = None
         self.__fabric_devices = None
 
@@ -33,6 +35,7 @@ class Fabric:
         self.open_connection(username, password, port, timeout, keepalive)
         self.__fabric_devices = self.get_parsed_fabric_node_show()
 
+    @logger_wraps()
     def open_connection(
         self,
         username: str,
@@ -56,7 +59,8 @@ class Fabric:
         logger.success("Connection SUCCESS")
         return self.__connection
 
-    def parse_line(line_to_parse: str) -> str:
+    @logger_wraps()
+    def parse_line(self, line_to_parse: str) -> str:
         """Parse line of code from "fabric node show" output
 
         :param line_to_parse: line to parse
@@ -69,6 +73,7 @@ class Fabric:
         else:
             return ""
 
+    @logger_wraps()
     def get_parsed_fabric_node_show(self) -> list:
         """Download and parse all nodes that are in same fabric.  
         """
@@ -84,6 +89,7 @@ class Fabric:
 
         return fabric_node
 
+    @logger_wraps()
     def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         # logger.info(f"Command was send. stdout {stdout.read()} ")
@@ -94,6 +100,7 @@ class Fabric:
         # logger.info(f"Command was send. stdout {stdout.read()} ")
         return stdin, stdout, stderr
 
+    @logger_wraps()
     @property
     def fabric_nodes(self):
         """Nodes thaht are associated with this fabric"""
