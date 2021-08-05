@@ -90,12 +90,20 @@ class Fabric:
 
     def send_command(self, command:str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
+<<<<<<< HEAD
         # logger.info(f"Command was send. stdout {stdout.read()} ")
+=======
+        logger.info(f"Command was send. stdout {stdout.read()} ")
+>>>>>>> 28de2ce93203a12ac96c128d606303ab7b3b6ee9
         # logger.trace(f"Command was send. stdout {stdout.read()} ")
         if not stderr == "":
             logger.error(f"Command was send. stderr {stderr.read()}")
 
+<<<<<<< HEAD
         # logger.info(f"Command was send. stdout {stdout.read()} ")
+=======
+        logger.info(f"Command was send. stdout {stdout.read()} ")
+>>>>>>> 28de2ce93203a12ac96c128d606303ab7b3b6ee9
         return stdin, stdout, stderr
 
 
