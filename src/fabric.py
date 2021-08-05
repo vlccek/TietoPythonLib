@@ -6,6 +6,7 @@ from loguru import logger
 
 import re
 
+
 class Fabric:
     def __init__(
         self,
@@ -29,10 +30,8 @@ class Fabric:
         self.__fabric_devices = None
 
         self.__hostname = hostname
-        self.open_connection(username,password,port,timeout,keepalive)
+        self.open_connection(username, password, port, timeout, keepalive)
         self.__fabric_devices = self.get_parsed_fabric_node_show()
-
-    
 
     def open_connection(
         self,
@@ -56,25 +55,8 @@ class Fabric:
         self.__connected = True
         logger.success("Connection SUCCESS")
         return self.__connection
-    
-    
-    def get_parsed_fabric_node_show(self)->list:
-        """Download and parse all nodes that are in same fabric.  
-        """
-        stdin, stdout, stderr = self.send_command("fabric-node-show")
-        fabric_node = []
-        # print("stdout" + stdout.read())
 
-        for line in stdout:
-            tmp =self.parse_line(line)
-            logger.trace("{}".format(tmp))
-            if not tmp == "":
-                fabric_node.append(tmp)
-        
-        return fabric_node
-        
-
-    def parse_line( line_to_parse:str) -> str:
+    def parse_line(line_to_parse: str) -> str:
         """Parse line of code from "fabric node show" output
 
         :param line_to_parse: line to parse
@@ -87,8 +69,22 @@ class Fabric:
         else:
             return ""
 
+    def get_parsed_fabric_node_show(self) -> list:
+        """Download and parse all nodes that are in same fabric.  
+        """
+        stdin, stdout, stderr = self.send_command("fabric-node-show")
+        fabric_node = []
+        # print("stdout" + stdout.read())
 
-    def send_command(self, command:str):
+        for line in stdout:
+            tmp = self.parse_line(line)
+            logger.trace("{}".format(tmp))
+            if not tmp == "":
+                fabric_node.append(tmp)
+
+        return fabric_node
+
+    def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         # logger.info(f"Command was send. stdout {stdout.read()} ")
         # logger.trace(f"Command was send. stdout {stdout.read()} ")
@@ -98,11 +94,10 @@ class Fabric:
         # logger.info(f"Command was send. stdout {stdout.read()} ")
         return stdin, stdout, stderr
 
-
     @property
     def fabric_nodes(self):
         """Nodes thaht are associated with this fabric"""
-        return self.__fabric_devices    
+        return self.__fabric_devices
     # Todo: nezapomenou uvést do dokumentace jak se jmenuje ten getter
 
     def __del__(self):
