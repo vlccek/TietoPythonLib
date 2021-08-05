@@ -3,7 +3,7 @@ import paramiko
 from switch import Switch
 from fabric import Fabric
 
-pepa = Fabric("mgame.cz", "server", "mgameserver2019")
+pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
 print(pepa.fabric_nodes)
 del pepa
 """
