@@ -63,7 +63,7 @@ class Fabric:
         """
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         fabric_node = []
-        print(stdout.read())
+        print("stdout" + stdout.read())
 
         for line in stdout:
             tmp =self.parse_line(line)
@@ -91,9 +91,11 @@ class Fabric:
     def send_command(self, command:str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command was send. stdout {stdout.read()} ")
-        logger.trace(f"Command was send. stdout {stdout.read()} ")
+        # logger.trace(f"Command was send. stdout {stdout.read()} ")
         if not stderr == "":
             logger.error(f"Command was send. stderr {stderr.read()}")
+
+        logger.info(f"Command was send. stdout {stdout.read()} ")
         return stdin, stdout, stderr
 
 
