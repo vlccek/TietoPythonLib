@@ -1,5 +1,5 @@
 import paramiko
-from loguru import logger, logger_wraps
+from loguru import logger
 
 #from switch_info import Switch_info
 #from vlan import Vlans
