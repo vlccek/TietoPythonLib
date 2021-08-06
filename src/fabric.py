@@ -117,7 +117,7 @@ class Fabric:
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         return stdout.read()
 
-    @logger_wraps
+    @logger_wraps()
     def node_show(self):
         stdin, stdout, stderr = self.send_command("node-show")
         return stdout.read()
