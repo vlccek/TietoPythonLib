@@ -101,6 +101,7 @@ class Fabric:
     @logger_wraps()
     def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
+        logger.info(f"Command {command} was send.")
         if not stderr == "":
             logger.error(f"Command was send. stderr {stderr.read()}")
         return stdin, stdout, stderr
