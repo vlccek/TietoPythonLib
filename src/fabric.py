@@ -7,6 +7,10 @@ import re
 from logger_decorator import logger_wraps
 
 
+file = open('farbic.log', 'w+')
+
+logger.add(file, level="TRACE")
+
 #from switch_info import Switch_info
 #from vlan import Vlans
 
