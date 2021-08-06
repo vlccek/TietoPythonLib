@@ -5,6 +5,9 @@ from fabric import Fabric
 
 pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
 print(pepa.fabric_nodes)
+print(pepa.fabric_info())
+print(pepa.fabric_node_show())
+print(pepa.node_show())
 del pepa
 """
 pepa = Switch(
