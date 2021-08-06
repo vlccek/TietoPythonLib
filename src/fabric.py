@@ -77,7 +77,6 @@ class Fabric:
         else:
             return ""
 
-    @property
     @logger_wraps()
     def get_parsed_fabric_node_show(self) -> list:
         """Download and parse all nodes that are in same fabric.  
