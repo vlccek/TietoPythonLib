@@ -106,15 +106,20 @@ class Fabric:
         return stdin, stdout, stderr
 
     @logger_wraps()
-    def info(self) -> str:
+    def fabric_info(self) -> str:
         """Retruns info from comamnd fabric-info """
         stdin, stdout, stderr = self.send_command("fabric-info")
         return stdout.read()
 
     @logger_wraps()
-    def node_show(self):
+    def fabric_node_show(self):
         """output from command fabric-node-show"""
         stdin, stdout, stderr = self.send_command("fabric-node-show")
+        return stdout.read()
+
+    @logger_wraps
+    def node_show(self):
+        stdin, stdout, stderr = self.send_command("node-show")
         return stdout.read()
 
     @property
