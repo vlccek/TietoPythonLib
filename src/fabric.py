@@ -6,14 +6,14 @@ import re
 # from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
 
-
+logger.remove(1)
 logger.add('farbic.log', level="TRACE")
 
 #from switch_info import Switch_info
 #from vlan import Vlans
 
 
-class Fabric:
+class Fabric(Switch):
     def __init__(
         self,
         hostname: str,
@@ -102,26 +102,31 @@ class Fabric:
     def send_command(self, command: str):
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command {command} was send.")
-        if not stderr == "":
-            logger.error(f"Command was send. stderr {stderr.read()}")
-        return stdin, stdout, stderr
+
+        stdout_str = stdout.read()
+        stderr_str = stderr.read()
+        stdin_str = stdin.read()
+
+        if not stderr_str == "":
+            logger.error(f"Command was send. stderr {stderr_str}")
+        return stdin_str, stdout_str, stderr_str
 
     @logger_wraps()
     def fabric_info(self) -> str:
         """Retruns info from comamnd fabric-info """
         stdin, stdout, stderr = self.send_command("fabric-info")
-        return stdout.read()
+        return stdout
 
     @logger_wraps()
     def fabric_node_show(self):
         """output from command fabric-node-show"""
         stdin, stdout, stderr = self.send_command("fabric-node-show")
-        return stdout.read()
+        return stdout
 
     @logger_wraps()
     def node_show(self):
         stdin, stdout, stderr = self.send_command("node-show")
-        return stdout.read()
+        return stdout
 
     @property
     def fabric_nodes(self):
@@ -132,3 +137,8 @@ class Fabric:
     def __del__(self):
         self.__connection.close()
         print("removing obj")
+
+
+class Switch:
+    def __init__(self) -> None:
+        pass
