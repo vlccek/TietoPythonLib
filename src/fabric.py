@@ -6,7 +6,6 @@ import re
 # from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
 
-logger.remove(1)
 logger.add('farbic.log', level="TRACE")
 
 #from switch_info import Switch_info
