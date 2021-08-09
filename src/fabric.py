@@ -123,11 +123,6 @@ class Fabric(Switch):
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         return stdout
 
-    @logger_wraps()
-    def node_show(self):
-        stdin, stdout, stderr = self.send_command("node-show")
-        return stdout
-
     @property
     def fabric_nodes(self):
         """Nodes thaht are associated with this fabric"""
@@ -138,7 +133,16 @@ class Fabric(Switch):
         self.__connection.close()
         print("removing obj")
 
+    def port_show(self):
+        stdin, stdout, stderr = self.send_command("port-show")
+        return stdout
 
-class Switch:
-    def __init__(self) -> None:
+    def port_config_modify(self):
+        pass
+
+    def port_phy_show(self):
+        stdin, stdout, stderr = self.send_command("port-phy-show")
+        return stdout
+
+    def software(self):
         pass

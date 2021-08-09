@@ -4,10 +4,19 @@ from switch import Switch
 from fabric import Fabric
 
 pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
-print(pepa.fabric_nodes)
-print(pepa.fabric_info())
-print(pepa.fabric_node_show())
-print(pepa.node_show())
+
+tmp = pepa.fabric_info()
+print(tmp)
+
+tmp = pepa.fabric_node_show()
+print(tmp)
+
+tmp = pepa.port_show()
+print(tmp)
+
+tmp = pepa.port_phy_show()
+print(tmp)
+
 del pepa
 """
 pepa = Switch(
