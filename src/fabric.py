@@ -143,5 +143,6 @@ class Fabric(Switch):
         stdin, stdout, stderr = self.send_command("port-phy-show")
         return stdout
 
-    def software(self):
-        pass
+    def software_show(self):
+        stdin, stdout, stderr = self.send_command("software-show")
+        return stdout
