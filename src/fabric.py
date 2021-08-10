@@ -1,12 +1,13 @@
 import paramiko
 from loguru import logger
-from typing import Any
+from typing import Any, Tuple, List
 
 import re
 # from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
 
-logger.add('farbic.log', level="TRACE")
+logger.remove()
+logger.add('fabric.log', level="TRACE")
 
 #from switch_info import Switch_info
 #from vlan import Vlans
@@ -79,7 +80,7 @@ class Fabric():
             return ""
 
     @logger_wraps()
-    def get_parsed_fabric_node_show(self) -> list:
+    def get_parsed_fabric_node_show(self) -> List[str]:
         """Download and parse all nodes that are in same fabric.  
         """
         stdin, stdout, stderr = self.send_command(
@@ -95,7 +96,11 @@ class Fabric():
         return fabric_node
 
     @logger_wraps()
-    def send_command(self, command: str):
+    def send_command(self, command: str) -> Tuple[str, str, str]:
+        """Generic function for sending command to switch
+
+        :param command: Command that user want to send
+        """
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command {command} was send.")
 
@@ -118,16 +123,16 @@ class Fabric():
         return stdout
 
     @logger_wraps()
-    def fabric_node_show(self):
+    def fabric_node_show(self) -> str:
         """output from command fabric-node-show"""
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         return stdout
 
     @property
-    def fabric_nodes(self):
+    def fabric_nodes(self) -> List[str]:
         """Nodes thaht are associated with this fabric"""
         return self.__fabric_devices
-    # Todo: nezapomenou uvést do dokumentace jak se jmenuje ten getter
+    # TODO: nezapomenou uvést do dokumentace jak se jmenuje ten getter
 
     def __del__(self):
         self.__connection.close()
