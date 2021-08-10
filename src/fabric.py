@@ -99,10 +99,10 @@ class Fabric():
         stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command {command} was send.")
 
-        stdout_str = stdout.read()
-        stderr_str = stderr.read()
+        stdout_str = str(stdout.read())
+        stderr_str = str(stderr.read())
         try:
-            stdin_str = stdin.read()
+            stdin_str = str(stdin.read())
         except:
             print("")
             stdin_str = ""
