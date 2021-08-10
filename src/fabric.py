@@ -82,19 +82,16 @@ class Fabric(Switch):
     def get_parsed_fabric_node_show(self) -> list:
         """Download and parse all nodes that are in same fabric.  
         """
-        stdin, stdout, stderr = self.send_command("fabric-node-show")
+        stdin, stdout, stderr = self.send_command(
+            "fabric-node-show no-show-headers")
         fabric_node = []
         # print("stdout" + stdout.read())
-        cnt = 0
-        for line in stdout:
-            if not cnt > 2:
-                break
-            cnt += 1
-            tmp = self.parse_line(line)
-            logger.trace("{}".format(tmp))
-            if not tmp == "":
-                fabric_node.append(tmp)
-
+        line = ""
+        for i in stdout:
+            line.append(i)
+            if (i == "\n"):
+                fabric_node.appedn(self.parse_line(line))
+                line = ""
         return fabric_node
 
     @logger_wraps()
