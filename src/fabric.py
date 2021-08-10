@@ -12,7 +12,7 @@ logger.add('farbic.log', level="TRACE")
 #from vlan import Vlans
 
 
-class Fabric(Switch):
+class Fabric():
     def __init__(
         self,
         hostname: str,
