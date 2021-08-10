@@ -36,10 +36,19 @@ class Fabric():
 
         self.__connection = None
         self.__fabric_devices = None
+        self.__sw_to_change = None
 
         self.__hostname = hostname
         self.open_connection(username, password, port, timeout, keepalive)
         self.__fabric_devices = self.get_parsed_fabric_node_show()
+
+    def change_configured_device(self, devices: list = None, all: bool = False) -> None:
+        if all == True:
+            self.get_parsed_fabric_node_show()
+            # for sure refresh nodes
+            self.__sw_to_change = self.__fabric_devices
+        if not devices == None:
+            self.__sw_to_change = devices
 
     @logger_wraps()
     def open_connection(
@@ -86,7 +95,7 @@ class Fabric():
         stdin, stdout, stderr = self.send_command(
             "fabric-node-show no-show-headers")
         fabric_node = []
-        # print("stdout" + stdout.read())
+        # print("stdout" + stdout.read()
         line = ""
         for i in stdout:
             line += i
@@ -96,12 +105,16 @@ class Fabric():
         return fabric_node
 
     @logger_wraps()
-    def send_command(self, command: str) -> Tuple[str, str, str]:
+    def send_command(self, command: str,  perfix_with_sw: bool = True) -> Tuple[str, str, str]:
         """Generic function for sending command to switch
 
         :param command: Command that user want to send
         """
-        stdin, stdout, stderr = self.__connection.exec_command(command)
+        if perfix_with_sw:
+            stdin, stdout, stderr = self.__connection.exec_command(
+                f"switch {self.__sw_to_change}{command}")
+        else:
+            stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command {command} was send.")
 
         stdout_str = str(stdout.read())
