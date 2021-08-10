@@ -41,6 +41,7 @@ class Fabric():
         self.__hostname = hostname
         self.open_connection(username, password, port, timeout, keepalive)
         self.__fabric_devices = self.get_parsed_fabric_node_show()
+        self.__sw_to_change = self.__fabric_devices
 
     def change_configured_device(self, devices: list = None, all: bool = False) -> None:
         if all == True:
