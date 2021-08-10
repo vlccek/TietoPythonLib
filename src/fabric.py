@@ -94,7 +94,7 @@ class Fabric():
         """Download and parse all nodes that are in same fabric.  
         """
         stdin, stdout, stderr = self.send_command(
-            "fabric-node-show no-show-headers")
+            "fabric-node-show no-show-headers", perfix_with_sw=False)
         fabric_node = []
         # print("stdout" + stdout.read()
         line = ""
@@ -111,13 +111,14 @@ class Fabric():
 
         :param command: Command that user want to send
         """
-        perfix = ""
-        for i in self.__sw_to_change:
-            perfix += i
-            if not self.__sw_to_change[-1]:
-                perfix += ","
 
         if perfix_with_sw:
+            perfix = ""
+            for i in self.__sw_to_change:
+                perfix += i
+                if not self.__sw_to_change[-1]:
+                    perfix += ","
+
             stdin, stdout, stderr = self.__connection.exec_command(
                 f"switch {perfix} {command}")
 
