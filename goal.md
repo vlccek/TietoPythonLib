@@ -1,20 +1,19 @@
 # Concept
-## Getting info about switch
+## Creating Fabric object
 ```py
-switch01 = Switch(name="Switch01", iphost="1.1.1.1")
-switch01.password = input('Enter password from ' + switch.get_name())
-switch.ssh_connect()
+fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 
-infoSW01 = switch.get_info() # returns <<switchInfo>>
-print(infoSW01)
 ```
 
 ## Run an (unknown) command on switch
 ```py
-switch01 = Switch(name="Pepa", iphost="1.1.1.0")  
-switch01.run_command(command="switch-get-config", params=[]) # possible output or error will be visible on console
+fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")  
+switch01.send_command(command="switch-get-config") # possible output or error will be returned
 
 ```
+
+
+# Legacy
 ## VLANS
 ```py
 switch01 = Switch(name="Vlaďa", iphost="1.1.1.1")
