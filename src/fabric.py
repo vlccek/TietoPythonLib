@@ -113,7 +113,6 @@ class Fabric():
         """
         perfix = ""
         for i in self.__sw_to_change:
-
             perfix += i
             if not self.__sw_to_change[-1]:
                 perfix += ","
@@ -160,7 +159,7 @@ class Fabric():
         self.__connection.close()
         print("removing obj")
 
-    def port_show(self):
+    def port_show(self) -> str:
         stdin, stdout, stderr = self.send_command("port-show")
         return stdout
 
