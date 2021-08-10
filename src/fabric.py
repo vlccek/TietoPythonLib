@@ -88,9 +88,9 @@ class Fabric():
         # print("stdout" + stdout.read())
         line = ""
         for i in stdout:
-            line.append(i)
+            line += i
             if (i == "\n"):
-                fabric_node.appedn(self.parse_line(line))
+                fabric_node.append(self.parse_line(line))
                 line = ""
         return fabric_node
 
