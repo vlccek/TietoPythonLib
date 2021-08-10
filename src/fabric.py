@@ -110,9 +110,17 @@ class Fabric():
 
         :param command: Command that user want to send
         """
+        perfix = ""
+        for i in self.__sw_to_change:
+
+            perfix += i
+            if not self.__sw_to_change[-1]:
+                perfix += ","
+
         if perfix_with_sw:
             stdin, stdout, stderr = self.__connection.exec_command(
-                f"switch {self.__sw_to_change}{command}")
+                f"switch {perfix} {command}")
+
         else:
             stdin, stdout, stderr = self.__connection.exec_command(command)
         logger.info(f"Command {command} was send.")
