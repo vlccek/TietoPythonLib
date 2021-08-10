@@ -101,7 +101,10 @@ class Fabric():
 
         stdout_str = stdout.read()
         stderr_str = stderr.read()
-        stdin_str = stdin.read()
+        try:
+            stdin_str = stdin.read()
+        except:
+            print("")
 
         if not stderr_str == "":
             logger.error(f"Command was send. stderr {stderr_str}")
