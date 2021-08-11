@@ -93,39 +93,24 @@ class Fabric():
     def get_parsed_fabric_node_show(self) -> List[str]:
         """Download and parse all nodes that are in same fabric.  
         """
-        stdin, stdout, stderr = self.send_command(
-            "fabric-node-show no-show-headers", perfix_with_sw=False)
+        stdin, stdout, stderr = self.__connection.exec_command("fabric-node-show no-show-headers format name") 
         fabric_node = []
         # print("stdout" + stdout.read()
-        line = ""
         for i in stdout:
-            line += i
-            if (i == "\n"):
-                fabric_node.append(self.parse_line(line))
-                line = ""
+            fabric_node.append(i)
         return fabric_node
 
+    def send_command_with_perfix(self, command: str) -> Tuple[str, str, str]:
+        stdin, stout, stderr = self.send_command(command)
+
     @logger_wraps()
-    def send_command(self, command: str,  perfix_with_sw: bool = True) -> Tuple[str, str, str]:
+    def send_command(self, command: str) -> Tuple[str, str, str]:
         """Generic function for sending command to switch
 
         :param command: Command that user want to send
         """
-
-        if perfix_with_sw:
-            perfix = ""
-            for i in self.__sw_to_change:
-                perfix += i
-                if not self.__sw_to_change[-1]:
-                    perfix += ","
-
-            stdin, stdout, stderr = self.__connection.exec_command(
-                f"switch {perfix} {command}")
-            logger.info(f"Command ´switch {perfix} {command}´ was send.")
-
-        else:
-            stdin, stdout, stderr = self.__connection.exec_command(command)
-            logger.info(f"Command {command} was send.")
+        stdin, stdout, stderr = self.__connection.exec_command(command)
+        logger.info(f"Command {command} was send.")
 
         stdout_str = str(stdout.read())
         stderr_str = str(stderr.read())
