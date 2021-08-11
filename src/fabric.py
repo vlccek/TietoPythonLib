@@ -121,10 +121,11 @@ class Fabric():
 
             stdin, stdout, stderr = self.__connection.exec_command(
                 f"switch {perfix} {command}")
+            logger.info(f"Command ´switch {perfix} {command}´ was send.")
 
         else:
             stdin, stdout, stderr = self.__connection.exec_command(command)
-        logger.info(f"Command {command} was send.")
+            logger.info(f"Command {command} was send.")
 
         stdout_str = str(stdout.read())
         stderr_str = str(stderr.read())

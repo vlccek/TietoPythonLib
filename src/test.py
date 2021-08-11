@@ -2,7 +2,7 @@ import paramiko
 
 from fabric import Fabric
 
-pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
+pepa = Fabric("21.112.28.11", "network-admin", "ericsson")
 
 tmp = pepa.fabric_info()
 print(tmp)
