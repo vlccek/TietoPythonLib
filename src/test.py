@@ -4,6 +4,8 @@ from fabric import Fabric
 
 pepa = Fabric("21.112.28.11", "network-admin", "ericsson")
 
+print(pepa.fabric_nodes)
+
 tmp = pepa.fabric_info()
 print(tmp)
 
