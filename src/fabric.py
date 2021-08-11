@@ -93,11 +93,14 @@ class Fabric():
     def get_parsed_fabric_node_show(self) -> List[str]:
         """Download and parse all nodes that are in same fabric.  
         """
-        stdin, stdout, stderr = self.__connection.exec_command("fabric-node-show no-show-headers format name") 
+        stdin, stdout, stderr = self.__connection.exec_command(
+            "fabric-node-show no-show-headers")
         fabric_node = []
         # print("stdout" + stdout.read()
         for i in stdout:
-            fabric_node.append(i)
+            parsed = self.parse_line(i)
+            if not parsed = "":
+                fabric_node.append(parsed)
         return fabric_node
 
     def send_command_with_perfix(self, command: str) -> Tuple[str, str, str]:
