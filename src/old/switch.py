@@ -99,7 +99,7 @@ class Switch:
 
     def commit(self):
         """Send changes made in Switch object to switch"""
-        #self.__info.
+        # self.__info.
         # TODO
         pass
 

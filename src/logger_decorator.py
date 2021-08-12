@@ -3,7 +3,6 @@ from loguru import logger
 
 
 def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
-
     def wrapper(func):
         name = func.__name__
 
@@ -12,7 +11,8 @@ def logger_wraps(*, entry=True, exit=True, level="DEBUG"):
             logger_ = logger.opt(depth=1)
             if entry:
                 logger_.log(
-                    level, "Entering '{}' (args={}, kwargs={})", name, args, kwargs)
+                    level, "Entering '{}' (args={}, kwargs={})", name, args, kwargs
+                )
             result = func(*args, **kwargs)
             if exit:
                 logger_.log(level, "Exiting '{}' (result={})", name, result)

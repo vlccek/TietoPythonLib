@@ -6,6 +6,7 @@ class Vnet:
         self.__id = id
         pass
 
+
 r = """Netvisor OS Command Line Interface 6.1
 Connected to Switch 102-NRU02-spine-01; nvOS Identifier:0x11000044; Ver: 6.1.0-6010018207
 LINUX TRACK - 6.1.0 HF1
@@ -20,7 +21,9 @@ name               fab-name                                    mgmt-ip         i
 102-NRU02-leaf-04  fabric_a6da4ba2-2e55-4f70-8dd6-b754a549e7fd 21.102.28.61/19 169.254.102.61/24 public            39      4           274      6.1.0-6010018207 online not-required     ok           
 """
 tsplited = r.splitlines()
-def parse_line( line_to_parse:str) -> str:
+
+
+def parse_line(line_to_parse: str) -> str:
     """Parse line of code from "fabric node show" output
 
     :param line_to_parse: line to parse
@@ -34,7 +37,6 @@ def parse_line( line_to_parse:str) -> str:
         return ""
 
 
-for i in tsplited: 
+for i in tsplited:
     # print(i)
     print(parse_line(line_to_parse=i))
-
