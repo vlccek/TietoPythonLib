@@ -99,12 +99,14 @@ class Fabric():
         # print("stdout" + stdout.read()
         for i in stdout:
             parsed = self.parse_line(i)
-            if not parsed = "":
+            if not parsed == "":
                 fabric_node.append(parsed)
         return fabric_node
 
     def send_command_with_perfix(self, command: str) -> Tuple[str, str, str]:
+        command = f"switch {self.__sw_to_change} {command}"
         stdin, stout, stderr = self.send_command(command)
+        return stdin, stout, stderr
 
     @logger_wraps()
     def send_command(self, command: str) -> Tuple[str, str, str]:
@@ -143,7 +145,6 @@ class Fabric():
     def fabric_nodes(self) -> List[str]:
         """Nodes thaht are associated with this fabric"""
         return self.__fabric_devices
-    # TODO: nezapomenou uvést do dokumentace jak se jmenuje ten getter
 
     def __del__(self):
         self.__connection.close()
