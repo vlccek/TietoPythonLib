@@ -7,8 +7,8 @@ fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 
 ## Run an (unknown) command on switch
 ```py
-fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")  
-switch01.send_command(command="switch-get-config") # possible output or error will be returned
+fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
+fabric01.send_command(command="switch-get-config") # possible output or error will be returned
 
 ```
 
