@@ -166,7 +166,9 @@ class Fabric:
         print("removing obj")
 
     def port_show(self) -> str:
-        stdin, stdout, stderr = self.send_command_with_perfix("port-show")
+        """Cannot run with switch <...> port-show
+        """
+        stdin, stdout, stderr = self.send_command("port-show")
         return stdout
 
     @logger_wraps()
