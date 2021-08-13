@@ -55,6 +55,7 @@ class Fabric:
             self.__sw_to_change = devices
 
     @logger_wraps()
+    @logger.catch
     def open_connection(
         self,
         username: str,
@@ -168,6 +169,7 @@ class Fabric:
         stdin, stdout, stderr = self.send_command_with_perfix("port-show")
         return stdout
 
+    @logger_wraps()
     def port_config_modify(
         self,
         port_list: str = "",
@@ -228,7 +230,9 @@ class Fabric:
                 if value == True:
                     command += f" {key}"
 
-        self.send_command_with_perfix("port-config-modify " + command)
+        stdin, stdout, stderr = self.send_command_with_perfix(
+            "port-config-modify " + command)
+        return stdout
 
     def port_phy_show(self):
         stdin, stdout, stderr = self.send_command_with_perfix("port-phy-show")
