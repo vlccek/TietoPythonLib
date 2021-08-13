@@ -223,7 +223,7 @@ class Fabric:
         for key, value in arguments.items():
             if key.startswith("__"):
                 continue
-            elif value is str:
+            elif type(value) is str:
                 if not value == "":
                     command += f" {key} {value}"
             elif value is bool:
