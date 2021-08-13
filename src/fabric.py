@@ -225,10 +225,10 @@ class Fabric:
                 continue
             elif type(value) is str:
                 if not value == "":
-                    command += f" {key} {value}"
-            elif value is bool:
+                    command += f""" {key.replace("_", "-")} {value}"""
+            elif type(value) is bool:
                 if value == True:
-                    command += f" {key}"
+                    command += f""" {key.replace("_", "-")}"""
 
         stdin, stdout, stderr = self.send_command_with_perfix(
             "port-config-modify " + command)
