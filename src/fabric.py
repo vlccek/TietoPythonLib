@@ -248,3 +248,59 @@ class Fabric:
         stdin, stdout, stderr = self.send_command_with_perfix(
             "switch-config-show")
         return stdout
+
+    def vlan_show(self):
+        stdin, stdout, stderr = self.send_command(
+            "vlan-show")
+        return stdout
+
+    def vlan_create(
+        self,
+        id: int,
+        scope: str,
+        type: str = "",
+        auto_vxlan: str = "",
+        replicators: str = "",
+        description: str = "",
+        active: str = "",
+        stats: str = "",
+        ports: str = "",
+        untagged_ports: str = "",
+        active_ports: str = "",
+        vxlan: str = "",
+        vxlanmodule: str = "",
+    ) -> None:
+        """Adds vlan by parametrs
+
+        :param id: id of new creted vlan, mandatory parameter
+        :param type: type of vlan, defaults to "private"
+        :param auto_vxlan:  defaults to False
+        :param replicators:  defaults to ""
+        :param scope:  defaults to "local"
+        :param description:  defaults to ""
+        :param active:  defaults to False
+        :param stats:  defaults to False
+        :param ports: defaults to []
+        :param untagged_ports:  defaults to []
+        :param active_ports:  defaults to []
+        :param vxlan: defaults to None
+        :param vxlanmodule: defaults to ""
+        """
+
+        new_vlan = {
+            "id": self.__id_checker(id),
+            "type": self.__type_checker(type),
+            "auto-vxlan": self.__bool_check(auto_vxlan),
+            "replicators": self.__text_checker(replicators),
+            "scope": self.__text_checker(scope),
+            "description": self.__text_checker(description),
+            "active": self.__bool_check(active),
+            "stats": self.__bool_check(stats),
+            "ports": self.__port_checker(ports),
+            "untagged_ports": self.__special_port_checker(untagged_ports, ports),
+            "active_ports": self.__special_port_checker(active_ports, ports),
+            "vxlan": self.__vxlan_checker(vxlan),
+            "vxlanmodule": self.__text_checker(vxlanmodule),
+        }
+        self.__vlans.append(new_vlan)
+        self.__vlans = sorted(self.__vlans, key=lambda k: k["id"])
