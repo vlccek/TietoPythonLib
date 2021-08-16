@@ -256,51 +256,56 @@ class Fabric:
 
     def vlan_create(
         self,
-        id: int,
+        id_or_range: str,
         scope: str,
-        type: str = "",
-        auto_vxlan: str = "",
-        replicators: str = "",
-        description: str = "",
-        active: str = "",
-        stats: str = "",
-        ports: str = "",
-        untagged_ports: str = "",
-        active_ports: str = "",
+        vnet: str = "",
         vxlan: str = "",
-        vxlanmodule: str = "",
+        auto_vxlan: str = "",
+        vxlan_mode: str = "",
+        replicators: str = "",
+        public_vlan: str = "",
+        description: str = "",
+        stats: bool = False,
+        no_stats: bool = False,
+        ports: str = "",
+        untagged_ports: str = ""
     ) -> None:
         """Adds vlan by parametrs
 
         :param id: id of new creted vlan, mandatory parameter
-        :param type: type of vlan, defaults to "private"
-        :param auto_vxlan:  defaults to False
+        :param scope:  defaults to ""
+        :param vnet: defaults to ""
+        :param vxlan: defaults to ""
+        :param auto_vxlan:  defaults to ""
+        :param vxlan_mode: defaults to ""
         :param replicators:  defaults to ""
-        :param scope:  defaults to "local"
+        :param public_vlan: defaults to ""
         :param description:  defaults to ""
-        :param active:  defaults to False
         :param stats:  defaults to False
-        :param ports: defaults to []
-        :param untagged_ports:  defaults to []
-        :param active_ports:  defaults to []
-        :param vxlan: defaults to None
-        :param vxlanmodule: defaults to ""
+        :param no_stats: defaults to False
+        :param ports: defaults to ""
+        :param untagged_ports:  defaults to ""
         """
 
-        new_vlan = {
-            "id": self.__id_checker(id),
-            "type": self.__type_checker(type),
-            "auto-vxlan": self.__bool_check(auto_vxlan),
-            "replicators": self.__text_checker(replicators),
-            "scope": self.__text_checker(scope),
-            "description": self.__text_checker(description),
-            "active": self.__bool_check(active),
-            "stats": self.__bool_check(stats),
-            "ports": self.__port_checker(ports),
-            "untagged_ports": self.__special_port_checker(untagged_ports, ports),
-            "active_ports": self.__special_port_checker(active_ports, ports),
-            "vxlan": self.__vxlan_checker(vxlan),
-            "vxlanmodule": self.__text_checker(vxlanmodule),
-        }
-        self.__vlans.append(new_vlan)
-        self.__vlans = sorted(self.__vlans, key=lambda k: k["id"])
+        arguments = locals()
+
+        command = ""
+        for key, value in arguments.items():
+            if key.startswith("__") or key == "id_or_range":
+                continue
+            elif type(value) is str:
+                if key == "id_or_range":
+                    if "," in value or "-" in value:
+                        command += f" range {value}"
+                    else:
+                        command += f" id {value}"
+                if not value == "":
+                    command += f""" {key.replace("_", "-")} {value}"""
+            elif type(value) is bool:
+                if value == True:
+                    command += f""" {key.replace("_", "-")}"""
+
+        stdin, stdout, stderr = self.send_command("vlan-create"
+        + command)
+
+        return stdout
