@@ -12,6 +12,21 @@ fabric01.send_command(command="switch-get-config") # possible output or error wi
 
 ```
 
+## List of supported commands
+```
+fabric-info
+fabric-node-show
+node-show
+port-show
+port-config-modify
+port-phy-show
+port-vlan-add
+vlan-show
+vlan-create
+software-show
+switch-config-show
+```
+
 
 # Legacy
 ## VLANS
