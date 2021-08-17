@@ -291,7 +291,7 @@ class Fabric:
 
         command = ""
         for key, value in arguments.items():
-            if key.startswith("__") or key == "id_or_range":
+            if key.startswith("__"):
                 continue
             elif type(value) is str:
                 if key == "id_or_range":
@@ -304,7 +304,7 @@ class Fabric:
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
-
+        
         stdin, stdout, stderr = self.send_command("vlan-create"
         + command)
 
