@@ -174,7 +174,7 @@ class Fabric:
     @logger_wraps()
     def port_config_modify(
         self,
-        port_list: str = "",
+        port_list: str,
         speed: str = "",
         egress_rate_limit: str = "",
         eth_mode: str = "",
@@ -309,3 +309,5 @@ class Fabric:
         + command)
 
         return stdout
+
+

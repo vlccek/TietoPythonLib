@@ -1,4 +1,4 @@
-# Concept
+
 ## Creating Fabric object
 ```py
 fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
@@ -25,6 +25,12 @@ vlan-show
 vlan-create
 software-show
 switch-config-show
+```
+
+## Script showcase
+```py
+fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
+fabric01.
 ```
 
 
