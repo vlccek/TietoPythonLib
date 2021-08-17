@@ -299,12 +299,12 @@ class Fabric:
                         command += f" range {value}"
                     else:
                         command += f" id {value}"
-                if not value == "":
+                elif not value == "":
                     command += f""" {key.replace("_", "-")} {value}"""
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
-        
+
         stdin, stdout, stderr = self.send_command("vlan-create"
         + command)
 

@@ -29,8 +29,10 @@ switch-config-show
 
 ## Script showcase
 ```py
-fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
-fabric01.
+pepa = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
+pepa.vlan_show()
+pepa.vlan_create("43", "local")
+pepa.vlan_show()
 ```
 
 
