@@ -232,8 +232,8 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command_with_perfix(
-            "port-config-modify " + command)
+        stdin, stdout, stderr = self.send_command(
+            "port-config-modify" + command)
         return stdout
 
     def port_phy_show(self):
@@ -245,7 +245,7 @@ class Fabric:
         return stdout
 
     def switch_config_show(self):
-        stdin, stdout, stderr = self.send_command_with_perfix(
+        stdin, stdout, stderr = self.send_command(
             "switch-config-show")
         return stdout
 
