@@ -108,13 +108,18 @@ class Fabric:
         return fabric_node
 
     @logger_wraps()
-    def send_command_with_perfix(self, command: str) -> Tuple[str, str, str]:
+    def send_command_with_prefix(self, command: str, switches: str) -> Tuple[str, str, str]:
         """Run command with some kind of perfix before command example: "switch {sw01,sw02} <random command>"
 
         :param command: command what you want to run
         """
-        command = f"switch {self.__sw_to_change} {command}"
-        stdin, stout, stderr = self.send_command(command)
+        if not switches:
+            stdin, stout, stderr = self.send_command(command)
+        else:
+            command = f"switch {switches} {command}"
+            stdin, stout, stderr = self.send_command(command)
+        #command = f"switch {self.__sw_to_change} {command}"
+        
         return stdin, stout, stderr
 
     @logger_wraps()
@@ -165,6 +170,7 @@ class Fabric:
         self.__connection.close()
         print("removing obj")
 
+    @logger_wraps()
     def port_show(self) -> str:
         """Cannot run with switch <...> port-show
         """
@@ -236,24 +242,32 @@ class Fabric:
             "port-config-modify" + command)
         return stdout
 
-    def port_phy_show(self):
-        stdin, stdout, stderr = self.send_command_with_perfix("port-phy-show")
+    @logger_wraps()
+    def port_phy_show(self, switches: str = ""):
+        stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show", switches)
+        return stdout
+    
+    @logger_wraps()
+    def software_show(self, switches: str = ""):
+        stdin, stdout, stderr = self.send_command_with_prefix("software-show", switches)
         return stdout
 
-    def software_show(self):
-        stdin, stdout, stderr = self.send_command_with_perfix("software-show")
+    @logger_wraps()
+    def switch_config_show(self, switches: str = ""):
+        stdin, stdout, stderr = self.send_command_with_prefix("switch-config-show", switches)
         return stdout
 
-    def switch_config_show(self):
-        stdin, stdout, stderr = self.send_command(
-            "switch-config-show")
+    @logger_wraps()
+    def switch_setup_show(self, switches: str = ""):
+        stdin, stdout, stderr = self.send_command_with_prefix("switch-setup-show", switches)
         return stdout
 
-    def vlan_show(self):
-        stdin, stdout, stderr = self.send_command(
-            "vlan-show")
+    @logger_wraps()
+    def vlan_show(self, switches: str = ""):
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-show", switches)
         return stdout
 
+    @logger_wraps()
     def vlan_create(
         self,
         id_or_range: str,
@@ -268,7 +282,8 @@ class Fabric:
         stats: bool = False,
         no_stats: bool = False,
         ports: str = "",
-        untagged_ports: str = ""
+        untagged_ports: str = "",
+        switches: str = ""
     ) -> None:
         """Adds vlan by parametrs
 
@@ -291,7 +306,7 @@ class Fabric:
 
         command = ""
         for key, value in arguments.items():
-            if key.startswith("__"):
+            if key.startswith("__") or key == "switches":
                 continue
             elif type(value) is str:
                 if key == "id_or_range":
@@ -305,9 +320,5 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command("vlan-create"
-        + command)
-
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-create" + command, switches)
         return stdout
-
-
