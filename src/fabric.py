@@ -108,7 +108,7 @@ class Fabric:
         return fabric_node
 
     @logger_wraps()
-    def send_command_with_prefix(self, command: str, switches: str) -> Tuple[str, str, str]:
+    def send_command_with_prefix(self, command: str, switches: str = "") -> Tuple[str, str, str]:
         """Run command with some kind of perfix before command example: "switch {sw01,sw02} <random command>"
 
         :param command: command what you want to run
