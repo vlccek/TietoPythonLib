@@ -5,7 +5,7 @@ fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 
 ```
 
-## Run an (unknown) command on switch
+## Run an unknown command on the switch by the library 
 ```py
 fabric01 = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 fabric01.send_command(command="switch-get-config") # possible output or error will be returned
@@ -25,6 +25,18 @@ vlan-show
 vlan-create
 software-show
 switch-config-show
+```
+
+## Planned commands
+```
+fabric-{create, info, show, join, unjoin, modify, stats-show, node-show, ....} 
+lldp-show 
+node-{info, show, ...} 
+port-{show, config-modify, stats-show, phy-show, vlan-add, xcvr-show, ...} 
+vlan-{show, modify, delete, create, port-add, ...} 
+running-config-show 
+software-show 
+switch-{config-show, export, setup-show, local, ...} 
 ```
 
 ## Script showcase
