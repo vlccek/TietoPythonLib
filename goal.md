@@ -45,6 +45,10 @@ pepa = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 pepa.vlan_show()
 pepa.vlan_create("43", "local")
 pepa.vlan_show()
+
+pepa.send_command("vlan-show format switch,id,ports")
+
+pepa.send_command_with_prefix(command="vlan-show format id,ports", switches="switch-01")
 ```
 
 
