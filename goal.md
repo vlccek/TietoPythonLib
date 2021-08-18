@@ -43,7 +43,7 @@ switch-{config-show, export, setup-show, local, ...}
 ```py
 pepa = Fabric(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 pepa.vlan_show()
-pepa.vlan_create("43", "local")
+pepa.vlan_create(id="43", scope="local")
 pepa.vlan_show()
 
 pepa.send_command("vlan-show format switch,id,ports")
