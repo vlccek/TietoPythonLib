@@ -5,6 +5,8 @@ from typing import Any, Tuple, List
 
 import re
 
+from overloading import overload
+
 # from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
 
@@ -223,6 +225,7 @@ class Fabric:
         no_fabric_guard: bool = False,
         fec: bool = False,
         no_fec: bool = False,
+        switches: str = ""
     ):
         """Ports config modify"""
         arguments = locals()
@@ -238,13 +241,20 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command(
-            "port-config-modify" + command)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "port-config-modify" + command, switches)
         return stdout
 
+    @overload
     @logger_wraps()
     def port_phy_show(self, switches: str = ""):
         stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show", switches)
+        return stdout
+    
+    @overload
+    @logger_wraps()
+    def port_phy_show(self, switches: str = "", format:str=""):
+        stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show", switches + f" format {format}")
         return stdout
     
     @logger_wraps()
@@ -321,4 +331,71 @@ class Fabric:
                     command += f""" {key.replace("_", "-")}"""
 
         stdin, stdout, stderr = self.send_command_with_prefix("vlan-create" + command, switches)
+        return stdout
+    
+    @logger_wraps()
+    def vlan_delete(self, id_or_range: str, switches: str = ""):
+        if ',' in id_or_range or '-' in id_or_range:
+            command = f" range {id_or_range}"
+        else:
+            command = f" id {id_or_range}" 
+
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-delete" + command, switches)
+        return stdout
+
+    @logger_wraps()
+    def vlan_port_add(
+        self, 
+        id_or_range: str, 
+        switch: str, 
+        ports: str, 
+        untagged: bool = False, 
+        tagged: bool = False):
+
+        arguments = locals()
+
+        command = ""
+        for key, value in arguments.items():
+            #if key.startswith("__") or key == "switches":
+            #    continue
+            if type(value) is str:
+                if key == "id_or_range":
+                    if "," in value or "-" in value:
+                        command += f" range {value}"
+                    else:
+                        command += f" id {value}"
+                elif not value == "":
+                    command += f""" {key.replace("_", "-")} {value}"""
+            elif type(value) is bool:
+                if value == True:
+                    command += f""" {key.replace("_", "-")}"""
+
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-port-add" + command)
+        return stdout
+
+    @logger_wraps()
+    def vlan_modify(
+        self, 
+        id: str, 
+        description: str = "", 
+        vxlan: str = "", 
+        replicators: str = "", 
+        vnet: str = "", 
+        public_vlan: str = ""):
+        
+        arguments = locals()
+
+        command = ""
+        counter = -1
+        for key, value in arguments.items():
+            #if key.startswith("__") or key == "switches":
+            #    continue
+            if type(value) is str:
+                if key == "id" or not value == "":
+                    command += f""" {key.replace("_", "-")} {value}"""
+                    counter += 1
+
+        if counter < 1 or counter > 4:
+            raise Exception("Too many arguments or no arguments")
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-modify" + command)
         return stdout
