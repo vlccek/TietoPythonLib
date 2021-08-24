@@ -245,6 +245,7 @@ class Fabric:
 
     @logger_wraps()
     def port_phy_show(self, switches: str = "", format:str=""):
+        command = ""
         if format != "":
             command = f" format {format}"
         stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show" + command, switches)
