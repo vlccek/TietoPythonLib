@@ -5,7 +5,8 @@ from typing import Any, Tuple, List
 
 import re
 
-from overloading import overload
+from plum import dispatch
+
 
 # from switch_in_fabric import Switch_in_Fabric
 from logger_decorator import logger_wraps
@@ -245,13 +246,13 @@ class Fabric:
             "port-config-modify" + command, switches)
         return stdout
 
-    @overload
+    @dispatch
     @logger_wraps()
     def port_phy_show(self, switches: str = ""):
         stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show", switches)
         return stdout
     
-    @overload
+    @dispatch
     @logger_wraps()
     def port_phy_show(self, switches: str = "", format:str=""):
         stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show", switches + f" format {format}")
