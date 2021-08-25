@@ -146,18 +146,27 @@ class Fabric:
     @logger_wraps()
     def fabric_info(self) -> str:
         """Retruns info from comamnd fabric-info"""
+        command = ""
+        if format != "":
+            command = f" format {format}"
         stdin, stdout, stderr = self.send_command("fabric-info")
         return stdout
 
     @logger_wraps()
-    def fabric_node_show(self) -> str:
+    def fabric_node_show(self, format:str="") -> str:
         """output from command fabric-node-show"""
+        command = ""
+        if format != "":
+            command = f" format {format}"
         stdin, stdout, stderr = self.send_command("fabric-node-show")
         return stdout
 
     @logger_wraps()
-    def node_show(self) -> str:
+    def node_show(self, format: str="") -> str:
         """output from command node-show"""
+        command = ""
+        if format != "":
+            command = f" format {format}"
         stdin, stdout, stderr = self.send_command("node-show")
         return stdout
 
@@ -171,9 +180,12 @@ class Fabric:
         print("removing obj")
 
     @logger_wraps()
-    def port_show(self) -> str:
+    def port_show(self, format:str="") -> str:
         """Cannot run with switch <...> port-show
         """
+        command = ""
+        if format != "":
+            command = f" format {format}"
         stdin, stdout, stderr = self.send_command("port-show")
         return stdout
 
@@ -252,23 +264,35 @@ class Fabric:
         return stdout
     
     @logger_wraps()
-    def software_show(self, switches: str = ""):
-        stdin, stdout, stderr = self.send_command_with_prefix("software-show", switches)
+    def software_show(self, switches: str = "", format:str=""):
+        command = ""
+        if format != "":
+            command = f" format {format}"
+        stdin, stdout, stderr = self.send_command_with_prefix("software-show" + command, switches)
         return stdout
 
     @logger_wraps()
-    def switch_config_show(self, switches: str = ""):
-        stdin, stdout, stderr = self.send_command_with_prefix("switch-config-show", switches)
+    def switch_config_show(self, switches: str = "", format:str=""):
+        command = ""
+        if format != "":
+            command = f" format {format}"
+        stdin, stdout, stderr = self.send_command_with_prefix("switch-config-show" + command, switches)
         return stdout
 
     @logger_wraps()
-    def switch_setup_show(self, switches: str = ""):
-        stdin, stdout, stderr = self.send_command_with_prefix("switch-setup-show", switches)
+    def switch_setup_show(self, switches: str = "", format:str=""):
+        command = ""
+        if format != "":
+            command = f" format {format}"
+        stdin, stdout, stderr = self.send_command_with_prefix("switch-setup-show"+ command,  switches)
         return stdout
 
     @logger_wraps()
-    def vlan_show(self, switches: str = ""):
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-show", switches)
+    def vlan_show(self, switches: str = "", format:str=""):
+        command = ""
+        if format != "":
+            command = f" format {format}"
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-show"+ command,  switches)
         return stdout
 
     @logger_wraps()

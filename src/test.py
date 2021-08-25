@@ -1,24 +1,8 @@
-import paramiko
-
 from fabric import Fabric
 
 pepa = Fabric("21.112.28.11", "network-admin", "ericsson")
 
-print(pepa.fabric_nodes)
-
-tmp = pepa.fabric_info()
-print(tmp)
-
-tmp = pepa.fabric_node_show()
-print(tmp)
-
-tmp = pepa.port_show()
-print(tmp)
-
-tmp = pepa.port_phy_show()
-print(tmp)
-
-del pepa
+pepa.vlan_show("")
 """
 pepa = Switch(
     username="admin", password="root", domain="sw-pepa.cz"
