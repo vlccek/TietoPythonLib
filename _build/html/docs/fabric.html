@@ -29,7 +29,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Examples" href="example.html" /> 
 
 </head>
 
@@ -103,12 +104,12 @@
                         
                             
                             
-                                <ul>
+                                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="example.html#show-commands">Show commands</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fabric_api.html">Fabric api</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fabric api</a></li>
 </ul>
 
                             
@@ -125,21 +126,32 @@
 <dt class="sig sig-object py" id="fabric.Fabric">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fabric.</span></span><span class="sig-name descname"><span class="pre">Fabric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepalive</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="fabric.Fabric.change_configured_device">
-<span class="sig-name descname"><span class="pre">change_configured_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#fabric.Fabric.change_configured_device" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>Created object that iminiadly connect to that switch and find all switch in fabric</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pepa</span> <span class="o">=</span> <span class="n">Fabric</span><span class="p">(</span><span class="s2">&quot;pepa.cz&quot;</span><span class="p">,</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span> <span class="s2">&quot;pa$$word123&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – hostname that we connect</p></li>
+<li><p><strong>username</strong> – username of user that we connect</p></li>
+<li><p><strong>password</strong> – password to switch</p></li>
+<li><p><strong>port</strong> – port, defaults to 22</p></li>
+<li><p><strong>timeout</strong> – timeout, defaults to 60</p></li>
+<li><p><strong>keepalive</strong> – keepalive, defaults to 60</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.fabric_info">
 <span class="sig-name descname"><span class="pre">fabric_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.fabric_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retruns info from comamnd fabric-info</p>
+<dd><p>Retruns info from comamnd <cite>fabric-info</cite></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.fabric_node_show">
 <span class="sig-name descname"><span class="pre">fabric_node_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.fabric_node_show" title="Permalink to this definition">¶</a></dt>
-<dd><p>output from command fabric-node-show</p>
+<dd><p>output from command <cite>fabric-node-show</cite></p>
 </dd></dl>
 
 <dl class="py property">
@@ -157,19 +169,34 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.node_show">
 <span class="sig-name descname"><span class="pre">node_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.node_show" title="Permalink to this definition">¶</a></dt>
-<dd><p>output from command node-show</p>
+<dd><p>output from command <cite>node-show</cite></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.open_connection">
 <span class="sig-name descname"><span class="pre">open_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepalive</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#fabric.Fabric.open_connection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens a SSH connection</p>
+<dd><p>Open ssh connection to switch</p>
+<p>Run on creation of object. No need to run manualy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Username that are connected</p></li>
+<li><p><strong>password</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Password</p></li>
+<li><p><strong>port</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – port of ssh, defaults to 22</p></li>
+<li><p><strong>timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – timeout, defaults to 60</p></li>
+<li><p><strong>keepalive</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – keeplive, defaults to 60</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.parse_line_of_node_show">
 <span class="sig-name descname"><span class="pre">parse_line_of_node_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_to_parse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.parse_line_of_node_show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse line of code from “fabric node show” output</p>
+<blockquote>
+<div><p>Run on creation of object. No need to run manualy (for dowload fabric members)</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
@@ -189,7 +216,19 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.port_phy_show">
 <span class="sig-name descname"><span class="pre">port_phy_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.port_phy_show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run commnad <cite>port-phy-show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout of command</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.port_show">
@@ -223,17 +262,53 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.software_show">
 <span class="sig-name descname"><span class="pre">software_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.software_show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run commnad <cite>software-show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout of command</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.switch_config_show">
 <span class="sig-name descname"><span class="pre">switch_config_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.switch_config_show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run commnad <cite>switch-config-show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout of command</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.switch_setup_show">
 <span class="sig-name descname"><span class="pre">switch_setup_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.switch_setup_show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run commnad <cite>switch-setup-show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout of command</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.vlan_create">
@@ -262,8 +337,23 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.vlan_delete">
-<span class="sig-name descname"><span class="pre">vlan_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_or_range</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.vlan_delete" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">vlan_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_or_range</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.vlan_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete vlan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>id_or_range</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – id or range of vlans thath should be deleted</p></li>
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches that should be run, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>stdout</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.vlan_modify">
@@ -278,7 +368,19 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="py method">
 <dt class="sig sig-object py" id="fabric.Fabric.vlan_show">
 <span class="sig-name descname"><span class="pre">vlan_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fabric.Fabric.vlan_show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run commnad <cite>vlans-show</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout of command</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
