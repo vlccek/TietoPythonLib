@@ -16,6 +16,21 @@ logger.add("fabric.log", level="TRACE")
 
 
 class Fabric:
+    """Created object that iminiadly connect to that switch and find all switch in fabric
+
+    .. code::
+
+        pepa = Fabric("pepa.cz", "root", "pa$$word123")
+
+
+    :param hostname: hostname that we connect
+    :param username: username of user that we connect
+    :param password: password to switch
+    :param port: port, defaults to 22
+    :param timeout: timeout, defaults to 60
+    :param keepalive: keepalive, defaults to 60
+    """
+
     def __init__(
         self,
         hostname: str,
@@ -25,15 +40,7 @@ class Fabric:
         timeout: int = 60,
         keepalive: int = 60,
     ) -> None:
-        """Created object that iminiadly connect to that switch and find all switch in fabric
 
-        :param hostname: hostname that we connect
-        :param username:
-        :param password: password to switch
-        :param port: port, defaults to 22
-        :param timeout: timeout, defaults to 60
-        :param keepalive: keepalive, defaults to 60
-        """
         logger.success("Object was creted success.")
 
         self.__connection = None
@@ -46,15 +53,6 @@ class Fabric:
         self.__sw_to_change = self.__fabric_devices
 
     @logger_wraps()
-    def change_configured_device(self, devices: list = None, all: bool = False) -> None:
-        if all == True:
-            self.get_parsed_fabric_node_show()
-            # for sure refresh nodes
-            self.__sw_to_change = self.__fabric_devices
-        if not devices == None:
-            self.__sw_to_change = devices
-
-    @logger_wraps()
     @logger.catch
     def open_connection(
         self,
@@ -64,7 +62,16 @@ class Fabric:
         timeout: int = 60,
         keepalive: int = 60,
     ) -> None:
-        """Opens a SSH connection"""
+        """Open ssh connection to switch
+
+        Run on creation of object. No need to run manualy
+
+        :param username: Username that are connected
+        :param password: Password
+        :param port: port of ssh, defaults to 22
+        :param timeout: timeout, defaults to 60
+        :param keepalive: keeplive, defaults to 60
+        """
         self.__connection = paramiko.SSHClient()
         self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.__connection.connect(
@@ -82,6 +89,8 @@ class Fabric:
     @logger_wraps()
     def parse_line_of_node_show(self, line_to_parse: str) -> str:
         """Parse line of code from "fabric node show" output
+
+         Run on creation of object. No need to run manualy (for dowload fabric members)
 
         :param line_to_parse: line to parse
         """
@@ -108,7 +117,9 @@ class Fabric:
         return fabric_node
 
     @logger_wraps()
-    def send_command_with_prefix(self, command: str, switches: str = "") -> Tuple[str, str, str]:
+    def send_command_with_prefix(
+        self, command: str, switches: str = ""
+    ) -> Tuple[str, str, str]:
         """Run command with some kind of perfix before command example: "switch {sw01,sw02} <random command>"
 
         :param command: command what you want to run
@@ -118,8 +129,8 @@ class Fabric:
         else:
             command = f"switch {switches} {command}"
             stdin, stout, stderr = self.send_command(command)
-        #command = f"switch {self.__sw_to_change} {command}"
-        
+        # command = f"switch {self.__sw_to_change} {command}"
+
         return stdin, stout, stderr
 
     @logger_wraps()
@@ -145,7 +156,7 @@ class Fabric:
 
     @logger_wraps()
     def fabric_info(self) -> str:
-        """Retruns info from comamnd fabric-info"""
+        """Retruns info from comamnd `fabric-info`"""
         command = ""
         if format != "":
             command = f" format {format}"
@@ -153,8 +164,8 @@ class Fabric:
         return stdout
 
     @logger_wraps()
-    def fabric_node_show(self, format:str="") -> str:
-        """output from command fabric-node-show"""
+    def fabric_node_show(self, format: str = "") -> str:
+        """output from command `fabric-node-show`"""
         command = ""
         if format != "":
             command = f" format {format}"
@@ -162,8 +173,8 @@ class Fabric:
         return stdout
 
     @logger_wraps()
-    def node_show(self, format: str="") -> str:
-        """output from command node-show"""
+    def node_show(self, format: str = "") -> str:
+        """output from command `node-show`"""
         command = ""
         if format != "":
             command = f" format {format}"
@@ -177,12 +188,12 @@ class Fabric:
 
     def __del__(self):
         self.__connection.close()
-        print("removing obj")
+        logger
+        print("Disconecting from switch, object was destroyed")
 
     @logger_wraps()
-    def port_show(self, format:str="") -> str:
-        """Cannot run with switch <...> port-show
-        """
+    def port_show(self, format: str = "") -> str:
+        """Cannot run with switch <...> port-show"""
         command = ""
         if format != "":
             command = f" format {format}"
@@ -235,7 +246,7 @@ class Fabric:
         no_fabric_guard: bool = False,
         fec: bool = False,
         no_fec: bool = False,
-        switches: str = ""
+        switches: str = "",
     ):
         """Ports config modify"""
         arguments = locals()
@@ -252,47 +263,88 @@ class Fabric:
                     command += f""" {key.replace("_", "-")}"""
 
         stdin, stdout, stderr = self.send_command_with_prefix(
-            "port-config-modify" + command, switches)
+            "port-config-modify" + command, switches
+        )
         return stdout
 
     @logger_wraps()
-    def port_phy_show(self, switches: str = "", format:str=""):
+    def port_phy_show(self, switches: str = "", format: str = ""):
+        """Run commnad `port-phy-show`
+
+        :param switches: switches where should be show runs, defaults to ""
+        :param format: column that should shows, defaults to ""
+        :return: stdout of command
+        """
         command = ""
         if format != "":
             command = f" format {format}"
-        stdin, stdout, stderr = self.send_command_with_prefix("port-phy-show" + command, switches)
-        return stdout
-    
-    @logger_wraps()
-    def software_show(self, switches: str = "", format:str=""):
-        command = ""
-        if format != "":
-            command = f" format {format}"
-        stdin, stdout, stderr = self.send_command_with_prefix("software-show" + command, switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "port-phy-show" + command, switches
+        )
         return stdout
 
     @logger_wraps()
-    def switch_config_show(self, switches: str = "", format:str=""):
+    def software_show(self, switches: str = "", format: str = ""):
+        """Run commnad `software-show`
+
+        :param switches: switches where should be show runs, defaults to ""
+        :param format: column that should shows, defaults to ""
+        :return: stdout of command
+        """
         command = ""
         if format != "":
             command = f" format {format}"
-        stdin, stdout, stderr = self.send_command_with_prefix("switch-config-show" + command, switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "software-show" + command, switches
+        )
         return stdout
 
     @logger_wraps()
-    def switch_setup_show(self, switches: str = "", format:str=""):
+    def switch_config_show(self, switches: str = "", format: str = ""):
+        """Run commnad `switch-config-show`
+
+        :param switches: switches where should be show runs, defaults to ""
+        :param format: column that should shows, defaults to ""
+        :return: stdout of command
+        """
         command = ""
         if format != "":
             command = f" format {format}"
-        stdin, stdout, stderr = self.send_command_with_prefix("switch-setup-show"+ command,  switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "switch-config-show" + command, switches
+        )
         return stdout
 
     @logger_wraps()
-    def vlan_show(self, switches: str = "", format:str=""):
+    def switch_setup_show(self, switches: str = "", format: str = ""):
+        """Run commnad `switch-setup-show`
+
+        :param switches: switches where should be show runs, defaults to ""
+        :param format: column that should shows, defaults to ""
+        :return: stdout of command
+        """
         command = ""
         if format != "":
             command = f" format {format}"
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-show"+ command,  switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "switch-setup-show" + command, switches
+        )
+        return stdout
+
+    @logger_wraps()
+    def vlan_show(self, switches: str = "", format: str = ""):
+        """Run commnad `vlans-show`
+
+        :param switches: switches where should be show runs, defaults to ""
+        :param format: column that should shows, defaults to ""
+        :return: stdout of command
+        """
+        command = ""
+        if format != "":
+            command = f" format {format}"
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "vlan-show" + command, switches
+        )
         return stdout
 
     @logger_wraps()
@@ -311,9 +363,9 @@ class Fabric:
         no_stats: bool = False,
         ports: str = "",
         untagged_ports: str = "",
-        switches: str = ""
+        switches: str = "",
     ) -> None:
-        """Adds vlan by parametrs
+        """Adds vlan by parametrs 
 
         :param id: id of new creted vlan, mandatory parameter
         :param scope:  defaults to ""
@@ -348,33 +400,43 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-create" + command, switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "vlan-create" + command, switches
+        )
         return stdout
-    
+
     @logger_wraps()
-    def vlan_delete(self, id_or_range: str, switches: str = ""):
-        if ',' in id_or_range or '-' in id_or_range:
+    def vlan_delete(self, id_or_range: str, switches: str = "") -> str:
+        """Delete vlan
+
+        :param id_or_range: id or range of vlans thath should be deleted
+        :param switches: switches that should be run, defaults to ""
+        :return: stdout
+        """
+        if "," in id_or_range or "-" in id_or_range:
             command = f" range {id_or_range}"
         else:
-            command = f" id {id_or_range}" 
+            command = f" id {id_or_range}"
 
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-delete" + command, switches)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "vlan-delete" + command, switches
+        )
         return stdout
 
     @logger_wraps()
     def vlan_port_add(
-        self, 
-        id_or_range: str, 
-        switch: str, 
-        ports: str, 
-        untagged: bool = False, 
-        tagged: bool = False):
-
+        self,
+        id_or_range: str,
+        switch: str,
+        ports: str,
+        untagged: bool = False,
+        tagged: bool = False,
+    ):
         arguments = locals()
 
         command = ""
         for key, value in arguments.items():
-            #if key.startswith("__") or key == "switches":
+            # if key.startswith("__") or key == "switches":
             #    continue
             if type(value) is str:
                 if key == "id_or_range":
@@ -388,25 +450,27 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-port-add" + command)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "vlan-port-add" + command)
         return stdout
 
     @logger_wraps()
     def vlan_modify(
-        self, 
-        id: str, 
-        description: str = "", 
-        vxlan: str = "", 
-        replicators: str = "", 
-        vnet: str = "", 
-        public_vlan: str = ""):
-        
+        self,
+        id: str,
+        description: str = "",
+        vxlan: str = "",
+        replicators: str = "",
+        vnet: str = "",
+        public_vlan: str = "",
+    ):
+
         arguments = locals()
 
         command = ""
         counter = -1
         for key, value in arguments.items():
-            #if key.startswith("__") or key == "switches":
+            # if key.startswith("__") or key == "switches":
             #    continue
             if type(value) is str:
                 if key == "id" or not value == "":
@@ -415,5 +479,6 @@ class Fabric:
 
         if counter < 1 or counter > 4:
             raise Exception("Too many arguments or no arguments")
-        stdin, stdout, stderr = self.send_command_with_prefix("vlan-modify" + command)
+        stdin, stdout, stderr = self.send_command_with_prefix(
+            "vlan-modify" + command)
         return stdout
