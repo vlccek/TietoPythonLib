@@ -13,3 +13,4 @@ See the Table of Contents for details.
 
    docs/example
    docs/fabric
+   docs/logging

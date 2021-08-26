@@ -365,7 +365,7 @@ class Fabric:
         untagged_ports: str = "",
         switches: str = "",
     ) -> None:
-        """Adds vlan by parametrs 
+        """Adds vlan by parametrs
 
         :param id: id of new creted vlan, mandatory parameter
         :param scope:  defaults to ""
@@ -458,8 +458,7 @@ class Fabric:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
 
-        stdin, stdout, stderr = self.send_command_with_prefix(
-            "vlan-port-add" + command)
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-port-add" + command)
         return stdout
 
     @logger_wraps()
@@ -483,7 +482,7 @@ class Fabric:
         :param id: id of vlan
         :param description: description
         :param vxlan: vxlan
-        :param vnet: vnet 
+        :param vnet: vnet
         :param public:vlan: public vlan
         """
         arguments = locals()
@@ -500,6 +499,5 @@ class Fabric:
 
         if counter < 1 or counter > 4:
             raise Exception("Too many arguments or no arguments")
-        stdin, stdout, stderr = self.send_command_with_prefix(
-            "vlan-modify" + command)
+        stdin, stdout, stderr = self.send_command_with_prefix("vlan-modify" + command)
         return stdout
