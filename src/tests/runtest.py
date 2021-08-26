@@ -13,7 +13,8 @@ except:
 
 class TestShowCommands(unittest.TestCase):
 
-    def setUp(self) -> None:
+    @classmethod
+    def setUpClass(self) -> None:
         self.coneceted_sw = Fabric(hostname, username, password, port)
         return super().setUp()
 
