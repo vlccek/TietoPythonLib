@@ -4,7 +4,7 @@ import unittest
 import sys
 
 try:
-    sys.path.apppend("..")
+    sys.path.append("../")
     from fabric import Fabric
 
 except:
@@ -13,7 +13,9 @@ except:
 
 class TestShowCommands(unittest.TestCase):
 
-    coneceted_sw = Fabric(hostname, username, password, port)
+    def setUp(self) -> None:
+        self.coneceted_sw = Fabric(hostname, username, password, port)
+        return super().setUp()
 
     def test_fabric_info(self):
         text = self.coneceted_sw.fabric_info()
@@ -77,4 +79,5 @@ class TestShowCommands(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    print("testuju")
     unittest.main()
