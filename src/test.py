@@ -1,6 +1,6 @@
 from fabric import Fabric
 
-pepa = Fabric("21.112.28.11", "network-admin", "ericsson")
+pepa = Fabric("21.102.28.11", "network-admin", "ericsson")
 
 print(pepa.vlan_show(format="id,description"))
 
@@ -8,7 +8,7 @@ pepa.vlan_create("111", "local")
 
 print(pepa.vlan_show())
 
-print(pepa.vlan_show(switches="", format="switch,id,description"))
+print(pepa.vlan_show(switches="102-NRU02-spine-02", format="switch,id,description"))
 
 pepa.vlan_modify("111", description="test desc xd")
 
