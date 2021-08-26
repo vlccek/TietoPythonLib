@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>TietoPythonLib &mdash; TietoPythonLib 0.0.1 alpha documentation</title>
+  <title>Examples &mdash; TietoPythonLib 0.0.1 alpha documentation</title>
   
 
   
@@ -29,7 +30,7 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="switch module" href="switch.html" />
+    <link rel="next" title="Fabric api" href="fabric_api.html" />
     <link rel="prev" title="TietoPythonLib" href="../index.html" /> 
 
 </head>
@@ -69,13 +70,13 @@
     
       <li><a href="../index.html">Docs</a></li>
         
-      <li>TietoPythonLib</li>
+      <li>Examples</li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/docs/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/docs/example.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -105,15 +106,11 @@
                             
                             
                                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">TietoPythonLib</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#show-commands">Show commands</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="switch.html">switch module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vlan.html">Vlan module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vlan_doc.html">Vlan module examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="vlan_doc.html#vlans">Vlans</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="fabric_api.html">Fabric api</a></li>
 </ul>
 
                             
@@ -124,19 +121,41 @@
                     <div class="document">
                         
                             
-  <div class="section" id="tietopythonlib">
-<h1><a class="toc-backref" href="#id1">TietoPythonLib</a><a class="headerlink" href="#tietopythonlib" title="Permalink to this headline">¶</a></h1>
-<p>The Python library for configuration of switches from company Pluribus.</p>
-<p>See the Table of Contents for details.</p>
+  <section id="examples">
+<h1><a class="toc-backref" href="#id1">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#tietopythonlib" id="id1">TietoPythonLib</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id1">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#show-commands" id="id2">Show commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#list-of-show-command" id="id3">List of show command</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
-<div class="toctree-wrapper compound">
-</div>
-</div>
+<section id="show-commands">
+<h2><a class="toc-backref" href="#id2">Show commands</a><a class="headerlink" href="#show-commands" title="Permalink to this headline">¶</a></h2>
+<p>Our library have implemented most of basic shows. Every show has optional argument <cite>format</cite> that add to command parametr format and gived arguments</p>
+<section id="list-of-show-command">
+<h3><a class="toc-backref" href="#id3">List of show command</a><a class="headerlink" href="#list-of-show-command" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.fabric_info()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.fabric_node_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.node_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.port_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.port_phy_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.software_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.switch_config_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.switch_setup_show()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.vlan_show()</span></code></p></li>
+</ul>
+</section>
+</section>
+</section>
 
 
                         
@@ -169,7 +188,7 @@
     <div class="footer" role="contentinfo">
         <div class="container">
             &#169; Copyright 2021, Petr Balnar, Jakub Vlk.
-        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.1.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0+.
         </div>
     </div>  
 

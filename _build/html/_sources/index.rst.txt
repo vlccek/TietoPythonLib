@@ -11,5 +11,5 @@ See the Table of Contents for details.
    :maxdepth: 2
    :glob:
 
-   docs/*
-   
+   docs/example
+   docs/fabric

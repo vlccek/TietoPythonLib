@@ -1,7 +1,7 @@
-switch module
+Fabric api
 =============
 
-.. automodule:: switch
+.. automodule:: fabric
    :members:
    :undoc-members:
    :show-inheritance:
