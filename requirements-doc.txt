@@ -1,3 +1,4 @@
 karma-sphinx-theme
+sphinx-autodoc-annotation
 sphinx
 insegel
