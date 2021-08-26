@@ -14,15 +14,15 @@ Our library have implemented most of basic shows. Every show has optional argume
 List of show command
 --------------------
 
-- :meth:`Fabric.fabric_info()`
-- :meth:`Fabric.fabric_node_show()`
-- :meth:`Fabric.node_show()`
-- :meth:`Fabric.port_show()`
-- :meth:`Fabric.port_phy_show()`
-- :meth:`Fabric.software_show()`
-- :meth:`Fabric.switch_config_show()`
-- :meth:`Fabric.switch_setup_show()`
-- :meth:`Fabric.vlan_show()`
+- :meth:`fabric.Fabric.fabric_info()`
+- :meth:`fabric.Fabric.fabric_node_show()`
+- :meth:`fabric.Fabric.node_show()`
+- :meth:`fabric.Fabric.port_show()`
+- :meth:`fabric.Fabric.port_phy_show()`
+- :meth:`fabric.Fabric.software_show()`
+- :meth:`fabric.Fabric.switch_config_show()`
+- :meth:`fabric.Fabric.switch_setup_show()`
+- :meth:`Fabric.Fabric.vlan_show()`
 
 
 

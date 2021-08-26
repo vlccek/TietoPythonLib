@@ -8,6 +8,10 @@ pepa.vlan_create("111", "local")
 
 print(pepa.vlan_show())
 
+print(pepa.vlan_show(switches="", format="switch,id,description"))
+
+pepa.vlan_modify("111", description="test desc xd")
+
 
 """
 pepa = Switch(

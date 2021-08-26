@@ -474,6 +474,12 @@ class Fabric:
     ) -> str:
         """modify vlan
 
+        Example:
+
+        .. code::
+
+            pepa.vlan_modify(id="10", description="New text")
+
         :param id: id of vlan
         :param description: description
         :param vxlan: vxlan
