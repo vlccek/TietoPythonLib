@@ -432,6 +432,14 @@ class Fabric:
         untagged: bool = False,
         tagged: bool = False,
     ):
+        """Add ports to vlan
+
+        :param id_or_range: id of new creted vlan, mandatory parameter
+        :param switch: switchs
+        :param ports: ports, defaults to ""
+        :param tagged: defaults to ""
+        :param untagged:  defaults to ""
+        """
         arguments = locals()
 
         command = ""
@@ -463,8 +471,15 @@ class Fabric:
         replicators: str = "",
         vnet: str = "",
         public_vlan: str = "",
-    ):
+    ) -> str:
+        """modify vlan
 
+        :param id: id of vlan
+        :param description: description
+        :param vxlan: vxlan
+        :param vnet: vnet 
+        :param public:vlan: public vlan
+        """
         arguments = locals()
 
         command = ""
