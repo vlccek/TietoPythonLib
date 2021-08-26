@@ -180,11 +180,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>username</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Username that are connected</p></li>
-<li><p><strong>password</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Password</p></li>
-<li><p><strong>port</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – port of ssh, defaults to 22</p></li>
-<li><p><strong>timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – timeout, defaults to 60</p></li>
-<li><p><strong>keepalive</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – keeplive, defaults to 60</p></li>
+<li><p><strong>username</strong> – Username that are connected</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+<li><p><strong>port</strong> – port of ssh, defaults to 22</p></li>
+<li><p><strong>timeout</strong> – timeout, defaults to 60</p></li>
+<li><p><strong>keepalive</strong> – keeplive, defaults to 60</p></li>
 </ul>
 </dd>
 </dl>
@@ -198,11 +198,8 @@
 <div><p>Run on creation of object. No need to run manualy (for dowload fabric members)</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>line_to_parse</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – line to parse</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>line_to_parse</strong> – line to parse</p>
 </dd>
 </dl>
 </dd></dl>
@@ -220,8 +217,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
-<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+<li><p><strong>switches</strong> – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> – column that should shows, defaults to “”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -243,7 +240,7 @@
 To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech nebo tak)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>command</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – Command that user want to send</p>
+<dd class="field-odd"><p><strong>command</strong> – Command that user want to send</p>
 </dd>
 </dl>
 </dd></dl>
@@ -254,7 +251,7 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dd><p>Run command with some kind of perfix before command example: “switch {sw01,sw02} &lt;random command&gt;”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>command</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – command what you want to run</p>
+<dd class="field-odd"><p><strong>command</strong> – command what you want to run</p>
 </dd>
 </dl>
 </dd></dl>
@@ -266,8 +263,8 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
-<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+<li><p><strong>switches</strong> – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> – column that should shows, defaults to “”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -283,8 +280,8 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
-<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+<li><p><strong>switches</strong> – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> – column that should shows, defaults to “”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -300,8 +297,8 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
-<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+<li><p><strong>switches</strong> – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> – column that should shows, defaults to “”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -318,18 +315,18 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> – id of new creted vlan, mandatory parameter</p></li>
-<li><p><strong>scope</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>vnet</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>vxlan</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>auto_vxlan</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>vxlan_mode</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>replicators</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>public_vlan</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>stats</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – defaults to False</p></li>
-<li><p><strong>no_stats</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) – defaults to False</p></li>
-<li><p><strong>ports</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
-<li><p><strong>untagged_ports</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – defaults to “”</p></li>
+<li><p><strong>scope</strong> – defaults to “”</p></li>
+<li><p><strong>vnet</strong> – defaults to “”</p></li>
+<li><p><strong>vxlan</strong> – defaults to “”</p></li>
+<li><p><strong>auto_vxlan</strong> – defaults to “”</p></li>
+<li><p><strong>vxlan_mode</strong> – defaults to “”</p></li>
+<li><p><strong>replicators</strong> – defaults to “”</p></li>
+<li><p><strong>public_vlan</strong> – defaults to “”</p></li>
+<li><p><strong>description</strong> – defaults to “”</p></li>
+<li><p><strong>stats</strong> – defaults to False</p></li>
+<li><p><strong>no_stats</strong> – defaults to False</p></li>
+<li><p><strong>ports</strong> – defaults to “”</p></li>
+<li><p><strong>untagged_ports</strong> – defaults to “”</p></li>
 </ul>
 </dd>
 </dl>
@@ -340,17 +337,14 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <span class="sig-name descname"><span class="pre">vlan_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_or_range</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">switches</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#fabric.Fabric.vlan_delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete vlan</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>id_or_range</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – id or range of vlans thath should be deleted</p></li>
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches that should be run, defaults to “”</p></li>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id_or_range</strong> – id or range of vlans thath should be deleted</p></li>
+<li><p><strong>switches</strong> – switches that should be run, defaults to “”</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>stdout</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>stdout</p>
 </dd>
 </dl>
 </dd></dl>
@@ -372,8 +366,8 @@ To co dám na vstup tak se pustí (je mi jedno jestli se to pustí na všech neb
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>switches</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – switches where should be show runs, defaults to “”</p></li>
-<li><p><strong>format</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) – column that should shows, defaults to “”</p></li>
+<li><p><strong>switches</strong> – switches where should be show runs, defaults to “”</p></li>
+<li><p><strong>format</strong> – column that should shows, defaults to “”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

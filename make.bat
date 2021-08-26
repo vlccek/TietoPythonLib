@@ -2,6 +2,8 @@
 
 pushd %~dp0
 
+set SPHINXBUILD="C:\Users\vlkkkjak\AppData\Roaming\Python\Python39\Scripts\sphinx-build.exe"
+
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
