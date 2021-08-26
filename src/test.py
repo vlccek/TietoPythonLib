@@ -4,7 +4,7 @@ pepa = Fabric("21.112.28.11", "network-admin", "ericsson")
 
 print(pepa.vlan_show(format="id,description"))
 
-pepa.vlan_create("111","local")
+pepa.vlan_create("111", "local")
 
 print(pepa.vlan_show())
 
