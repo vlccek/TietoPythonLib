@@ -188,8 +188,10 @@ class Fabric:
 
     def __del__(self):
         self.__connection.close()
-        logger
-        print("Disconecting from switch, object was destroyed")
+        logger.info(
+            f"Disconecting from switch: {self.__hostname}. Object was destroyed."
+        )
+        print("Disconecting from switch: {self.__hostname}. Object was destroyed.")
 
     @logger_wraps()
     def port_show(self, format: str = "") -> str:
