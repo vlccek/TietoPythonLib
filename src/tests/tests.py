@@ -124,10 +124,22 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
         )
-        self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        found = False
+        for vlan in vlans:
+            if vlan.get("id") is not None and vlan.get("id") == 10:
+                found = True
+                self.assertEqual(vlan.get("description"), "Nejlepsi vlan na svete")
+        self.assertEqual(found, True)
 
     def test_vlan_create_range():
-        pass
+        out = self.connected_sw.vlan_create(
+            id_or_range="11-42,43-44,21", scope="local", description="pepa vlan"
+        )
+        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        counter = 0
+        for vlan in vlans:
+            pass
 
 
 if __name__ == "__main__":
