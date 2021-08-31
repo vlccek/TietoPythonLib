@@ -83,7 +83,7 @@ class TestShowCommands(unittest.TestCase):
 class TestVlanShow(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.coneceted_sw = Fabric(hostname, username, password, port)
+        self.conneceted_sw = Fabric(hostname, username, password, port)
 
     def parse_vlan_show(self, info_to_parse: str):
         pattern = "(?P<Sw_name>[a-zA-Z0-9_.-]*)\s+(?P<vlan_id>\d+)\s+(?P<type>\w+)\s+(?P<auto_vxlan>yes|no)\s+(?P<replicators>\w+)\s+(?P<scope>\w+)\s+(?P<description>[a-zA-Z0-9_.-]*)\s+(?P<active>yes|no)\s+(?P<stats>yes|no)\s+(?P<ports>[0-9,-]*|none)\s+(?P<untagged_ports>[0-9,-]*|none)\s+(?P<active_ports>none|[0-9,-]*)"
@@ -104,11 +104,11 @@ class TestVlanShow(unittest.TestCase):
                 "untagged_ports": i[10],
                 "active_ports": i[11],
             }
-            vlans.append(i)
+            vlans.append(new_vlan)
         return vlans
 
     def test_vlan_create_number(self):
-        self.coneceted_sw.vlan_create(
+        self.conneceted_sw.vlan_create(
             "10",
             "local",
             "",
@@ -127,7 +127,7 @@ class TestVlanShow(unittest.TestCase):
         vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
         found = False
         for vlan in vlans:
-            if vlan.get("id") is not None and vlan.get("id") == 10:
+            if vlan.get("id") is not None and vlan.get("id") == "10":
                 found = True
                 self.assertEqual(vlan.get("description"), "Nejlepsi vlan na svete")
         self.assertEqual(found, True)

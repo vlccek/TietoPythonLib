@@ -116,7 +116,7 @@ class Fabric:
                 "untagged_ports": i[10],
                 "active_ports": i[11],
             }
-            vlans.append(i)
+            vlans.append(new_vlan)
         return vlans
 
     @logger_wraps()
