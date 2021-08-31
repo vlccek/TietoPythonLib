@@ -132,14 +132,35 @@ class TestVlanShow(unittest.TestCase):
                 self.assertEqual(vlan.get("description"), "Nejlepsi vlan na svete")
         self.assertEqual(found, True)
 
-    def test_vlan_create_range():
+    def test_vlan_create_range(self):
         out = self.connected_sw.vlan_create(
-            id_or_range="11-42,43-44,21", scope="local", description="pepa vlan"
+            id_or_range="11-42,43-44,56", scope="local", description="pepa vlan"
         )
         vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
         counter = 0
         for vlan in vlans:
-            pass
+            if vlan.get("id") is not None and ((vlan.get("id") >= 11 and vlan.get("id") <= 44) or vlan.get("id") == 56):
+                counter += 1
+                self.assertEqual(vlan.get("description"), "pepa vlan")
+        self.assertEqual(counter, 35)
+    
+    def test_vlan_modify(self):
+        self.connected_sw.vlan_create(id_or_range="111", scope="local", description="pepa vlan")
+        self.coneceted_sw.vlan_modify(id="111", description="pepova vlan")
+        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        for vlan in vlans:
+            if vlan.get("id") is not None and vlan.get("id") == "111":
+                self.assertEqual(vlan.get("description"), "pepova vlan")
+    
+    def test_vlan_delete(self):
+        self.connected_sw.vlan_create(id_or_range="112", scope="local", description="pepa vlan")
+        self.coneceted_sw.vlan_delete(id_or_range="112")
+        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        found = False
+        for vlan in vlans:
+            if vlan.get("id") is not None and vlan.get("id") == "112":
+                found = True
+        self.assertEqual(found, False)
 
 
 if __name__ == "__main__":
