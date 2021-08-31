@@ -83,7 +83,7 @@ class TestShowCommands(unittest.TestCase):
 class TestVlanShow(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.conneceted_sw = Fabric(hostname, username, password, port)
+        self.connected_sw = Fabric(hostname, username, password, port)
 
     def parse_vlan_show(self, info_to_parse: str):
         pattern = "(?P<Sw_name>[a-zA-Z0-9_.-]*)\s+(?P<vlan_id>\d+)\s+(?P<type>\w+)\s+(?P<auto_vxlan>yes|no)\s+(?P<replicators>\w+)\s+(?P<scope>\w+)\s+(?P<description>[a-zA-Z0-9_.-]*)\s+(?P<active>yes|no)\s+(?P<stats>yes|no)\s+(?P<ports>[0-9,-]*|none)\s+(?P<untagged_ports>[0-9,-]*|none)\s+(?P<active_ports>none|[0-9,-]*)"
@@ -108,7 +108,7 @@ class TestVlanShow(unittest.TestCase):
         return vlans
 
     def test_vlan_create_number(self):
-        self.conneceted_sw.vlan_create(
+        self.connected_sw.vlan_create(
             "10",
             "local",
             "",
