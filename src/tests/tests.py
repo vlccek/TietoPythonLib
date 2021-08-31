@@ -17,64 +17,64 @@ except:
 class TestShowCommands(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.coneceted_sw = Fabric(hostname, username, password, port)
+        self.connected_sw = Fabric(hostname, username, password, port)
 
     def test_fabric_info(self):
-        text = self.coneceted_sw.fabric_info()
+        text = self.connected_sw.fabric_info()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_fabric_node_show(self):
-        text = self.coneceted_sw.fabric_node_show()
+        text = self.connected_sw.fabric_node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_node_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_port_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_port_phy_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_port_software_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_switch_config_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_switch_setup_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_switch_setup_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
 
     def test_vlan_show(self):
-        text = self.coneceted_sw.node_show()
+        text = self.connected_sw.node_show()
 
         self.assertIsInstance(text, str)
         self.assertNotEqual(text, "")
@@ -124,7 +124,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
         )
-        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         found = False
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "10":
@@ -136,7 +136,7 @@ class TestVlanShow(unittest.TestCase):
         out = self.connected_sw.vlan_create(
             id_or_range="11-42,43-44,56", scope="local", description="pepa vlan"
         )
-        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         counter = 0
         for vlan in vlans:
             if vlan.get("id") is not None and ((vlan.get("id") >= 11 and vlan.get("id") <= 44) or vlan.get("id") == 56):
@@ -146,16 +146,16 @@ class TestVlanShow(unittest.TestCase):
     
     def test_vlan_modify(self):
         self.connected_sw.vlan_create(id_or_range="111", scope="local", description="pepa vlan")
-        self.coneceted_sw.vlan_modify(id="111", description="pepova vlan")
-        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        self.connected_sw.vlan_modify(id="111", description="pepova vlan")
+        vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "111":
                 self.assertEqual(vlan.get("description"), "pepova vlan")
     
     def test_vlan_delete(self):
         self.connected_sw.vlan_create(id_or_range="112", scope="local", description="pepa vlan")
-        self.coneceted_sw.vlan_delete(id_or_range="112")
-        vlans = self.parse_vlan_show(self.coneceted_sw.vlan_show())
+        self.connected_sw.vlan_delete(id_or_range="112")
+        vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         found = False
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "112":
