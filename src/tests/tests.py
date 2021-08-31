@@ -4,14 +4,9 @@ import unittest
 import sys
 import re
 
-try:
-    sys.path.append("../")
-    from fabric import Fabric
+sys.path.append("../")
+from fabric import Fabric
 
-    sys.path.remove("../")
-
-except:
-    pass
 
 
 class TestShowCommands(unittest.TestCase):
@@ -108,7 +103,7 @@ class TestVlanShow(unittest.TestCase):
         return vlans
 
     def test_vlan_create_number(self):
-        self.connected_sw.vlan_create(
+        why = self.connected_sw.vlan_create(
             "10",
             "local",
             "",
@@ -124,6 +119,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
         )
+        print(why)
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         print("Create number vlans:\n" + str(vlans))
         found = False
@@ -139,7 +135,7 @@ class TestVlanShow(unittest.TestCase):
             id_or_range="11-42,43-44,56", scope="local", description="pepa vlan"
         )
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
-        print("Create range vlans:\n" + str(vlans))
+        #print("Create range vlans:\n" + str(vlans))
         counter = 0
         for vlan in vlans:
             if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
@@ -151,7 +147,7 @@ class TestVlanShow(unittest.TestCase):
         self.connected_sw.vlan_create(id_or_range="111", scope="local", description="pepa vlan")
         self.connected_sw.vlan_modify(id="111", description="pepova vlan")
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
-        print("Vlan modify:\n" + str(vlans))
+        #print("Vlan modify:\n" + str(vlans))
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "111":
                 self.assertEqual(vlan.get("description"), "pepova vlan")
@@ -160,7 +156,7 @@ class TestVlanShow(unittest.TestCase):
         self.connected_sw.vlan_create(id_or_range="112", scope="local", description="pepa vlan")
         self.connected_sw.vlan_delete(id_or_range="112")
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
-        print("Vlan delete:\n" + str(vlans))
+        #print("Vlan delete:\n" + str(vlans))
         found = False
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "112":
