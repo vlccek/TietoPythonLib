@@ -1,3 +1,4 @@
+from sys import stderr
 from threading import local
 import paramiko
 from loguru import logger
@@ -90,7 +91,7 @@ class Fabric:
     @logger_wraps()
     def update_vlans(self):
         """Update vlans from switch"""
-        stdout = self.send_command("vlan-show no-show-headers")
+        stdin, stdout, stderr = self.send_command("vlan-show no-show-headers")
 
         self.__vlans = self.parse_vlan_show(stdout)
 
