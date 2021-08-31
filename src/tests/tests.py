@@ -127,6 +127,7 @@ class TestVlanShow(unittest.TestCase):
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         found = False
         for vlan in vlans:
+            print(vlan.get("id"))
             if vlan.get("id") is not None and vlan.get("id") == "10":
                 found = True
                 self.assertEqual(vlan.get("description"), "Nejlepsi vlan na svete")
@@ -139,7 +140,7 @@ class TestVlanShow(unittest.TestCase):
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         counter = 0
         for vlan in vlans:
-            if vlan.get("id") is not None and ((vlan.get("id") >= 11 and vlan.get("id") <= 44) or vlan.get("id") == 56):
+            if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
                 counter += 1
                 self.assertEqual(vlan.get("description"), "pepa vlan")
         self.assertEqual(counter, 35)
