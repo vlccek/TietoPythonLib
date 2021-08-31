@@ -46,6 +46,7 @@ class Fabric:
         self.__connection = None
         self.__fabric_devices = None
         self.__sw_to_change = None
+        self.__vlans = []
 
         self.__hostname = hostname
         self.open_connection(username, password, port, timeout, keepalive)
@@ -85,6 +86,37 @@ class Fabric:
         self.__connected = True
         logger.success("Connection SUCCESS")
         return self.__connection
+
+    @logger_wraps()
+    def update_vlans(self):
+        """Update vlans from switch"""
+        stdout = self.send_command("vlan-show no-show-headers")
+
+        self.__vlans = self.parse_vlan_show(stdout)
+
+    @logger_wraps()
+    def parse_vlan_show(self, info_to_parse: str) -> List[dict()]:
+        """Parse output from vlan show"""
+        pattern = "(?P<Sw_name>[a-zA-Z0-9_.-]*)\s+(?P<vlan_id>\d+)\s+(?P<type>\w+)\s+(?P<auto_vxlan>yes|no)\s+(?P<replicators>\w+)\s+(?P<scope>\w+)\s+(?P<description>[a-zA-Z0-9_.-]*)\s+(?P<active>yes|no)\s+(?P<stats>yes|no)\s+(?P<ports>[0-9,-]*|none)\s+(?P<untagged_ports>[0-9,-]*|none)\s+(?P<active_ports>none|[0-9,-]*)"
+        # https://regexr.com/61s1p
+        match = re.findall(pattern, info_to_parse)
+        vlans = []
+        for i in match:
+            new_vlan = {
+                "id": i[1],
+                "type": i[2],
+                "auto-vxlan": i[3],
+                "replicators": i[4],
+                "scope": i[5],
+                "description": i[6],
+                "active": i[7],
+                "stats": i[8],
+                "ports": i[9],
+                "untagged_ports": i[10],
+                "active_ports": i[11],
+            }
+            vlans.append(i)
+        return vlans
 
     @logger_wraps()
     def parse_line_of_node_show(self, line_to_parse: str) -> str:
@@ -405,6 +437,7 @@ class Fabric:
         stdin, stdout, stderr = self.send_command_with_prefix(
             "vlan-create" + command, switches
         )
+        self.update_vlans()
         return stdout
 
     @logger_wraps()
@@ -423,6 +456,7 @@ class Fabric:
         stdin, stdout, stderr = self.send_command_with_prefix(
             "vlan-delete" + command, switches
         )
+        self.update_vlans()
         return stdout
 
     @logger_wraps()
@@ -461,6 +495,7 @@ class Fabric:
                     command += f""" {key.replace("_", "-")}"""
 
         stdin, stdout, stderr = self.send_command_with_prefix("vlan-port-add" + command)
+        self.update_vlans()
         return stdout
 
     @logger_wraps()
@@ -502,4 +537,5 @@ class Fabric:
         if counter < 1 or counter > 4:
             raise Exception("Too many arguments or no arguments")
         stdin, stdout, stderr = self.send_command_with_prefix("vlan-modify" + command)
+        self.update_vlans()
         return stdout
