@@ -1,7 +1,7 @@
 from threading import local
 import paramiko
 from loguru import logger
-from typing import Any, Tuple, List
+from typing import Any, Tuple, List, Dict
 
 import re
 
@@ -95,7 +95,7 @@ class Fabric:
         self.__vlans = self.parse_vlan_show(stdout)
 
     @logger_wraps()
-    def parse_vlan_show(self, info_to_parse: str) -> List[dict()]:
+    def parse_vlan_show(self, info_to_parse: str) -> List[Dict[str, str]]:
         """Parse output from vlan show"""
         pattern = "(?P<Sw_name>[a-zA-Z0-9_.-]*)\s+(?P<vlan_id>\d+)\s+(?P<type>\w+)\s+(?P<auto_vxlan>yes|no)\s+(?P<replicators>\w+)\s+(?P<scope>\w+)\s+(?P<description>[a-zA-Z0-9_.-]*)\s+(?P<active>yes|no)\s+(?P<stats>yes|no)\s+(?P<ports>[0-9,-]*|none)\s+(?P<untagged_ports>[0-9,-]*|none)\s+(?P<active_ports>none|[0-9,-]*)"
         # https://regexr.com/61s1p
