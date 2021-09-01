@@ -112,7 +112,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
             "",
-            "Nejlepsi vlan na svete",
+            "\"Nejlepsi vlan na svete\"",
             False,
             False,
             "",
