@@ -160,9 +160,9 @@ class Fabric:
         print("Full command: \n" + command)
         if not switches:
             stdin, stout, stderr = self.send_command(command)
-            print("Stdin:\n" + stdin)
-            print("Stdout:\n" + stdout)
-            print("Stderr:\n" + stderr)
+            print("Stdin:\n" + str(stdin))
+            print("Stdout:\n" + str(stdout))
+            print("Stderr:\n" + str(stderr))
         else:
             command = f"switch {switches} {command}"
             stdin, stout, stderr = self.send_command(command)
