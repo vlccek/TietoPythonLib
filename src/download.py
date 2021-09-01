@@ -48,16 +48,16 @@ def open_connection(
     :param timeout: timeout, defaults to 60
     :param keepalive: keeplive, defaults to 60
     """
-    self.__connection = paramiko.SSHClient()
-    self.__connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    self.__connection.connect(
+    __connection = paramiko.SSHClient()
+    __connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    __connection.connect(
         hostname=hostname,
         username=username,
         password=password,
         timeout=timeout,
         port=port,
     )
-    self.__connection.get_transport().set_keepalive(keepalive)
-    self.__connected = True
+    __connection.get_transport().set_keepalive(keepalive)
+    __connected = True
     logger.success("Connection SUCCESS")
-    return self.__connection
+    return __connection
