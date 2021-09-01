@@ -1,4 +1,4 @@
-from sys import stderr
+from sys import stderr, stdout
 from threading import local
 import paramiko
 from loguru import logger
@@ -160,6 +160,9 @@ class Fabric:
         print("Full command: \n" + command)
         if not switches:
             stdin, stout, stderr = self.send_command(command)
+            print("Stdin:\n" + stdin)
+            print("Stdout:\n" + stdout)
+            print("Stderr:\n" + stderr)
         else:
             command = f"switch {switches} {command}"
             stdin, stout, stderr = self.send_command(command)
