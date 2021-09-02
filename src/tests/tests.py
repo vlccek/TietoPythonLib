@@ -117,7 +117,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
             "",
-            "'Nejlepsi pepa'",
+            "\"Nejlepsi pepa\"",
             False,
             False,
             "",
