@@ -397,7 +397,7 @@ class Fabric:
         vxlan_mode: str = "",
         replicators: str = "",
         public_vlan: str = "",
-        description: str = "",
+        description: str = """""",
         stats: bool = False,
         no_stats: bool = False,
         ports: str = "",
