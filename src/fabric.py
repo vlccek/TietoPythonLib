@@ -157,12 +157,12 @@ class Fabric:
 
         :param command: command what you want to run
         """
-        print("Full command: \n" + command)
+        #print("Full command: \n" + command)
         if not switches:
             stdin, stout, stderr = self.send_command(command)
-            print("Stdin:\n" + str(stdin))
-            print("Stdout:\n" + str(stdout))
-            print("Stderr:\n" + str(stderr))
+            #print("Stdin:\n" + str(stdin))
+            #print("Stdout:\n" + str(stdout))
+            #print("Stderr:\n" + str(stderr))
         else:
             command = f"switch {switches} {command}"
             stdin, stout, stderr = self.send_command(command)
@@ -438,7 +438,7 @@ class Fabric:
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
-        print("command parametres:\n" + command)
+        #print("command parametres:\n" + command)
 
         stdin, stdout, stderr = self.send_command_with_prefix(
             "vlan-create" + command, switches

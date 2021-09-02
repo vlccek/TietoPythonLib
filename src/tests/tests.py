@@ -124,12 +124,12 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
         )
-        print(why)
+        #print(why)
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
-        print("Create number vlans:\n" + str(vlans))
+        #print("Create number vlans:\n" + str(vlans))
         found = False
         for vlan in vlans:
-            print(vlan.get("id"))
+            #print(vlan.get("id"))
             if vlan.get("id") is not None and vlan.get("id") == "10":
                 found = True
                 self.assertEqual(vlan.get("description"), "Nejlepsi_vlan_na_svete")
