@@ -159,7 +159,7 @@ class Fabric:
         """
         print("Full command: \n" + command)
         if not switches:
-            stdin, stout, stderr = self.send_command(command)
+            stdin, stout, stderr = self.send_command("""\"""" + command + """\"""")
             print("Stdin:\n" + str(stdin))
             print("Stdout:\n" + str(stdout))
             print("Stderr:\n" + str(stderr))
