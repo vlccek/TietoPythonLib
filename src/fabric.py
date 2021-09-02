@@ -403,7 +403,7 @@ class Fabric:
         ports: str = "",
         untagged_ports: str = "",
         switches: str = "",
-    ) -> None:
+    ) -> str:
         """Adds vlan by parametrs
 
         :param id: id of new creted vlan, mandatory parameter
