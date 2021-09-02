@@ -4,6 +4,11 @@ import unittest
 import sys
 import re
 
+print(hostname)
+print(username)
+print(password)
+print(port)
+
 sys.path.append("../")
 from fabric import Fabric
 
