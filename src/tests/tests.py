@@ -117,7 +117,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
             "",
-            "\"Nejlepsi vlan na svete\"",
+            "\"Nejlepsi jsem\"",
             False,
             False,
             "",
@@ -132,12 +132,12 @@ class TestVlanShow(unittest.TestCase):
             print(vlan.get("id"))
             if vlan.get("id") is not None and vlan.get("id") == "10":
                 found = True
-                self.assertEqual(vlan.get("description"), "Nejlepsi vlan na svete")
+                self.assertEqual(vlan.get("description"), "Nejlepsi jsem")
         self.assertEqual(found, True)
 
     def test_vlan_create_range(self):
         out = self.connected_sw.vlan_create(
-            id_or_range="11-42,43-44,56", scope="local", description="pepa vlan"
+            id_or_range="11-42,43-44,56", scope="local", description="pepa xd"
         )
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         #print("Create range vlans:\n" + str(vlans))
@@ -145,7 +145,7 @@ class TestVlanShow(unittest.TestCase):
         for vlan in vlans:
             if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
                 counter += 1
-                self.assertEqual(vlan.get("description"), "pepa vlan")
+                self.assertEqual(vlan.get("description"), "pepa xd")
         self.assertEqual(counter, 35)
     
     def test_vlan_modify(self):
