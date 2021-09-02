@@ -159,7 +159,7 @@ class Fabric:
         """
         print("Full command: \n" + command)
         if not switches:
-            stdin, stout, stderr = self.send_command("""\"""" + command + """\"""")
+            stdin, stout, stderr = self.send_command(command)
             print("Stdin:\n" + str(stdin))
             print("Stdout:\n" + str(stdout))
             print("Stderr:\n" + str(stderr))
@@ -397,7 +397,7 @@ class Fabric:
         vxlan_mode: str = "",
         replicators: str = "",
         public_vlan: str = "",
-        description: str = """""",
+        description: str = "",
         stats: bool = False,
         no_stats: bool = False,
         ports: str = "",

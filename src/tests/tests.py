@@ -117,7 +117,7 @@ class TestVlanShow(unittest.TestCase):
             "",
             "",
             "",
-            """'Nejlepsi pepa'""",
+            "Nejlepsi_vlan_na_svete",
             False,
             False,
             "",
@@ -132,12 +132,12 @@ class TestVlanShow(unittest.TestCase):
             print(vlan.get("id"))
             if vlan.get("id") is not None and vlan.get("id") == "10":
                 found = True
-                self.assertEqual(vlan.get("description"), "Nejlepsi jsem")
+                self.assertEqual(vlan.get("description"), "Nejlepsi_vlan_na_svete")
         self.assertEqual(found, True)
 
     def test_vlan_create_range(self):
         out = self.connected_sw.vlan_create(
-            id_or_range="11-42,43-44,56", scope="local", description="pepa xd"
+            id_or_range="11-42,43-44,56", scope="local", description="pepa_vlan"
         )
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         #print("Create range vlans:\n" + str(vlans))
@@ -145,20 +145,20 @@ class TestVlanShow(unittest.TestCase):
         for vlan in vlans:
             if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
                 counter += 1
-                self.assertEqual(vlan.get("description"), "pepa xd")
+                self.assertEqual(vlan.get("description"), "pepa_vlan")
         self.assertEqual(counter, 35)
     
     def test_vlan_modify(self):
-        self.connected_sw.vlan_create(id_or_range="111", scope="local", description="pepa vlan")
-        self.connected_sw.vlan_modify(id="111", description="pepova vlan")
+        self.connected_sw.vlan_create(id_or_range="111", scope="local", description="pepa_vlan")
+        self.connected_sw.vlan_modify(id="111", description="pepova_vlan")
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         #print("Vlan modify:\n" + str(vlans))
         for vlan in vlans:
             if vlan.get("id") is not None and vlan.get("id") == "111":
-                self.assertEqual(vlan.get("description"), "pepova vlan")
+                self.assertEqual(vlan.get("description"), "pepova_vlan")
     
     def test_vlan_delete(self):
-        self.connected_sw.vlan_create(id_or_range="112", scope="local", description="pepa vlan")
+        self.connected_sw.vlan_create(id_or_range="112", scope="local", description="pepa_vlan")
         self.connected_sw.vlan_delete(id_or_range="112")
         vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
         #print("Vlan delete:\n" + str(vlans))
