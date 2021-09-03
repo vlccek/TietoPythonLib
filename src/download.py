@@ -30,7 +30,6 @@ def download(
 
 
 def open_connection(
-    self,
     username: str,
     password: str,
     hostname: str,
@@ -58,6 +57,6 @@ def open_connection(
         port=port,
     )
     __connection.get_transport().set_keepalive(keepalive)
-    __connected = True
+    #__connected = True
     logger.success("Connection SUCCESS")
     return __connection
