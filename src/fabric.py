@@ -296,7 +296,7 @@ class Fabric:
                 continue
             elif type(value) is str:
                 if not value == "":
-                    command += f""" {key.replace("_", "-")} {value}"""
+                    command += f""" {key.replace("_", "-")} {value.replace(" ", "_")}"""
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
@@ -434,7 +434,7 @@ class Fabric:
                     else:
                         command += f" id {value}"
                 elif not value == "":
-                    command += f""" {key.replace("_", "-")} {value}"""
+                    command += f""" {key.replace("_", "-")} {value.replace(" ", "_")}"""
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
@@ -495,7 +495,7 @@ class Fabric:
                     else:
                         command += f" id {value}"
                 elif not value == "":
-                    command += f""" {key.replace("_", "-")} {value}"""
+                    command += f""" {key.replace("_", "-")} {value.replace(" ", "_")}"""
             elif type(value) is bool:
                 if value == True:
                     command += f""" {key.replace("_", "-")}"""
@@ -537,7 +537,7 @@ class Fabric:
             #    continue
             if type(value) is str:
                 if key == "id" or not value == "":
-                    command += f""" {key.replace("_", "-")} {value}"""
+                    command += f""" {key.replace("_", "-")} {value.replace(" ", "_")}"""
                     counter += 1
 
         if counter < 1 or counter > 4:
