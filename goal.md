@@ -51,6 +51,12 @@ pepa.send_command("vlan-show format switch,id,ports")
 pepa.send_command_with_prefix(command="vlan-show format id,ports", switches="switch-01")
 ```
 
+## Log downloading
+```py
+from download import download
+download(hostname="Best-Fabric", username="pepa", password="pejcpa123")
+```
+
 
 # Legacy
 ## VLANS
