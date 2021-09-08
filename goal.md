@@ -57,6 +57,26 @@ from download import download
 download(hostname="Best-Fabric", username="pepa", password="pejcpa123")
 ```
 
+## Tests showcase
+```py
+class TestVlanShow(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.connected_sw = Fabric(hostname, username, password, port)
+    def test_vlan_create_range(self):
+        out = self.connected_sw.vlan_create(
+            id_or_range="11-42,43-44,56", scope="local", description="pepa_vlan"
+        )
+        vlans = self.parse_vlan_show(self.connected_sw.vlan_show())
+        #print("Create range vlans:\n" + str(vlans))
+        counter = 0
+        for vlan in vlans:
+            if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
+                counter += 1
+                self.assertEqual(vlan.get("description"), "pepa_vlan")
+        self.assertEqual(counter, 35)
+```
+
 
 # Legacy
 ## VLANS
