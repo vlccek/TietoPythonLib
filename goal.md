@@ -71,7 +71,8 @@ class TestVlanShow(unittest.TestCase):
         #print("Create range vlans:\n" + str(vlans))
         counter = 0
         for vlan in vlans:
-            if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
+            if vlan.get("id") is not None and ((int(vlan.get("id")) >= 11 and \
+                int(vlan.get("id")) <= 44) or int(vlan.get("id")) == 56):
                 counter += 1
                 self.assertEqual(vlan.get("description"), "pepa_vlan")
         self.assertEqual(counter, 35)
