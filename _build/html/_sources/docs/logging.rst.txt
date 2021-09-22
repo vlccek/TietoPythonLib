@@ -15,7 +15,7 @@ if you don´t want to log to default logging file (`fabric.log`) you can use cus
     https://loguru.readthedocs.io/en/stable
 
 .. warning:: 
-    this don´t remove old logger. They will work both.
+    this don´t remove old logger. They will work both. 
     for remove use:
 
     .. code::

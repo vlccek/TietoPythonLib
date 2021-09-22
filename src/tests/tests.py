@@ -80,7 +80,7 @@ class TestShowCommands(unittest.TestCase):
         self.assertNotEqual(text, "")
 
 
-class TestVlanShow(unittest.TestCase):
+class TestVlanCommands(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.connected_sw = Fabric(hostname, username, password, port)
@@ -167,6 +167,39 @@ class TestVlanShow(unittest.TestCase):
             if vlan.get("id") is not None and vlan.get("id") == "112":
                 found = True
         self.assertEqual(found, False)
+
+class TestPorts(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.connected_sw = Fabric(hostname, username, password, port)
+    def parse_port_show(self, info_to_parse: str):
+        pattern = "([a-zA-Z0-9_.-]+)\s+(\d+)\s+([0-9.]+)\s+([0-9,.]*)\s+([0-9:a-zA-Z]*)\s+(\d*)\s+([a-zA-Z0-9_.-]*)\s+([a-zA-Z0-9-._,]+)\s+([a-zA-Z0-9-._,]+)\s+([a-zA-Z0-9-._,]*)"
+        # https://regexr.com/65m42
+        match = re.findall(pattern, info_to_parse)
+        ports = []
+        for i in match:
+            new_port = {
+                "switch": i[1],
+                "port": i[2],
+                "bezel-port": i[3],
+                "ip": i[4],
+                "mac": i[5],
+                "vlan": i[6],
+                "hostname": i[7],
+                "status": i[8],
+                "config": i[9],
+                "trunk": i[10]
+            }
+            ports.append(new_port)
+        return ports
+    
+    def test_port_vlan_add(self):
+        self.connected_sw.vlan_create(id_or_range="59", scope="local")
+        self.connected_sw.port_vlan_add("1", vlans="59")
+        
+    
+
+
 
 
 if __name__ == "__main__":

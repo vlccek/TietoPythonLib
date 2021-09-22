@@ -308,7 +308,7 @@ class Fabric:
 
     @logger_wraps()
     def port_phy_show(self, switches: str = "", format: str = ""):
-        """Run commnad `port-phy-show`
+        """Runs commnad `port-phy-show`
 
         :param switches: switches where should be show runs, defaults to ""
         :param format: column that should shows, defaults to ""
@@ -321,10 +321,42 @@ class Fabric:
             "port-phy-show" + command, switches
         )
         return stdout
+    
+    @logger_wraps()
+    def port_vlan_add(
+        self, 
+        port: str, 
+        vnet: str = "", 
+        vlans: str = "", 
+        untagged_vlan: str = ""):
+        """Runs command `port-vlan-add`
+
+        :param port: port number for VLAN
+        :param vnet: VNET name for port, defaults to ""
+        :param vlans: list of VLANs applied to port, defaults to ""
+        :param untagged_vlans: untagged VLAN for the port, can be between 0-4095, defaults to ""
+        """
+
+        arguments = locals()
+
+        command = ""
+        counter = -1
+        for key, value in arguments.items():
+            # if key.startswith("__") or key == "switches":
+            #    continue
+            if type(value) is str:
+                if key == "port" or not value == "":
+                    command += f""" {key.replace("_", "-")} {value.replace(" ", "_")}"""
+                    counter += 1
+
+        if counter < 1:
+            raise Exception("No arguments")
+        stdin, stdout, stderr = self.send_command_with_prefix("port-vlan-add" + command)
+        return stdout
 
     @logger_wraps()
     def software_show(self, switches: str = "", format: str = ""):
-        """Run commnad `software-show`
+        """Runs commnad `software-show`
 
         :param switches: switches where should be show runs, defaults to ""
         :param format: column that should shows, defaults to ""
@@ -340,7 +372,7 @@ class Fabric:
 
     @logger_wraps()
     def switch_config_show(self, switches: str = "", format: str = ""):
-        """Run commnad `switch-config-show`
+        """Runs commnad `switch-config-show`
 
         :param switches: switches where should be show runs, defaults to ""
         :param format: column that should shows, defaults to ""
@@ -356,7 +388,7 @@ class Fabric:
 
     @logger_wraps()
     def switch_setup_show(self, switches: str = "", format: str = ""):
-        """Run commnad `switch-setup-show`
+        """Runs commnad `switch-setup-show`
 
         :param switches: switches where should be show runs, defaults to ""
         :param format: column that should shows, defaults to ""
@@ -372,7 +404,7 @@ class Fabric:
 
     @logger_wraps()
     def vlan_show(self, switches: str = "", format: str = ""):
-        """Run commnad `vlans-show`
+        """Runs commnad `vlans-show`
 
         :param switches: switches where should be show runs, defaults to ""
         :param format: column that should shows, defaults to ""
@@ -404,10 +436,10 @@ class Fabric:
         untagged_ports: str = "",
         switches: str = "",
     ) -> str:
-        """Adds vlan by parametrs
+        """Adds vlan by parametrs 
 
-        :param id: id of new creted vlan, mandatory parameter
-        :param scope:  defaults to ""
+        :param id_or_range: id of new creted vlan, mandatory parameter
+        :param scope:  scope of created vlans, mandatory parameter (local|cluster)
         :param vnet: defaults to ""
         :param vxlan: defaults to ""
         :param auto_vxlan:  defaults to ""
@@ -419,6 +451,8 @@ class Fabric:
         :param no_stats: defaults to False
         :param ports: defaults to ""
         :param untagged_ports:  defaults to ""
+        :param switches: switches on which this command should be executed, 
+                         empty means executing on whole fabric, defaults to ""
         """
 
         arguments = locals()
@@ -448,7 +482,7 @@ class Fabric:
 
     @logger_wraps()
     def vlan_delete(self, id_or_range: str, switches: str = "") -> str:
-        """Delete vlan
+        """Deletes vlan(s)
 
         :param id_or_range: id or range of vlans thath should be deleted
         :param switches: switches that should be run, defaults to ""
@@ -474,13 +508,13 @@ class Fabric:
         untagged: bool = False,
         tagged: bool = False,
     ):
-        """Add ports to vlan
+        """Adds ports to vlan
 
         :param id_or_range: id of new creted vlan, mandatory parameter
-        :param switch: switchs
-        :param ports: ports, defaults to ""
-        :param tagged: defaults to ""
-        :param untagged:  defaults to ""
+        :param switch: name of switch with the port, mandatory parameter
+        :param ports: number of port, list of ports or range of ports, mandatory parameter
+        :param untagged: defaults to False
+        :param tagged:  defaults to False
         """
         arguments = locals()
 
@@ -522,11 +556,11 @@ class Fabric:
 
             pepa.vlan_modify(id="10", description="New text")
 
-        :param id: id of vlan
-        :param description: description
-        :param vxlan: vxlan
-        :param vnet: vnet
-        :param public:vlan: public vlan
+        :param id: id of vlan, mandatory parameter
+        :param description: description of vlan, defaults to ""
+        :param vxlan: vxlan, defaults to ""
+        :param vnet: vnet, defaults to ""
+        :param public_vlan: public vlan, defaults to ""
         """
         arguments = locals()
 

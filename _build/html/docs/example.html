@@ -108,6 +108,8 @@
                                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#show-commands">Show commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vlan-commands">Vlan commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-commands">Port commands</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fabric.html">Fabric api</a></li>
@@ -131,7 +133,17 @@
 <ul>
 <li><p><a class="reference internal" href="#show-commands" id="id2">Show commands</a></p>
 <ul>
-<li><p><a class="reference internal" href="#list-of-show-command" id="id3">List of show command</a></p></li>
+<li><p><a class="reference internal" href="#list-of-show-commands" id="id3">List of show commands</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#vlan-commands" id="id4">Vlan commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#list-of-vlan-commands" id="id5">List of vlan commands</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#port-commands" id="id6">Port commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#list-of-port-commands" id="id7">List of port commands</a></p></li>
 </ul>
 </li>
 </ul>
@@ -140,9 +152,9 @@
 </div>
 <section id="show-commands">
 <h2><a class="toc-backref" href="#id2">Show commands</a><a class="headerlink" href="#show-commands" title="Permalink to this headline">¶</a></h2>
-<p>Our library have implemented most of basic shows. Every show has optional argument <cite>format</cite> that add to command parametr format and gived arguments</p>
-<section id="list-of-show-command">
-<h3><a class="toc-backref" href="#id3">List of show command</a><a class="headerlink" href="#list-of-show-command" title="Permalink to this headline">¶</a></h3>
+<p>Our library have implemented most of basic shows. Every show has optional argument <cite>format</cite> that add to command parametr format and given arguments</p>
+<section id="list-of-show-commands">
+<h3><a class="toc-backref" href="#id3">List of show commands</a><a class="headerlink" href="#list-of-show-commands" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="fabric.html#fabric.Fabric.fabric_info" title="fabric.Fabric.fabric_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.fabric_info()</span></code></a></p></li>
 <li><p><a class="reference internal" href="fabric.html#fabric.Fabric.fabric_node_show" title="fabric.Fabric.fabric_node_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.fabric_node_show()</span></code></a></p></li>
@@ -152,7 +164,34 @@
 <li><p><a class="reference internal" href="fabric.html#fabric.Fabric.software_show" title="fabric.Fabric.software_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.software_show()</span></code></a></p></li>
 <li><p><a class="reference internal" href="fabric.html#fabric.Fabric.switch_config_show" title="fabric.Fabric.switch_config_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.switch_config_show()</span></code></a></p></li>
 <li><p><a class="reference internal" href="fabric.html#fabric.Fabric.switch_setup_show" title="fabric.Fabric.switch_setup_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.switch_setup_show()</span></code></a></p></li>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Fabric.Fabric.vlan_show()</span></code></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_show" title="fabric.Fabric.vlan_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_show()</span></code></a></p></li>
+</ul>
+</section>
+</section>
+<section id="vlan-commands">
+<h2><a class="toc-backref" href="#id4">Vlan commands</a><a class="headerlink" href="#vlan-commands" title="Permalink to this headline">¶</a></h2>
+<p>Our library can also handle most of basic vlan commands.</p>
+<section id="list-of-vlan-commands">
+<h3><a class="toc-backref" href="#id5">List of vlan commands</a><a class="headerlink" href="#list-of-vlan-commands" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_create" title="fabric.Fabric.vlan_create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_create()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_modify" title="fabric.Fabric.vlan_modify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_modify()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_port_add" title="fabric.Fabric.vlan_port_add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_port_add()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_delete" title="fabric.Fabric.vlan_delete"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_delete()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.vlan_show" title="fabric.Fabric.vlan_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.vlan_show()</span></code></a></p></li>
+</ul>
+</section>
+</section>
+<section id="port-commands">
+<h2><a class="toc-backref" href="#id6">Port commands</a><a class="headerlink" href="#port-commands" title="Permalink to this headline">¶</a></h2>
+<p>We can also handle some basic port commands.</p>
+<section id="list-of-port-commands">
+<h3><a class="toc-backref" href="#id7">List of port commands</a><a class="headerlink" href="#list-of-port-commands" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.port_vlan_add" title="fabric.Fabric.port_vlan_add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.port_vlan_add()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.port_config_modify" title="fabric.Fabric.port_config_modify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.port_config_modify()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.port_show" title="fabric.Fabric.port_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.port_show()</span></code></a></p></li>
+<li><p><a class="reference internal" href="fabric.html#fabric.Fabric.port_phy_show" title="fabric.Fabric.port_phy_show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fabric.Fabric.port_phy_show()</span></code></a></p></li>
 </ul>
 </section>
 </section>
@@ -189,7 +228,7 @@
     <div class="footer" role="contentinfo">
         <div class="container">
             &#169; Copyright 2021, Petr Balnar, Jakub Vlk.
-        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0+.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.
         </div>
     </div>  
 
