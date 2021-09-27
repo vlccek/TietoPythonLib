@@ -22,9 +22,9 @@ def download_diags(
     if "Diagnostics exported to /sftp/export" not in send_command_with_input(network, "export-diags"):
         print("Did not run export-diags properly")
         return
-    logger.info(f"export-diags ran properly")
+    logger.success(f"export-diags ran properly")
     network.close()
-    logger.info(f"Closed connection as network-admin")
+    logger.success(f"Closed connection as network-admin")
 
     admin = open_connection("admin", settings.password,
                             hostname, port, timeout, keepalive)
@@ -41,6 +41,7 @@ def download_diags(
 
     if latestfile is not None:
         sftp.get(latestfile, latestfile)
+        logger.success("Diags downloaded successfully")
 
     sftp.close()
     admin.close()
@@ -48,8 +49,11 @@ def download_diags(
 
 def send_command_with_input(connection, command):
     stdin, stdout, stderr = connection.exec_command(command, get_pty=True)
+    print("Sending " + command + " command.")
     stdin.write("/n")
     stdin.flush()
+    print("Entered username")
     stdin.write(settings.password + "/n")
     stdin.flush()
+    print("Entered password and waiting")
     return str(stdout.read())
