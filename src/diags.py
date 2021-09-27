@@ -3,6 +3,7 @@ import paramiko
 import datetime
 from download import open_connection
 from tests import settings
+import time
 
 
 def download_diags(
@@ -17,12 +18,15 @@ def download_diags(
     network.exec_command(f"admin-sftp-modify enable")
     stdin, stdout, stderr = network.exec_command("save-diags", get_pty=True)
     print("Sending save-diags command.")
+    time.sleep(1)
     stdin.write("/n")
     stdin.flush()
     print("Entered username")
+    time.sleep(1)
     stdin.write(settings.password + "/n")
     stdin.flush()
     print("Entered password and waiting")
+    time.sleep(1)
     savediags = str(stdout.read())
     if "Diagnostics info saved." not in savediags:
         print("Did not run save-diags properly")
@@ -30,12 +34,15 @@ def download_diags(
     logger.info(f"save-diags ran properly")
     stdin, stdout, stderr = network.exec_command("export-diags", get_pty=True)
     print("Sending export-diags command.")
+    time.sleep(1)
     stdin.write("/n")
     stdin.flush()
     print("Entered username")
+    time.sleep(1)
     stdin.write(settings.password + "/n")
     stdin.flush()
     print("Entered password and waiting")
+    time.sleep(1)
     exportdiags = str(stdout.read())
     if "Diagnostics exported to /sftp/export" not in exportdiags:
         print("Did not run export-diags properly")
