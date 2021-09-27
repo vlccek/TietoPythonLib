@@ -15,11 +15,29 @@ def download_diags(
         "network-admin", settings.password, hostname, port, timeout, keepalive)
 
     network.exec_command(f"admin-sftp-modify enable")
-    if "Diagnostics info saved." not in send_command_with_input(network, "save-diags"):
+    stdin, stdout, stderr = network.exec_command("save-diags", get_pty=True)
+    print("Sending save-diags command.")
+    stdin.write("/n")
+    stdin.flush()
+    print("Entered username")
+    stdin.write(settings.password + "/n")
+    stdin.flush()
+    print("Entered password and waiting")
+    savediags = str(stdout.read())
+    if "Diagnostics info saved." not in savediags:
         print("Did not run save-diags properly")
         return
     logger.info(f"save-diags ran properly")
-    if "Diagnostics exported to /sftp/export" not in send_command_with_input(network, "export-diags"):
+    stdin, stdout, stderr = network.exec_command("export-diags", get_pty=True)
+    print("Sending export-diags command.")
+    stdin.write("/n")
+    stdin.flush()
+    print("Entered username")
+    stdin.write(settings.password + "/n")
+    stdin.flush()
+    print("Entered password and waiting")
+    exportdiags = str(stdout.read())
+    if "Diagnostics exported to /sftp/export" not in exportdiags:
         print("Did not run export-diags properly")
         return
     logger.success(f"export-diags ran properly")
