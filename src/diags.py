@@ -6,7 +6,6 @@ from tests import settings
 
 
 def download_diags(
-    self,
     hostname: str = settings.hostname,
     port: int = settings.port,
     timeout: int = 60,
