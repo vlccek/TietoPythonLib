@@ -81,7 +81,8 @@ class TestVlanShow(unittest.TestCase):
 ## Diags downloading
 ```py
 from diags import download_diags
-download_diags() # downloads diags to current location
+# downloads diags from switch in settings.py to current location
+download_diags() 
 ```
 
 
