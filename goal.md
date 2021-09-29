@@ -78,6 +78,12 @@ class TestVlanShow(unittest.TestCase):
         self.assertEqual(counter, 35)
 ```
 
+## Diags downloading
+```py
+from diags import download_diags
+download_diags() # downloads diags to current location
+```
+
 
 # Legacy
 ## VLANS
