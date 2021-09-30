@@ -5,6 +5,10 @@ from download import open_connection
 from tests import settings
 import time
 
+def download_diags_from_switches(hostnames):
+    for ip in hostnames:
+        download_diags(hostname=ip)
+
 
 def download_diags(
     hostname: str = settings.hostname,
