@@ -1,9 +1,6 @@
 from loguru import logger
-import paramiko
-import datetime
 from download import open_connection
 from tests import settings
-import time
 
 def download_diags_from_switches(hostnames):
     for ip in hostnames:
@@ -20,33 +17,13 @@ def download_diags(
         "network-admin", settings.password, hostname, port, timeout, keepalive)
 
     network.exec_command(f"admin-sftp-modify enable")
-    # stdin, stdout, stderr = network.exec_command("save-diags", get_pty=True)
-    # print("Sending save-diags command.")
-    # time.sleep(1)
-    # stdin.write("\n")
-    # stdin.flush()
-    # print("Entered username")
-    # time.sleep(1)
-    # stdin.write(settings.password + "\n")
-    # stdin.flush()
-    # print("Entered password and waiting")
-    # time.sleep(1)
+
     savediags = send_command_with_input(network, "save-diags")
     if "Diagnostics info saved." not in savediags:
         print("Did not run save-diags properly")
         return
     logger.info(f"save-diags ran properly")
-    # stdin, stdout, stderr = network.exec_command("export-diags", get_pty=True)
-    # print("Sending export-diags command.")
-    # time.sleep(1)
-    # stdin.write("\n")
-    # stdin.flush()
-    # print("Entered username")
-    # time.sleep(1)
-    # stdin.write(settings.password + "\n")
-    # stdin.flush()
-    # print("Entered password and waiting")
-    # time.sleep(1)
+
     exportdiags = send_command_with_input(network, "export-diags")
     if "Diagnostics exported to /sftp/export" not in exportdiags:
         print("Did not run export-diags properly")
