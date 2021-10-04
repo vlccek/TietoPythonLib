@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Diags &mdash; TietoPythonLib 0.0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Logging" href="logging.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                TietoPythonLib
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+      <li>Diags</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/diags.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#show-commands">Show commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#vlan-commands">Vlan commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#port-commands">Port commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fabric.html">Fabric api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Diags</a></li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="diags">
+<h1>Diags<a class="headerlink" href="#diags" title="Permalink to this headline">¶</a></h1>
+<p>Module to handle downloading diags from switches without need of root privilages.</p>
+<span class="target" id="module-diags"></span><dl class="py function">
+<dt class="sig sig-object py" id="diags.download_diags">
+<span class="sig-prename descclassname"><span class="pre">diags.</span></span><span class="sig-name descname"><span class="pre">download_diags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'switch-ip'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepalive</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#diags.download_diags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads diags from switch on &lt;hostname&gt; (from settings.py on default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostname</strong> – hostname that we connect and download from, by default its taken from settings.py</p></li>
+<li><p><strong>port</strong> – SSH port, by default its taken from settings.py</p></li>
+<li><p><strong>timeout</strong> – timeout, defaults to 60</p></li>
+<li><p><strong>keepalive</strong> – keepalive, defaults to 60</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diags.download_diags_from_switches">
+<span class="sig-prename descclassname"><span class="pre">diags.</span></span><span class="sig-name descname"><span class="pre">download_diags_from_switches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostnames</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diags.download_diags_from_switches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads diags from switches in &lt;hostnames&gt; list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hostnames</strong> – hostnames that we connect and download from, by default its taken from settings.py</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diags.send_command_with_login">
+<span class="sig-prename descclassname"><span class="pre">diags.</span></span><span class="sig-name descname"><span class="pre">send_command_with_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diags.send_command_with_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends command that needs login.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> – SSH Paramiko Client</p></li>
+<li><p><strong>command</strong> – Command that is sent on switch.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1 alpha',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Petr Balnar, Jakub Vlk.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.
+        </div>
+    </div>  
+
+</body>
+</html>
