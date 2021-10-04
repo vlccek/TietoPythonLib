@@ -1,4 +1,4 @@
 hostname = "switch-ip"
 username = "network-admin"
-password = "ericsson"
+password = "password"
 port = 22
