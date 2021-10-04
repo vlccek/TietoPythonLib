@@ -1,8 +1,13 @@
+from typing import List
 from loguru import logger
 from download import open_connection
 from tests import settings
 
-def download_diags_from_switches(hostnames):
+def download_diags_from_switches(hostnames: List[str]):
+    """Downloads diags from switches in <hostnames> list. 
+
+    :param hostnames: hostnames that we connect and download from, by default its taken from settings.py
+    """
     for ip in hostnames:
         download_diags(hostname=ip)
 
@@ -13,18 +18,25 @@ def download_diags(
     timeout: int = 60,
     keepalive: int = 60,
 ) -> None:
+    """Downloads diags from switch on <hostname> (from settings.py on default). 
+
+    :param hostname: hostname that we connect and download from, by default its taken from settings.py
+    :param port: SSH port, by default its taken from settings.py
+    :param timeout: timeout, defaults to 60
+    :param keepalive: keepalive, defaults to 60
+    """
     network = open_connection(
         "network-admin", settings.password, hostname, port, timeout, keepalive)
 
     network.exec_command(f"admin-sftp-modify enable")
 
-    savediags = send_command_with_input(network, "save-diags")
+    savediags = send_command_with_login(network, "save-diags")
     if "Diagnostics info saved." not in savediags:
         print("Did not run save-diags properly")
         return
     logger.info(f"save-diags ran properly")
 
-    exportdiags = send_command_with_input(network, "export-diags")
+    exportdiags = send_command_with_login(network, "export-diags")
     if "Diagnostics exported to /sftp/export" not in exportdiags:
         print("Did not run export-diags properly")
         return
@@ -53,7 +65,12 @@ def download_diags(
     admin.close()
 
 
-def send_command_with_input(connection, command):
+def send_command_with_login(connection, command):
+    """Sends command that needs login.
+
+    :param connection: SSH Paramiko Client 
+    :param command: Command that is sent on switch.
+    """
     stdin, stdout, stderr = connection.exec_command(command, get_pty=True)
     print("Sending " + command + " command.")
     stdin.write("\n")
